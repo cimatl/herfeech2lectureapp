@@ -3,834 +3,1163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblical Hermeneutics — Week 3</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<title>Biblical Hermeneutics — Week 3 · Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0c0a07;
-  --surface: #13100c;
-  --card: #1a1610;
-  --gold: #c9a84c;
-  --gold2: #e8c96a;
-  --goldp: rgba(201,168,76,0.14);
-  --goldb: rgba(201,168,76,0.32);
-  --cream: #ecddc6;
-  --creamp: rgba(236,221,198,0.62);
-  --creamf: rgba(236,221,198,0.35);
-  --green: #4a9470;
-  --red: #943a3a;
-  --r: 10px;
-  --nav: 210px;
+
+:root{
+  --bg:#0d0b08;--card:#1c1710;--card2:#231e13;
+  --gold:#b8942a;--gl:#dbb84a;--gp:rgba(184,148,42,0.13);
+  --gb:rgba(184,148,42,0.3);--cream:#e8dcc8;
+  --cdim:rgba(232,220,200,0.65);--cfaint:rgba(232,220,200,0.35);
+  --ok:#3a8a5c;--no:#8a3a3a;--r:11px;--nav:210px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--cream);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden}
 
-/* TOPBAR */
-#topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(12,10,7,.95);border-bottom:1px solid var(--goldb);display:flex;align-items:center;padding:0 18px;gap:14px;z-index:300;backdrop-filter:blur(8px)}
-.tb-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:var(--gold);flex:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tb-prog{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--creamp)}
-.tb-bar{width:70px;height:3px;background:rgba(255,255,255,.07);border-radius:9px;overflow:hidden}
-.tb-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:9px;transition:width .5s ease}
-.ltog{background:var(--card);border:1px solid var(--goldb);border-radius:99px;padding:3px;display:flex;gap:2px}
-.lbtn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.08em;padding:4px 11px;border-radius:99px;border:none;cursor:pointer;transition:all .2s;color:var(--creamp);background:transparent}
-.lbtn.on{background:var(--gold);color:#0c0a07;font-weight:700}
+/* TOP BAR */
+#tb{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(13,11,8,.96);
+  border-bottom:1px solid var(--gb);backdrop-filter:blur(10px);
+  display:flex;align-items:center;padding:0 16px;gap:12px;z-index:200}
+#tb-t{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:var(--gold);
+  flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tb-p{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--cdim);white-space:nowrap}
+#tb-bar{width:64px;height:3px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+#tb-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gl));border-radius:99px;transition:width .5s}
+.lw{background:var(--card);border:1px solid var(--gb);border-radius:99px;padding:3px;display:flex;gap:2px;flex-shrink:0}
+.lb{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;padding:4px 11px;border-radius:99px;
+  border:none;cursor:pointer;transition:all .2s;color:var(--cdim);background:transparent}
+.lb.on{background:var(--gold);color:#0d0b08;font-weight:700}
 
 /* SIDEBAR */
-#sidebar{position:fixed;top:50px;left:0;bottom:0;width:var(--nav);background:rgba(12,10,7,.96);border-right:1px solid var(--goldb);overflow-y:auto;z-index:200;padding:16px 0}
-.ns{padding:5px 18px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;opacity:.6;margin-top:10px}
-.ni{display:flex;align-items:center;gap:9px;padding:8px 18px;cursor:pointer;transition:all .2s;border-left:2px solid transparent}
-.ni:hover{background:var(--goldp);border-left-color:var(--goldb)}
-.ni.on{background:var(--goldp);border-left-color:var(--gold)}
-.ni.done .nd{background:var(--gold);border-color:var(--gold)}
-.nd{width:6px;height:6px;border-radius:50%;border:1px solid var(--goldb);flex-shrink:0;transition:all .2s}
-.ni.on .nd{border-color:var(--gold);box-shadow:0 0 6px var(--gold)}
-.nl{font-size:12.5px;color:var(--creamp);line-height:1.3}
+#sb{position:fixed;top:48px;left:0;bottom:0;width:var(--nav);
+  background:rgba(13,11,8,.97);border-right:1px solid var(--gb);
+  overflow-y:auto;z-index:100;padding:14px 0}
+.ns{padding:5px 16px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;
+  color:var(--gold);text-transform:uppercase;opacity:.55;margin-top:6px}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 16px;cursor:pointer;
+  transition:all .2s;border-left:2px solid transparent}
+.ni:hover{background:var(--gp);border-left-color:var(--gb)}
+.ni.on{background:var(--gp);border-left-color:var(--gold)}
+.ni.dn .nd,.ni.on .nd{background:var(--gold);border-color:var(--gold)}
+.nd{width:6px;height:6px;border-radius:50%;border:1px solid var(--gb);flex-shrink:0;transition:all .2s}
+.nl{font-size:11.5px;color:var(--cdim);line-height:1.3}
 .ni.on .nl{color:var(--cream)}
 
 /* MAIN */
-#main{margin-left:var(--nav);margin-top:50px;min-height:calc(100vh - 50px)}
+#main{margin-left:var(--nav);margin-top:48px;min-height:calc(100vh - 48px);position:relative;z-index:1}
+.view{display:none}
+.view.on{display:block;animation:fi .3s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#v-cover.on{display:flex}
 
-/* VIEWS */
-.vw{display:none;animation:fi .35s ease both}
-.vw.on{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* COVER */
+#v-cover{flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:56px 36px;min-height:calc(100vh - 48px)}
+.corn{font-size:12px;letter-spacing:.5em;color:var(--gold);opacity:.4;margin-bottom:24px}
+.clb{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:9px;opacity:.8}
+.ct{font-family:'Cinzel',serif;font-size:clamp(22px,4vw,38px);font-weight:600;
+  color:var(--cream);line-height:1.15;letter-spacing:.04em;margin-bottom:7px}
+.cs{font-family:'IM Fell English',serif;font-size:clamp(15px,2.2vw,20px);
+  color:var(--cdim);font-style:italic;margin-bottom:28px}
+.cdv{width:130px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 26px}
+.cm{font-size:14px;color:var(--cdim);line-height:1.9;margin-bottom:40px}
+.cm strong{color:var(--cream)}
+
+/* BUTTONS */
+.bgo{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;
+  background:linear-gradient(135deg,var(--gold),#8a6a14);border:none;border-radius:var(--r);
+  color:#0d0b08;font-family:'Cinzel',serif;font-size:12px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.bgo:hover{transform:translateY(-2px);box-shadow:0 7px 24px rgba(184,148,42,.3)}
+.bsc{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;
+  background:transparent;border:1px solid var(--gb);border-radius:var(--r);
+  color:var(--gold);font-family:'Cinzel',serif;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.bsc:hover{background:var(--gp);border-color:var(--gold)}
 
 /* PAGE */
-.pg{max-width:740px;margin:0 auto;padding:44px 36px 80px}
-.pbadge{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;opacity:.8}
-.ptitle{font-family:'Cinzel',serif;font-size:clamp(19px,2.8vw,28px);font-weight:600;color:var(--cream);line-height:1.2;letter-spacing:.03em;margin-bottom:5px}
-.pko{font-size:14px;color:rgba(236,221,198,.42);font-style:italic;margin-bottom:24px}
-.prule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:32px}
-
-/* COVER special */
-#vw-cover{display:none}
-#vw-cover.on{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:calc(100vh - 50px);padding:60px 30px}
-.corn{font-size:13px;letter-spacing:.45em;color:var(--gold);opacity:.4;margin-bottom:28px}
-.clabel{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;opacity:.8}
-.ctitle{font-family:'Cinzel',serif;font-size:clamp(24px,4vw,40px);font-weight:600;color:var(--cream);line-height:1.15;letter-spacing:.04em;margin-bottom:8px}
-.csub{font-size:clamp(16px,2.2vw,20px);color:var(--creamp);font-style:italic;margin-bottom:32px}
-.cdiv{width:140px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 28px}
-.cmeta{font-size:14px;color:var(--creamp);line-height:1.9;margin-bottom:44px}
-.cmeta strong{color:var(--cream)}
-.btnp{display:inline-flex;align-items:center;gap:9px;padding:15px 38px;background:linear-gradient(135deg,var(--gold),#8c6a14);border:none;border-radius:var(--r);color:#0c0a07;font-family:'Cinzel',serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s}
-.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.32)}
-.btns{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;background:transparent;border:1px solid var(--goldb);border-radius:var(--r);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.btns:hover{background:var(--goldp);border-color:var(--gold)}
-
-/* CONTENT */
-.sh{font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:var(--gold);margin:36px 0 5px;letter-spacing:.04em}
-.shk{font-size:12px;color:rgba(236,221,198,.4);margin-bottom:14px;font-style:italic}
-.ssh{font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.8);margin:24px 0 10px;letter-spacing:.03em}
-.bt{font-size:17px;line-height:1.78;color:var(--creamp);margin-bottom:16px}
-.bt strong{color:var(--cream)}
-.bt em{color:var(--gold2);font-style:italic}
-.tm{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;color:var(--gold);opacity:.7;margin-bottom:10px;display:block}
-.bq{border-left:3px solid var(--gold);padding:14px 22px;margin:22px 0;background:var(--goldp);border-radius:0 var(--r) var(--r) 0}
-.bqt{font-size:17px;line-height:1.65;color:var(--cream);font-style:italic}
-.bqa{font-size:13px;color:var(--creamp);margin-top:7px}
-.ins{background:rgba(100,30,30,.1);border:1px solid rgba(150,50,50,.25);border-radius:var(--r);padding:12px 16px;font-size:13.5px;color:rgba(236,221,198,.5);font-style:italic;margin:16px 0}
-.ins::before{content:'📖 Instructor: ';font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(180,80,80,.8);font-family:"Cinzel",serif;display:block;margin-bottom:3px}
-.li{display:flex;gap:12px;margin-bottom:12px}
-.lb{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:9px}
-.lt{font-size:17px;line-height:1.7;color:var(--creamp)}
+.pg{max-width:720px;margin:0 auto;padding:40px 32px 68px}
+.pb{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.25em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:6px;opacity:.75}
+.pt{font-family:'Cinzel',serif;font-size:clamp(18px,2.6vw,26px);font-weight:600;
+  color:var(--cream);line-height:1.2;margin-bottom:4px;letter-spacing:.03em}
+.ptk{font-size:14px;color:rgba(232,220,200,.42);font-style:italic;margin-bottom:20px}
+.pr{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:28px}
+.sh{font-family:'Cinzel',serif;font-size:13.5px;font-weight:600;color:var(--gold);
+  margin:32px 0 4px;letter-spacing:.05em}
+.shk{font-size:11.5px;color:rgba(232,220,200,.38);margin-bottom:12px;font-style:italic}
+.ssh{font-family:'Cinzel',serif;font-size:12px;font-weight:600;
+  color:rgba(184,148,42,.72);margin:22px 0 9px;letter-spacing:.04em}
+.bt{font-size:16.5px;line-height:1.75;color:var(--cdim);margin-bottom:15px}
+.bt strong{color:var(--cream)}.bt em{color:var(--gl);font-style:italic}
+.tm{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.12em;
+  color:var(--gold);opacity:.6;margin-bottom:9px;display:block}
+.bq{border-left:3px solid var(--gold);padding:14px 20px;margin:20px 0;
+  background:var(--gp);border-radius:0 var(--r) var(--r) 0}
+.bqt{font-family:'IM Fell English',serif;font-size:16.5px;line-height:1.65;
+  color:var(--cream);font-style:italic}
+.bqa{font-size:12px;color:var(--cdim);margin-top:6px}
+.ins{background:rgba(122,30,46,.08);border:1px solid rgba(122,30,46,.22);
+  border-radius:var(--r);padding:11px 15px;margin:14px 0;font-size:13px;
+  color:rgba(232,220,200,.48);font-style:italic}
+.ins::before{content:'Instructor ';font-style:normal;font-family:'Cinzel',serif;
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(200,80,80,.65);display:block;margin-bottom:3px}
+/* Korean static fallback — shown only when JS hasn't run yet; hidden by JS after load */
+.ko-fb{background:rgba(184,148,42,.06);border:1px solid rgba(184,148,42,.2);
+  border-radius:var(--r);padding:10px 14px;margin:10px 0 14px;font-size:13.5px;
+  color:rgba(232,220,200,.55);font-style:normal;line-height:1.7}
+.ko-fb::before{content:'한국어 ';font-family:'Cinzel',serif;font-size:9px;
+  letter-spacing:.15em;color:rgba(184,148,42,.6);display:block;margin-bottom:3px}
+.js-ready .ko-fb{display:none}
+.li{display:flex;gap:11px;margin-bottom:11px}
+.lb2{width:5px;height:5px;border-radius:50%;background:var(--gold);
+  flex-shrink:0;margin-top:9px}
+.lt{font-size:16.5px;line-height:1.7;color:var(--cdim)}
 .lt strong{color:var(--cream)}
 
-/* TRANSLATION BOX */
-.tbox{background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);padding:18px 20px;margin:18px 0}
-.trow{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}
-.trow:last-child{border-bottom:none}
-.tlabel{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;color:var(--gold);min-width:44px;margin-top:2px;flex-shrink:0}
-.ttext{font-size:15px;line-height:1.6;color:var(--creamp);font-style:italic}
+/* TABLE */
+.ttbl{background:var(--card2);border:1px solid var(--gb);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.tr2{display:flex;border-bottom:1px solid rgba(255,255,255,.04)}
+.tr2:last-child{border-bottom:none}
+.tl{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.1em;color:var(--gold);
+  padding:11px 14px;background:rgba(184,148,42,.07);border-right:1px solid var(--gb);
+  min-width:52px;display:flex;align-items:center;flex-shrink:0}
+.td{font-size:14.5px;line-height:1.6;color:var(--cdim);font-style:italic;padding:11px 14px}
 
-/* CASE BOX */
-.cbox{background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);padding:20px 22px;margin:22px 0;position:relative}
-.cboxtag{position:absolute;top:-10px;left:16px;background:var(--bg);border:1px solid var(--goldb);border-radius:99px;padding:3px 12px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;color:var(--gold)}
-.cboxq{font-size:16px;line-height:1.65;color:var(--cream);margin-bottom:14px}
-.cboxd{font-size:15px;line-height:1.7;color:var(--creamp)}
-.cboxd strong{color:var(--cream2, var(--cream))}
+/* 2-col */
+.tc{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--gb);
+  border-radius:var(--r);overflow:hidden;margin:16px 0}
+.th{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.13em;color:var(--gold);
+  background:rgba(184,148,42,.09);padding:9px 14px;
+  border-bottom:1px solid var(--gb);text-transform:uppercase}
+.th:nth-child(1){border-right:1px solid var(--gb)}
+.td2{font-size:14.5px;line-height:1.65;color:var(--cdim);padding:12px 14px}
+.td2:nth-child(3){border-right:1px solid var(--gb)}
+.td2 strong{color:var(--cream)}
 
-/* OBJECTIVES */
-.ob{display:flex;gap:14px;padding:14px 18px;background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);margin-bottom:10px}
-.obn{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--gold);opacity:.55;min-width:22px}
-.obe{font-size:16px;line-height:1.5;color:var(--cream);margin-bottom:3px}
-.obk{font-size:13px;color:var(--creamp);font-style:italic}
+/* OBJ */
+.obj{display:flex;gap:12px;padding:12px 16px;background:var(--card);
+  border:1px solid var(--gb);border-radius:var(--r);margin-bottom:9px}
+.on2{font-family:'Cinzel',serif;font-size:16px;font-weight:600;
+  color:var(--gold);opacity:.52;flex-shrink:0;min-width:20px}
+.oen{font-size:15.5px;line-height:1.5;color:var(--cream);margin-bottom:2px}
+.ok{font-size:13px;color:var(--cdim);font-style:italic}
 
 /* PAGE NAV */
-.pnav{display:flex;justify-content:space-between;margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.05);gap:12px}
-.nbtn{display:flex;align-items:center;gap:7px;padding:11px 22px;border:1px solid var(--goldb);border-radius:var(--r);background:transparent;color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.nbtn:hover{background:var(--goldp);border-color:var(--gold)}
-.nbtn.prim{background:linear-gradient(135deg,var(--gold),#8c6a14);border-color:transparent;color:#0c0a07;font-weight:700}
-.nbtn.prim:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(201,168,76,.28)}
+.pn{display:flex;justify-content:space-between;align-items:center;
+  margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.05);gap:10px}
+.pnb{display:flex;align-items:center;gap:7px;padding:10px 20px;
+  border:1px solid var(--gb);border-radius:var(--r);background:transparent;
+  color:var(--gold);font-family:'Cinzel',serif;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.pnb:hover{background:var(--gp);border-color:var(--gold)}
+.pnb.p{background:linear-gradient(135deg,var(--gold),#8a6a14);
+  border-color:transparent;color:#0d0b08;font-weight:700}
+.pnb.p:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(184,148,42,.26)}
 
-/* DISCUSSION */
-.dq{background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);padding:18px 20px;margin-bottom:10px}
-.dqn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.18em;color:var(--gold);margin-bottom:5px}
-.dqt{font-size:16px;line-height:1.65;color:var(--creamp)}
-.at{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.at:last-child{border-bottom:none}
-.an{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);flex-shrink:0;min-width:18px}
-.av{font-size:15px;line-height:1.6;color:var(--creamp)}
-.av strong{color:var(--cream)}
+/* STUDY GUIDE */
+.dq{background:var(--card);border:1px solid var(--gb);border-radius:var(--r);
+  padding:16px 18px;margin-bottom:9px}
+.dqn{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.14em;color:var(--gold);margin-bottom:4px}
+.dqt{font-size:15px;line-height:1.65;color:var(--cdim)}
+.ai{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ai:last-child{border-bottom:none}
+.an{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);flex-shrink:0;min-width:17px}
+.at{font-size:14.5px;line-height:1.6;color:var(--cdim)}
+.at strong{color:var(--cream)}
 
 /* QUIZ */
-.qwrap{max-width:680px;margin:0 auto;padding:44px 36px 80px}
-.qprog-labs{display:flex;justify-content:space-between;font-size:12px;color:var(--creamp);letter-spacing:.05em;margin-bottom:7px}
-.qtrack{height:4px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
-.qfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .5s ease}
-.qdots{display:flex;gap:7px;margin-top:11px;justify-content:center}
-.qd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid var(--goldb);transition:all .3s}
-.qd.done{background:var(--gold);border-color:var(--gold)}
-.qd.cur{background:transparent;border-color:var(--gold);box-shadow:0 0 7px var(--gold)}
-.qcard{background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);padding:30px 26px 26px;position:relative;margin-top:26px;animation:fi .4s ease both}
-.qcard::before{content:'✦';position:absolute;top:9px;left:13px;color:var(--gold);opacity:.3;font-size:9px}
-.qcard::after{content:'✦';position:absolute;bottom:9px;right:13px;color:var(--gold);opacity:.3;font-size:9px}
-.qtag{position:absolute;top:-11px;right:18px;background:var(--bg);border:1px solid var(--goldb);border-radius:99px;padding:3px 13px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.12em;color:var(--gold)}
-.qtopic{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:rgba(201,168,76,.7);text-transform:uppercase;margin-bottom:5px}
-.qnum{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;opacity:.75}
-.qtext{font-size:clamp(15px,2.2vw,18px);line-height:1.62;color:var(--cream);margin-bottom:26px}
-.qtext em{color:var(--gold2);font-style:italic}
-.opts{display:flex;flex-direction:column;gap:9px}
-.opt{display:flex;align-items:flex-start;gap:13px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:13px 15px;cursor:pointer;transition:all .2s;text-align:left;width:100%}
-.opt:hover:not(:disabled){background:var(--goldp);border-color:var(--goldb)}
+.qw{max-width:660px;margin:0 auto;padding:40px 32px 68px}
+.qpl{display:flex;justify-content:space-between;font-size:11px;color:var(--cdim);
+  letter-spacing:.05em;margin-bottom:6px}
+.qtr{height:4px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.qfi{height:100%;background:linear-gradient(90deg,var(--gold),var(--gl));
+  border-radius:99px;transition:width .5s}
+.qds{display:flex;gap:6px;margin-top:9px;justify-content:center}
+.qd{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.07);
+  border:1px solid var(--gb);transition:all .3s}
+.qd.d{background:var(--gold);border-color:var(--gold)}
+.qd.a{border-color:var(--gold);box-shadow:0 0 7px var(--gold)}
+.qc{background:var(--card);border:1px solid var(--gb);border-radius:var(--r);
+  padding:28px 24px 24px;position:relative;animation:fi .4s ease both;margin-top:20px}
+.qc::before,.qc::after{content:'✦';position:absolute;color:var(--gold);opacity:.28;font-size:9px}
+.qc::before{top:8px;left:12px}.qc::after{bottom:8px;right:12px}
+.qtag{position:absolute;top:-10px;right:16px;background:var(--bg);
+  border:1px solid var(--gb);border-radius:99px;padding:3px 12px;
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:.14em;color:var(--gold)}
+.qtop{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.16em;
+  color:rgba(184,148,42,.62);text-transform:uppercase;margin-bottom:4px}
+.qnum{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;
+  color:var(--gold);opacity:.68;margin-bottom:11px}
+.qtxt{font-size:clamp(14.5px,2.1vw,17.5px);line-height:1.6;color:var(--cream);margin-bottom:22px}
+.qtxt em{color:var(--gl);font-style:italic}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.023);
+  border:1px solid rgba(255,255,255,.07);border-radius:9px;
+  padding:12px 14px;cursor:pointer;transition:all .2s;text-align:left;width:100%}
+.opt:hover:not(:disabled){background:var(--gp);border-color:var(--gb)}
 .opt:disabled{cursor:default}
-.oltr{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);width:21px;height:21px;border:1px solid var(--goldb);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
-.otxt{font-size:15px;line-height:1.5;color:var(--creamp);transition:color .2s}
-.opt.corr{background:rgba(74,148,112,.14);border-color:var(--green)}
-.opt.corr .oltr{background:var(--green);border-color:var(--green);color:#fff}
-.opt.corr .otxt{color:var(--cream)}
-.opt.wrng{background:rgba(148,58,58,.12);border-color:var(--red)}
-.opt.wrng .oltr{background:var(--red);border-color:var(--red);color:#fff}
-.opt.wrng .otxt{color:rgba(236,221,198,.38)}
-.opt.rev{background:rgba(74,148,112,.08);border-color:rgba(74,148,112,.38)}
-.opt.rev .oltr{border-color:var(--green);color:var(--green)}
-.fb{margin-top:20px;padding:16px 18px;border-radius:9px;display:none;animation:fi .3s ease both}
-.fb.on{display:block}
-.fb.cok{background:rgba(74,148,112,.1);border:1px solid rgba(74,148,112,.32)}
-.fb.wrg{background:rgba(148,58,58,.08);border:1px solid rgba(148,58,58,.22)}
-.fblab{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
-.fb.cok .fblab{color:var(--green)}
-.fb.wrg .fblab{color:var(--red)}
-.fbtext{font-size:15px;line-height:1.65;color:var(--creamp)}
-.fbtext strong{color:var(--cream)}
-.qnext{display:none;margin-top:22px;width:100%;padding:15px;background:linear-gradient(135deg,var(--gold),#8c6a14);border:none;border-radius:9px;color:#0c0a07;font-family:'Cinzel',serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .25s}
-.qnext.on{display:block;animation:fi .3s ease both}
-.qnext:hover{transform:translateY(-1px);box-shadow:0 5px 22px rgba(201,168,76,.28)}
+.ol{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--gold);
+  width:20px;height:20px;border:1px solid var(--gb);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
+.ot{font-size:14.5px;line-height:1.5;color:var(--cdim);transition:color .2s}
+.opt.kok{background:rgba(58,138,92,.13);border-color:var(--ok)}
+.opt.kok .ol{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.kok .ot{color:var(--cream)}
+.opt.kno{background:rgba(138,58,58,.1);border-color:var(--no)}
+.opt.kno .ol{background:var(--no);border-color:var(--no);color:#fff}
+.opt.kno .ot{color:rgba(232,220,200,.38)}
+.opt.krv{background:rgba(58,138,92,.07);border-color:rgba(58,138,92,.36)}
+.opt.krv .ol{border-color:var(--ok);color:var(--ok)}
+.fb{margin-top:18px;padding:14px 17px;border-radius:9px;display:none;animation:fi .3s ease both}
+.fb.sh{display:block}
+.fb.fok{background:rgba(58,138,92,.08);border:1px solid rgba(58,138,92,.28)}
+.fb.fno{background:rgba(138,58,58,.07);border:1px solid rgba(138,58,58,.2)}
+.fbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.fb.fok .fbl{color:var(--ok)}.fb.fno .fbl{color:var(--no)}
+.fbt{font-size:14.5px;line-height:1.65;color:var(--cdim)}
+.fbt strong{color:var(--cream)}
+.nxt{display:none;margin-top:20px;width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--gold),#8a6a14);border:none;border-radius:9px;
+  color:#0d0b08;font-family:'Cinzel',serif;font-size:11.5px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.nxt.sh{display:block;animation:fi .3s ease both}
+.nxt:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(184,148,42,.26)}
 
 /* RESULTS */
-.rwrap{max-width:600px;margin:0 auto;padding:56px 36px 80px;text-align:center}
-.remb{width:96px;height:96px;margin:0 auto 22px;border:2px solid var(--goldb);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;background:radial-gradient(circle,var(--goldp),transparent);position:relative}
-.remb::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--goldb);opacity:.4}
-.rtitle{font-family:'Cinzel',serif;font-size:clamp(20px,4vw,30px);color:var(--cream);margin-bottom:7px;letter-spacing:.04em}
-.rsub{font-size:15px;color:var(--creamp);font-style:italic;margin-bottom:30px}
-.scard{background:var(--card);border:1px solid var(--goldb);border-radius:var(--r);padding:26px;margin-bottom:24px}
-.sbig{font-family:'Cinzel',serif;font-size:60px;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:5px}
-.slabel{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:18px;opacity:.8}
-.strk{height:5px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-bottom:14px}
-.sfill{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.4,0,.2,1) .3s}
-.sdotrow{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
-.sdot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:10px;font-weight:600;border:1px solid var(--goldb);color:var(--creamp)}
-.sdot.hit{background:var(--green);border-color:var(--green);color:#fff}
-.sdot.miss{background:var(--red);border-color:var(--red);color:#fff}
-.fibox{background:var(--card);border:1px solid var(--goldb);border-left:3px solid var(--gold);border-radius:var(--r);padding:22px;text-align:left;margin-bottom:22px}
-.filab{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;opacity:.8}
-.fitext{font-size:16px;line-height:1.7;color:var(--creamp);font-style:italic}
-.fitext strong{color:var(--cream);font-style:normal}
-.rbtns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+.rw{max-width:580px;margin:0 auto;padding:52px 32px 68px;text-align:center}
+.re{width:90px;height:90px;margin:0 auto 20px;border:2px solid var(--gb);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:36px;background:radial-gradient(circle,var(--gp),transparent);position:relative}
+.re::before{content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--gb);opacity:.4}
+.rt{font-family:'Cinzel',serif;font-size:clamp(19px,3.2vw,28px);
+  color:var(--cream);margin-bottom:6px;letter-spacing:.05em}
+.rs{font-size:14px;color:var(--cdim);font-style:italic;margin-bottom:28px}
+.sc{background:var(--card);border:1px solid var(--gb);border-radius:var(--r);padding:24px;margin-bottom:22px}
+.sb{font-family:'Cinzel',serif;font-size:58px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gl));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;margin-bottom:4px}
+.sl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:16px;opacity:.8}
+.str{height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden;margin-bottom:13px}
+.sfi{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.4,0,.2,1) .3s}
+.sdr{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.sd{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:9.5px;font-weight:600;
+  border:1px solid var(--gb);color:var(--cdim)}
+.sd.h{background:var(--ok);border-color:var(--ok);color:#fff}
+.sd.m{background:var(--no);border-color:var(--no);color:#fff}
+.fi{background:var(--card);border:1px solid var(--gb);border-left:3px solid var(--gold);
+  border-radius:var(--r);padding:20px;text-align:left;margin-bottom:20px}
+.fil{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.23em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:7px;opacity:.8}
+.fit{font-size:15px;line-height:1.7;color:var(--cdim);font-style:italic}
+.fit strong{color:var(--cream);font-style:normal}
 
-/* MOBILE */
-@media(max-width:720px){
-  :root{--nav:0px}
-  #sidebar{display:none}
-  #main{margin-left:0}
-  .pg,.qwrap,.rwrap{padding:28px 16px 60px}
-}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--goldb);border-radius:99px}
+@media(max-width:700px){:root{--nav:0px}#sb{display:none}#main{margin-left:0}.pg,.qw,.rw{padding:26px 15px 52px}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gb);border-radius:99px}
+
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div id="topbar">
-  <div class="tb-title" id="tb-title">Biblical Hermeneutics · Week 3</div>
-  <div class="tb-prog">
-    <span id="tb-ptext">1/8</span>
-    <div class="tb-bar"><div class="tb-fill" id="tb-fill" style="width:0%"></div></div>
-  </div>
-  <div class="ltog">
-    <button class="lbtn on" onclick="setLang('en')">EN</button>
-    <button class="lbtn" onclick="setLang('ko')">한국어</button>
+<div id="tb">
+  <div id="tb-t">Biblical Hermeneutics · Week 3</div>
+  <div id="tb-p"><span id="tb-n">1/8</span><div id="tb-bar"><div id="tb-fill" style="width:12%"></div></div></div>
+  <div class="lw">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('ko')">한국어</button>
   </div>
 </div>
 
-<!-- SIDEBAR -->
-<div id="sidebar">
-  <div class="ns" data-t="Course|강의">Course</div>
-  <div class="ni" id="sn-cover" onclick="go('cover')"><div class="nd"></div><div class="nl" data-t="Welcome|시작">Welcome</div></div>
-  <div class="ni" id="sn-obj" onclick="go('obj')"><div class="nd"></div><div class="nl" data-t="Objectives|학습목표">Objectives</div></div>
-  <div class="ns" data-t="Lecture|강의 내용">Lecture</div>
-  <div class="ni" id="sn-b1" onclick="go('b1')"><div class="nd"></div><div class="nl" data-t="Block 1 · Translation|1블록 · 번역">Block 1 · Translation</div></div>
-  <div class="ni" id="sn-b2" onclick="go('b2')"><div class="nd"></div><div class="nl" data-t="Block 2 · The Spiral|2블록 · 나선형">Block 2 · The Spiral</div></div>
-  <div class="ni" id="sn-b3" onclick="go('b3')"><div class="nd"></div><div class="nl" data-t="Block 3 · Grammar|3블록 · 문법">Block 3 · Grammar</div></div>
-  <div class="ni" id="sn-guide" onclick="go('guide')"><div class="nd"></div><div class="nl" data-t="Study Guide|학습 가이드">Study Guide</div></div>
-  <div class="ns" data-t="Assessment|평가">Assessment</div>
-  <div class="ni" id="sn-quiz" onclick="go('quiz')"><div class="nd"></div><div class="nl" data-t="Quiz · 7 Questions|퀴즈 · 7문항">Quiz · 7 Questions</div></div>
+<div id="sb">
+  <div class="ns" id="ns1">Course</div>
+  <div class="ni on" id="ni-cover" onclick="go('cover')"><div class="nd"></div><div class="nl" id="nl-cover">Welcome</div></div>
+  <div class="ni" id="ni-obj" onclick="go('obj')"><div class="nd"></div><div class="nl" id="nl-obj">Objectives</div></div>
+  <div class="ns" id="ns2">Lecture</div>
+  <div class="ni" id="ni-b1" onclick="go('b1')"><div class="nd"></div><div class="nl" id="nl-b1">Block 1 · Translation</div></div>
+  <div class="ni" id="ni-b2" onclick="go('b2')"><div class="nd"></div><div class="nl" id="nl-b2">Block 2 · The Spiral</div></div>
+  <div class="ni" id="ni-b3" onclick="go('b3')"><div class="nd"></div><div class="nl" id="nl-b3">Block 3 · Grammar</div></div>
+  <div class="ni" id="ni-sg" onclick="go('sg')"><div class="nd"></div><div class="nl" id="nl-sg">Study Guide</div></div>
+  <div class="ns" id="ns3">Assessment</div>
+  <div class="ni" id="ni-quiz" onclick="go('quiz')"><div class="nd"></div><div class="nl" id="nl-quiz">Quiz · 7 Questions</div></div>
 </div>
 
-<!-- MAIN -->
 <div id="main">
 
 <!-- COVER -->
-<div class="vw" id="vw-cover">
+<div id="v-cover" class="view">
   <div class="corn">✦ · ✦ · ✦</div>
-  <div class="clabel" data-t="Biblical Hermeneutics · Week 3|성경 해석학 · 3주차">Biblical Hermeneutics · Week 3</div>
-  <div class="ctitle" data-t="The Interpreter's Instruments|해석자의 도구들">The Interpreter's Instruments</div>
-  <div class="csub" data-t="Translation, Context, and Grammar|번역, 문맥, 그리고 문법">Translation, Context, and Grammar</div>
-  <div class="cdiv"></div>
-  <div class="cmeta">
-    <strong data-t="Primary Texts|주요 텍스트">Primary Texts</strong><br>
+  <div class="clb" id="c1">Biblical Hermeneutics · Week 3</div>
+  <div class="ct" id="c2">The Interpreter's Instruments</div>
+  <div class="cs" id="c3">Translation, Context, and Grammar</div>
+  <div style="font-size:10px;letter-spacing:.12em;color:rgba(184,148,42,.35);margin:4px 0 0">Fee &amp; Stuart Ch.2 · Osborne Ch.1–2 · Final</div>
+  <div class="cdv"></div>
+  <div class="cm" id="c4">
+    <strong id="c4a">Primary Texts</strong><br>
     Fee &amp; Stuart, <em>How to Read the Bible for All Its Worth</em>, Ch. 2<br>
     Osborne, <em>The Hermeneutical Spiral</em>, Intro; Ch. 1–2<br><br>
-    <strong data-t="Duration|시간">Duration</strong> · 3 <span data-t="Hours|시간">Hours</span> · <span data-t="3 Blocks × 50 min|3블록 × 50분">3 Blocks × 50 min</span>
+    <strong id="c4b">Duration</strong> · 3 <span id="c4c">Hours</span> · 3 <span id="c4d">Blocks × 50 min</span>
   </div>
-  <button class="btnp" onclick="go('obj')"><span data-t="Begin Lecture →|강의 시작 →">Begin Lecture →</span></button>
+  <button class="bgo" onclick="go('obj')" id="c5">Begin Lecture →</button>
 </div>
 
 <!-- OBJECTIVES -->
-<div class="vw" id="vw-obj">
-<div class="pg">
-  <div class="pbadge" data-t="Week 3 · Learning Objectives|3주차 · 학습 목표">Week 3 · Learning Objectives</div>
-  <div class="ptitle" data-t="What You Will Learn|학습 목표">What You Will Learn</div>
-  <div class="pko" data-t="학습 목표|Learning objectives for this lecture">학습 목표</div>
-  <div class="prule"></div>
-  <div class="ob"><div class="obn">1</div><div><div class="obe" data-t="Understand why every translation is already an act of interpretation|모든 번역이 이미 해석의 행위인 이유를 이해한다">Understand why every translation is already an act of interpretation</div><div class="obk" data-t="번역과 해석의 관계|Translation and interpretation">번역과 해석의 관계</div></div></div>
-  <div class="ob"><div class="obn">2</div><div><div class="obe" data-t="Distinguish formal equivalence, dynamic equivalence, and paraphrase|형식적 등가, 동적 등가, 의역의 번역 철학을 구별한다">Distinguish formal equivalence, dynamic equivalence, and paraphrase</div><div class="obk" data-t="세 가지 번역 철학|Three translation philosophies">세 가지 번역 철학</div></div></div>
-  <div class="ob"><div class="obn">3</div><div><div class="obe" data-t="Articulate the metaphor of the hermeneutical spiral|해석학적 나선형의 은유와 그 함의를 설명한다">Articulate the metaphor of the hermeneutical spiral</div><div class="obk" data-t="해석학적 나선형|The hermeneutical spiral">해석학적 나선형</div></div></div>
-  <div class="ob"><div class="obn">4</div><div><div class="obe" data-t="Apply historical and logical context as the foundational interpretive framework|역사적·논리적 문맥을 기본적인 해석 틀로 적용한다">Apply historical and logical context as the foundational interpretive framework</div><div class="obk" data-t="문맥의 해석적 기능|Contextual interpretation">문맥의 해석적 기능</div></div></div>
-  <div class="ob"><div class="obn">5</div><div><div class="obe" data-t="Grasp the basics of textual criticism and grammatical analysis|본문 비평과 문법 분석의 기초를 파악한다">Grasp the basics of textual criticism and grammatical analysis</div><div class="obk" data-t="본문 비평과 문법|Text criticism and grammar">본문 비평과 문법</div></div></div>
-  <div class="pnav">
-    <button class="nbtn" onclick="go('cover')">← <span data-t="Cover|표지">Cover</span></button>
-    <button class="nbtn prim" onclick="go('b1')"><span data-t="Block 1 →|1블록 →">Block 1 →</span></button>
+<div id="v-obj" class="view"><div class="pg">
+  <div class="pb" id="ob1">Week 3 · Learning Objectives</div>
+  <div class="pt" id="ob2">What You Will Learn</div>
+  <div class="ptk" id="ob3">학습 목표</div>
+  <div class="pr"></div>
+  <div class="obj"><div class="on2">1</div><div><div class="oen" id="o1a">Understand why every translation is already an act of interpretation</div><div class="ok" id="o1b">모든 번역이 이미 해석의 행위인 이유</div></div></div>
+  <div class="obj"><div class="on2">2</div><div><div class="oen" id="o2a">Distinguish formal equivalence, dynamic equivalence, and paraphrase translation philosophies</div><div class="ok" id="o2b">세 가지 번역 철학 구별하기</div></div></div>
+  <div class="obj"><div class="on2">3</div><div><div class="oen" id="o3a">Articulate the hermeneutical spiral and its implications for exegesis</div><div class="ok" id="o3b">해석학적 나선형의 함의</div></div></div>
+  <div class="obj"><div class="on2">4</div><div><div class="oen" id="o4a">Apply historical and logical context as the foundational interpretive framework</div><div class="ok" id="o4b">문맥의 해석적 기능 적용하기</div></div></div>
+  <div class="obj"><div class="on2">5</div><div><div class="oen" id="o5a">Grasp the basics of textual criticism and grammatical analysis</div><div class="ok" id="o5b">본문 비평과 문법 분석의 기초</div></div></div>
+  <div class="pn">
+    <button class="pnb" onclick="go('cover')" id="ob-p">← Cover</button>
+    <button class="pnb p" onclick="go('b1')" id="ob-n">Block 1 →</button>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- BLOCK 1: TRANSLATION -->
-<div class="vw" id="vw-b1">
-<div class="pg">
-  <div class="pbadge" data-t="Block 1 · Minutes 0–50|1블록 · 0–50분">Block 1 · Minutes 0–50</div>
-  <div class="ptitle" data-t="The Basic Tool: A Good Translation|기본 도구: 좋은 번역본">The Basic Tool: A Good Translation</div>
-  <div class="pko" data-t="기본 도구: 좋은 번역본 — Fee &amp; Stuart, Ch. 2|기본 도구: 좋은 번역본 — Fee &amp; Stuart, Ch. 2">기본 도구: 좋은 번역본</div>
-  <div class="prule"></div>
+<!-- BLOCK 1 -->
+<div id="v-b1" class="view"><div class="pg">
+  <div class="pb" id="b1-pb">Block 1 · Minutes 0–50</div>
+  <div class="pt" id="b1-pt">The Basic Tool: A Good Translation</div>
+  <div class="ptk">기본 도구: 좋은 번역본</div>
+  <div class="pr"></div>
 
-  <span class="tm" data-t="⏱ 0:00 — The Linguist's Dilemma (10 min)|⏱ 0:00 — 언어학자의 딜레마 (10분)">⏱ 0:00 — The Linguist's Dilemma (10 min)</span>
-  <div class="bt" data-t="Let me begin with a confession that may disturb you — and should. Every time you open your English Bible and read it, you are not reading the Bible. You are reading a translation of the Bible. And &lt;strong&gt;every translation is already an interpretation&lt;/strong&gt;.|한 가지 고백으로 시작하겠습니다 — 불편할 수도 있지만, 마땅히 그래야 합니다. 영어 성경을 펼칠 때마다, 당신은 성경을 읽는 것이 아닙니다. 번역본을 읽는 것입니다. 그리고 &lt;strong&gt;모든 번역은 이미 해석입니다&lt;/strong&gt;.">Let me begin with a confession that may disturb you — and should. Every time you open your English Bible, you are not reading the Bible. You are reading a translation. And <strong>every translation is already an interpretation</strong>.</div>
-  <div class="bt" data-t="The sixty-six books of the Protestant canon were composed in three languages: Hebrew, Aramaic, and Greek. Unless you have studied all three with some degree of fluency, you have never read a single verse of Scripture in its original form.|성경 정경의 66권은 세 가지 언어로 기록되었습니다: 히브리어, 아람어, 그리스어. 이 세 언어를 어느 정도 유창하게 공부하지 않았다면, 당신은 원래 형태의 성경 구절을 한 절도 읽은 적이 없습니다.">The sixty-six books were composed in three languages: Hebrew, Aramaic, and Greek. Unless you have studied all three, you have never read a single verse of Scripture in its original form.</div>
-  <div class="ins" data-t="Write on the board: 'Every translation is an interpretation.' Allow a moment for that to land.|칠판에 적으십시오: '모든 번역은 해석이다.' 잠시 여유를 두십시오.">Write on the board: 'Every translation is an interpretation.' Allow a moment for that to land.</div>
+  <span class="tm" id="b1-t1">⏱ 0:00 — The Linguist's Dilemma (10 min)</span>
+  <div class="bt" id="b1-p1">Let me begin with a confession that may disturb you — and should. Every time you open your English Bible and read it, you are not reading the Bible. You are reading a translation. And <strong>every translation is already an interpretation</strong>. The sixty-six books were composed in three languages: Hebrew, Aramaic, and Greek. Unless you have studied all three, you have never read a single verse in its original form.</div>
+  <div class="ins ko-fb">한 가지 고백으로 시작하겠습니다. 영어 성경을 펼칠 때마다, 당신은 번역본을 읽는 것입니다. <strong>모든 번역은 이미 해석입니다.</strong> 66권은 히브리어, 아람어, 그리스어로 기록되었습니다. 세 언어를 공부하지 않았다면, 원래 형태로 한 구절도 읽은 적이 없습니다.</div>
 
-  <div class="sh" data-t="I. The Three Languages of the Biblical Text|I. 성경의 세 언어">I. The Three Languages of the Biblical Text</div>
-  <div class="shk" data-t="성경의 세 언어|Hebrew, Aramaic, Greek">성경의 세 언어</div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Biblical Hebrew|성경 히브리어">Biblical Hebrew</strong> — <span data-t="a Semitic language of striking concreteness, rooted in images of movement, body, and land. Its verbs are the backbone of the sentence; its nouns carry relational weight.|움직임, 신체, 땅의 이미지에 뿌리를 둔 놀라운 구체성의 셈어. 동사는 문장의 기본 뼈대이고, 명사는 관계적 무게를 담고 있습니다.">a Semitic language of striking concreteness, rooted in images of movement, body, and land. Its verbs are the backbone of the sentence; its nouns carry relational weight.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Aramaic|아람어">Aramaic</strong> — <span data-t="the international lingua franca of the ancient Near East. Portions of Ezra and Daniel were written in Aramaic; Jesus likely spoke it in daily life.|고대 근동의 국제 공통어. 에스라와 다니엘의 일부가 아람어로 기록되었으며; 예수님도 일상생활에서 아람어를 사용했습니다.">the international lingua franca of the ancient Near East. Portions of Ezra and Daniel were written in Aramaic; Jesus likely spoke it in daily life.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Koine Greek|코이네 그리스어">Koine Greek</strong> — <span data-t="the common Greek of the marketplace, spread by Alexander the Great's conquests. Not the elegant Greek of Plato — simpler, more flexible, the Greek of ordinary people writing with apostolic urgency.|알렉산더 대왕의 정복으로 퍼진 시장의 일상 그리스어. 플라톤의 우아한 그리스어가 아닌 — 더 단순하고 유연한, 사도적 긴박감으로 쓴 일반인들의 그리스어.">the common Greek of the marketplace, spread by Alexander the Great's conquests. Not the elegant Greek of Plato — simpler, more flexible, the Greek of ordinary people writing with apostolic urgency.</span></div></div>
+  <div class="sh" id="b1-s1">I. The Three Languages of the Biblical Text</div>
+  <div class="shk">성경의 세 언어</div>
+  <div class="bt" id="b1-p2"><strong>Biblical Hebrew</strong> (OT, with Aramaic in Ezra/Daniel) is a language of striking concreteness — rooted in images of movement, body, and land. Its verbs are the backbone of the sentence. <strong>Koine Greek</strong> (NT) is the common Greek of the marketplace, spread by Alexander's conquests: simpler, more flexible, the Greek of ordinary people writing with apostolic urgency. Each language carries semantic ranges that do not map perfectly onto English. Translation requires interpretation. The question is not <em>whether</em> to interpret — it is whether to do so well or poorly.</div>
+  <div class="ko-fb"><strong>성경 히브리어</strong>(구약)는 움직임, 신체, 땅의 이미지에 뿌리를 둔 구체성의 언어입니다. 동사가 문장의 뼈대입니다. <strong>코이네 그리스어</strong>(신약)는 시장의 일상 그리스어로, 사도적 긴박감을 가진 언어입니다. 번역은 해석을 필요로 합니다. 문제는 해석할 것인지가 아니라 — 잘 할 것인지입니다.</div>
 
-  <div class="sh" data-t="II. What a Translator Must Decide|II. 번역자의 결정들">II. What a Translator Must Decide</div>
-  <div class="shk" data-t="번역자가 결정해야 하는 것들|Translational decisions">번역자가 결정해야 하는 것들</div>
-  <div class="bt" data-t="Fee and Stuart illustrate the problem vividly with &lt;strong&gt;1 Corinthians 7:36&lt;/strong&gt;. Four major English translations render this verse with four different social scenarios. Is Paul addressing a man and his fiancée? A father and his daughter? A celibate ascetic couple? The Greek is genuinely ambiguous — but Paul was not being ambiguous.|피와 스튜어트는 &lt;strong&gt;고린도전서 7:36&lt;/strong&gt;으로 이 문제를 생생히 설명합니다. 네 가지 주요 영어 번역본이 이 구절을 네 가지 다른 사회적 상황으로 번역합니다. 바울은 남자와 약혼녀를? 아버지와 딸을? 독신 부부를? 그리스어 원문은 진정으로 모호합니다 — 하지만 바울은 모호하지 않았습니다.">Fee and Stuart illustrate with <strong>1 Corinthians 7:36</strong>. Four major English translations render this verse with four different social scenarios. Is Paul addressing a fiancée, a daughter, or a celibate partner? The Greek is genuinely ambiguous — but Paul was not.</div>
-
-  <!-- Case Study 1: 1 Cor 7:36 -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · 1 Cor 7:36|사례 연구 · 고전 7:36">Case Study · 1 Cor 7:36</div>
-    <div class="cboxq" data-t="Four translations — four different social scenarios. Same Greek text. What does this tell us?|네 가지 번역, 네 가지 다른 사회적 상황. 같은 그리스어 원문. 이것이 우리에게 무엇을 말합니까?">Four translations — four different social scenarios. Same Greek text. What does this tell us?</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel">NKJV</div><div class="ttext" data-t='"If any man thinks that he is behaving improperly toward his virgin…"' data-ko='"어떤 남자가 자기의 처녀에 대하여 부당하게 행동한다고 생각하면…"'>"If any man thinks that he is behaving improperly toward his virgin…"</div></div>
-      <div class="trow"><div class="tlabel">NASB</div><div class="ttext" data-t='"If any man thinks that he is acting unbecomingly toward his virgin daughter…"' data-ko='"어떤 남자가 자기 처녀 딸에게 부적절하게 행동한다고 생각하면…"'>"If any man thinks that he is acting unbecomingly toward his virgin daughter…"</div></div>
-      <div class="trow"><div class="tlabel">NIV</div><div class="ttext" data-t='"If anyone is worried that he might not be acting honorably toward the virgin he is engaged to…"' data-ko='"누군가가 자기가 약혼한 처녀에게 명예롭게 행동하지 못할까 걱정된다면…"'>"If anyone is worried that he might not be acting honorably toward the virgin he is engaged to…"</div></div>
-      <div class="trow"><div class="tlabel">NEB</div><div class="ttext" data-t='"If a man has a partner in celibacy and feels that he is not behaving properly towards her…"' data-ko='"어떤 남자가 독신 파트너가 있고 그녀에게 적절하게 행동하지 못하고 있다고 느낀다면…"'>"If a man has a partner in celibacy and feels that he is not behaving properly towards her…"</div></div>
-    </div>
-    <div class="cboxd" style="margin-top:14px" data-t="&lt;strong&gt;Interpretive implication:&lt;/strong&gt; Where translations agree, the interpreter is on solid ground. Where they diverge, a genuine difficulty in the original text is surfaced. That divergence is your invitation to dig deeper — not a crisis, but a hermeneutical flag.|&lt;strong&gt;해석적 함의:&lt;/strong&gt; 번역본들이 일치하는 곳에서는 해석자가 확실한 기반 위에 있습니다. 번역본들이 다른 곳에서는 원문의 진정한 어려움이 드러납니다. 그 차이는 더 깊이 탐구하라는 초대입니다 — 위기가 아니라 해석학적 신호입니다."><strong>Interpretive implication:</strong> Where translations agree, the interpreter is on solid ground. Where they diverge, a genuine difficulty in the original text is surfaced. That divergence is your invitation to dig deeper — not a crisis, but a hermeneutical flag.</div>
+  <div class="sh" id="b1-s2">II. The 1 Corinthians 7:36 Case Study</div>
+  <div class="shk">번역 비교 사례: 고린도전서 7:36</div>
+  <span class="tm" id="b1-t2">⏱ 0:20 — Translation Philosophy (15 min)</span>
+  <div class="bt" id="b1-p3">Fee and Stuart use <strong>1 Corinthians 7:36</strong> as their primary case study. Four translations render this verse with four different social scenarios — a man and his fiancée? a father and his daughter? a celibate couple? The Greek is genuinely ambiguous — but Paul was not. He wrote to a community that already knew the situation. Where translations <em>agree</em>, you are on solid ground. Where they <em>diverge</em>, a genuine interpretive difficulty is surfaced — your invitation to dig deeper.</div>
+  <div class="ttbl">
+    <div class="tr2"><div class="tl">NKJV</div><div class="td">"If any man thinks that he is behaving improperly toward his virgin…"</div></div>
+    <div class="tr2"><div class="tl">NASB</div><div class="td">"If any man thinks that he is acting unbecomingly toward his virgin daughter…"</div></div>
+    <div class="tr2"><div class="tl">NIV</div><div class="td">"If anyone is worried that he might not be acting honorably toward the virgin he is engaged to…"</div></div>
+    <div class="tr2"><div class="tl">NEB</div><div class="td">"If a man has a partner in celibacy and feels that he is not behaving properly towards her…"</div></div>
   </div>
+  <div class="bq"><div class="bqt" id="b1-bq">Where translations agree, you are on solid ground. Where they diverge, you are looking at a genuine difficulty in the text — and that divergence is your invitation to dig deeper.</div><div class="bqa">— Fee &amp; Stuart</div></div>
 
-  <div class="sh" data-t="III. A Taxonomy of English Translations|III. 번역본의 유형">III. A Taxonomy of English Translations</div>
-  <div class="shk" data-t="번역본의 세 가지 유형|Three types of translation">번역본의 세 가지 유형</div>
-  <span class="tm" data-t="⏱ 0:20 — Translation Philosophy (15 min)|⏱ 0:20 — 번역 철학 (15분)">⏱ 0:20 — Translation Philosophy (15 min)</span>
-
-  <div class="ssh" data-t="A. Formal Equivalence (Word-for-Word) · NASB, ESV, NKJV|A. 형식적 등가 (단어 대 단어) · NASB, ESV, NKJV">A. Formal Equivalence · NASB, ESV, NKJV</div>
-  <div class="bt" data-t="Formal equivalence attempts to render the original as literally as possible — preserving word order and grammatical structures wherever English allows. Invaluable for close study. But translating idioms word-for-word can produce nonsense or false precision.|형식적 등가 번역은 원어를 가능한 한 문자 그대로 번역하려 합니다 — 영어가 허용하는 한 어순과 문법 구조를 보존합니다. 정밀한 연구에 매우 귀중합니다. 그러나 관용어를 단어 대 단어로 번역하면 의미 없는 결과나 거짓 정밀성을 낳을 수 있습니다.">Formal equivalence attempts to render the original as literally as possible — preserving word order and grammatical structures wherever English allows. Invaluable for close study. But translating idioms word-for-word can produce nonsense or false precision.</div>
-
-  <div class="ssh" data-t="B. Dynamic Equivalence (Thought-for-Thought) · NIV, NLT|B. 동적 등가 (의미 대 의미) · NIV, NLT">B. Dynamic Equivalence · NIV, NLT</div>
-  <div class="bt" data-t="Dynamic equivalence asks: what would this sound like in natural modern English? More readable and often captures the original impact — but makes more interpretive decisions on behalf of the reader. The NIV renders σάρξ (sarx, 'flesh') as 'sinful nature' in Rom 7:18 — one interpretation among several, invisible to the English reader.|동적 등가는 묻습니다: 현대 영어에서 자연스럽게 어떻게 들릴까? 더 읽기 쉽고 원문의 영향을 포착하지만 — 독자 대신 더 많은 해석적 결정을 합니다. NIV는 롬 7:18에서 σάρξ(sarx, '육신')를 '죄성'으로 번역합니다 — 영어 독자에게는 보이지 않는 여러 해석 중 하나입니다.">Dynamic equivalence asks: what would this sound like in natural modern English? More readable and captures original impact — but makes more interpretive decisions. The NIV renders σάρξ ('flesh') as 'sinful nature' in Rom 7:18 — one interpretation among several, invisible to the English reader.</div>
-
-  <div class="ssh" data-t="C. Paraphrase · The Message, The Living Bible|C. 의역 · 메시지 성경, 리빙 바이블">C. Paraphrase · The Message, The Living Bible</div>
-  <div class="bt" data-t="Paraphrases are expansive, interpretive retellings. Valuable for devotional reading and recovering the emotional force of a passage — &lt;strong&gt;never use as a primary study text&lt;/strong&gt;. The Message is Peterson's interpretation, not a translation in the technical sense.|의역은 광범위한 해석적 재표현입니다. 묵상 읽기와 구절의 감정적 힘을 회복하는 데 가치 있지만 — &lt;strong&gt;주요 연구 텍스트로 사용하지 마십시오&lt;/strong&gt;. 메시지 성경은 피터슨의 해석이지 기술적 의미의 번역이 아닙니다.">Paraphrases are expansive, interpretive retellings. Valuable for devotional reading — <strong>never use as a primary study text</strong>. The Message is Peterson's interpretation, not a translation in the technical sense.</div>
-
-  <div class="sh" data-t="IV. Korean Linguistic Bridge|IV. 한국어 언어적 가교">IV. Korean Linguistic Bridge</div>
-  <div class="shk" data-t="개역개정, 새번역, 현대인의 성경|Korean Bible translations">개역개정, 새번역, 현대인의 성경</div>
-  <div class="bt" data-t="Korean translations — &lt;strong&gt;개역개정&lt;/strong&gt;, &lt;strong&gt;새번역&lt;/strong&gt;, &lt;strong&gt;현대인의 성경&lt;/strong&gt; — each carry their own translation philosophies. Korean's verb-final structure aligns in some respects more naturally with Hebrew and Greek than English. Korean honorific levels require constant decisions about relational posture that English's single 'you' never needs to make. A bilingual reader has a richer interpretive resource.|한국어 번역본들 — &lt;strong&gt;개역개정&lt;/strong&gt;, &lt;strong&gt;새번역&lt;/strong&gt;, &lt;strong&gt;현대인의 성경&lt;/strong&gt; — 각각 고유한 번역 철학을 담고 있습니다. 한국어의 동사 후위 구조는 영어보다 히브리어와 그리스어에 더 자연스럽게 정렬되는 면이 있습니다. 한국어 경어 체계는 영어의 단일한 'you'는 결코 할 필요가 없는 관계적 자세에 대한 끊임없는 결정을 요구합니다. 이중 언어 독자는 더 풍부한 해석적 자원을 갖습니다.">Korean translations — <strong>개역개정</strong>, <strong>새번역</strong>, <strong>현대인의 성경</strong> — each carry their own philosophies. Korean's verb-final structure aligns more naturally with Hebrew and Greek in some respects. Korean honorific levels require constant decisions about relational posture. A bilingual reader has a richer interpretive resource.</div>
-
-  <div class="pnav">
-    <button class="nbtn" onclick="go('obj')">← <span data-t="Objectives|학습목표">Objectives</span></button>
-    <button class="nbtn prim" onclick="go('b2')"><span data-t="Block 2 →|2블록 →">Block 2 →</span></button>
+  <div class="sh" id="b1-s3">III. A Taxonomy of English Translations</div>
+  <div class="shk">번역 철학의 스펙트럼</div>
+  <div class="tc">
+    <div class="th" id="b1-th1">Formal Equivalence (Word-for-Word)</div>
+    <div class="th" id="b1-th2">Dynamic Equivalence (Thought-for-Thought)</div>
+    <div class="td2" id="b1-td1">Preserves word order and grammatical structures. <strong>NASB, ESV, NKJV.</strong> Best for close study. Risk: idioms translated word-for-word can mislead.</div>
+    <div class="td2" id="b1-td2">Renders the meaning in natural English. <strong>NIV, NLT.</strong> More readable. Risk: the translator's interpretation becomes embedded — e.g. NIV renders σάρξ as 'sinful nature' (one choice among several).</div>
   </div>
-</div>
-</div>
+  <div class="bt" id="b1-p4"><strong>Paraphrase</strong> (The Message, Living Bible): expansive, interpretive retellings. Valuable devotionally — <em>never as a primary study text</em>. Practical wisdom: NASB/ESV for formal study; NIV/CSB for readable checking; compare all on difficult passages.</div>
+  <div class="ko-fb"><strong>의역</strong> (메시지 성경): 광범위한 해석적 재표현입니다. 묵상에는 가치 있지만 — <em>주요 연구 텍스트로 사용하지 마십시오.</em> 실용적 지혜: NASB/ESV를 형식적 연구에; NIV/CSB를 가독성 확인에 사용하고, 어려운 구절에서는 모두 비교하십시오.</div>
 
-<!-- BLOCK 2: THE SPIRAL -->
-<div class="vw" id="vw-b2">
-<div class="pg">
-  <div class="pbadge" data-t="Block 2 · Minutes 60–110|2블록 · 60–110분">Block 2 · Minutes 60–110</div>
-  <div class="ptitle" data-t="The Hermeneutical Spiral|해석학적 나선형">The Hermeneutical Spiral</div>
-  <div class="pko" data-t="해석학적 나선: 이해의 형태 — Osborne, Intro + Ch. 1|해석학적 나선: 이해의 형태 — Osborne, Intro + Ch. 1">해석학적 나선: 이해의 형태</div>
-  <div class="prule"></div>
+  <div class="sh" id="b1-s4">IV. Korean Linguistic Bridge</div>
+  <div class="shk">한국어 언어적 가교</div>
+  <div class="bt" id="b1-p5">Korean translations — <strong>개역개정, 새번역, 현대인의 성경</strong> — each carry their own translation philosophies. Korean's verb-final structure aligns more naturally with Hebrew and Greek in some respects than English. Korean honorific levels require constant decisions about relational posture that English's single 'you' never faces. A bilingual reader moving between English and Korean has a richer interpretive resource than one confined to one tradition.</div>
 
-  <div class="sh" data-t="I. A Metaphor That Changes Everything|I. 모든 것을 바꾸는 비유">I. A Metaphor That Changes Everything</div>
-  <div class="shk" data-t="닫힌 원 대 나선형|Closed circle vs. spiral">닫힌 원 대 나선형</div>
-  <span class="tm" data-t="⏱ 1:00 — The Shape of Understanding (12 min)|⏱ 1:00 — 이해의 형태 (12분)">⏱ 1:00 — The Shape of Understanding (12 min)</span>
-
-  <div class="bt" data-t="Osborne opens &lt;em&gt;The Hermeneutical Spiral&lt;/em&gt; with a gold coins image: imagine gold discovered on the church's back lot — and that coins increased in number with every foot of depth, down to two hundred feet. How quickly would you start digging? &lt;strong&gt;The deeper you go, the greater the rewards.&lt;/strong&gt; This is the reality of Bible study.|오스본은 &lt;em&gt;해석학적 나선&lt;/em&gt;을 황금 동전 이미지로 시작합니다: 교회 뒤뜰에 황금이 발견되었고 200피트까지 매 피트마다 동전 수가 늘어난다고 상상해보십시오. 얼마나 빨리 파기 시작하겠습니까? &lt;strong&gt;더 깊이 들어갈수록, 보상은 더 커집니다.&lt;/strong&gt; 이것이 성경 연구의 실제입니다.">Osborne opens with a gold coins image: imagine gold discovered on the church's back lot — increasing in number with every foot of depth. How quickly would you start digging? <strong>The deeper you go, the greater the rewards.</strong> This is the reality of Bible study.</div>
-  <div class="bt" data-t="Biblical interpretation, Osborne argues, is not a &lt;strong&gt;closed circle&lt;/strong&gt; but a &lt;strong&gt;spiral&lt;/strong&gt;. A closed circle implies interpretation is self-referential — we bring our preunderstanding and the text merely confirms it, in an endless loop. The spiral corrects this: unlike a closed circle, a spiral moves. It converges toward the text's intended meaning with each pass.|성경 해석은, 오스본이 주장하듯, &lt;strong&gt;닫힌 원&lt;/strong&gt;이 아니라 &lt;strong&gt;나선형&lt;/strong&gt;입니다. 닫힌 원은 해석이 자기 지시적임을 암시합니다 — 우리는 선이해를 가져오고 텍스트는 단순히 이를 확인합니다. 나선형은 이것을 교정합니다: 나선형은 움직입니다. 매 순환마다 텍스트의 의도된 의미를 향해 수렴합니다.">Biblical interpretation is not a <strong>closed circle</strong> but a <strong>spiral</strong>. A closed circle implies interpretation is self-referential — we bring our preunderstanding and the text confirms it. The spiral corrects this: it moves forward, converging toward the text's intended meaning with each pass.</div>
-
-  <div class="bq">
-    <div class="bqt" data-t="It is not a closed circle that can never detect the true meaning but [I] am spiraling nearer and nearer to the text's intended meaning as I refine my hypotheses and allow the text to continue to challenge and correct those alternative interpretations.|이것은 참된 의미를 결코 발견할 수 없는 닫힌 원이 아니라, 내가 가설을 정제하고 텍스트가 대안적 해석들에 계속 도전하고 수정하도록 허용함에 따라 텍스트의 의도된 의미에 점점 더 가까워지는 나선형입니다.">It is not a closed circle that can never detect the true meaning but [I] am spiraling nearer and nearer to the text's intended meaning as I refine my hypotheses and allow the text to continue to challenge and correct those alternative interpretations.</div>
-    <div class="bqa">— Grant Osborne</div>
+  <div class="pn">
+    <button class="pnb" onclick="go('obj')" id="b1-p">← Objectives</button>
+    <button class="pnb p" onclick="go('b2')" id="b1-n">Block 2 →</button>
   </div>
+</div></div>
 
-  <div class="sh" data-t="II. Three Dimensions of Hermeneutics|II. 해석학의 세 차원">II. Three Dimensions of Hermeneutics</div>
-  <div class="shk" data-t="과학, 예술, 영적 행위|Science, art, spiritual act">과학, 예술, 영적 행위</div>
-  <span class="tm" data-t="⏱ 1:12 — Science, Art, Spirit (8 min)|⏱ 1:12 — 과학, 예술, 영적 행위 (8분)">⏱ 1:12 — Science, Art, Spirit (8 min)</span>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="A science|과학">A science</strong> — <span data-t="providing logical, orderly classification of interpretive laws. Some interpretations are demonstrably better than others.|해석의 법칙에 대한 논리적이고 질서정연한 분류를 제공합니다. 어떤 해석들은 분명히 다른 것들보다 낫습니다.">providing logical, orderly classification of interpretive laws. Some interpretations are demonstrably better than others.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="An art|예술">An art</strong> — <span data-t="an acquired skill demanding imagination and practice. Rules can be learned without mastery; the art develops through thousands of hours of encounter with the text.|상상력과 연습을 필요로 하는 습득된 기술. 규칙은 숙달 없이 배울 수 있습니다; 예술은 텍스트와의 수천 시간의 만남을 통해 발전합니다.">an acquired skill demanding imagination and practice. Rules can be learned without mastery; the art develops through thousands of hours of encounter with the text.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="A spiritual act|영적 행위">A spiritual act</strong> — <span data-t="uniquely dependent on the illuminating work of the Holy Spirit. Human effort is necessary and never sufficient. The doctrine of illumination presupposes rigorous study — it does not replace it.|성령의 조명 사역에 고유하게 의존합니다. 인간의 노력은 필요하지만 결코 충분하지 않습니다. 조명의 교리는 엄격한 연구를 전제합니다 — 대체하는 것이 아니라.">uniquely dependent on the illuminating work of the Holy Spirit. Human effort is necessary and never sufficient. The doctrine of illumination presupposes rigorous study — it does not replace it.</span></div></div>
+<!-- BLOCK 2 -->
+<div id="v-b2" class="view"><div class="pg">
+  <div class="pb" id="b2-pb">Block 2 · Minutes 60–110</div>
+  <div class="pt" id="b2-pt">The Hermeneutical Spiral</div>
+  <div class="ptk">해석학적 나선: 이해의 형태</div>
+  <div class="pr"></div>
 
-  <div class="sh" data-t="III. The Four Distances (Klein, Blomberg, Hubbard)|III. 네 가지 거리 (클라인, 블롬버그, 허바드)">III. The Four Distances</div>
-  <div class="shk" data-t="리쾨르의 거리화 간격 — 네 영역|Ricoeur's distanciation gap — four areas">리쾨르의 거리화 간격</div>
-  <span class="tm" data-t="⏱ 1:20 — Distanciation Gap (10 min)|⏱ 1:20 — 거리화 간격 (10분)">⏱ 1:20 — Distanciation Gap (10 min)</span>
-  <div class="bt" data-t="The philosopher Paul Ricoeur speaks of the &lt;em&gt;distanciation gap&lt;/em&gt; between the world of the biblical text and the world of contemporary readers. The question is not whether the gap exists — it does — but whether it is bridgeable. Klein, Blomberg, and Hubbard identify four areas of distance:|철학자 폴 리쾨르는 성경 텍스트의 세계와 현대 독자의 세계 사이의 &lt;em&gt;거리화 간격&lt;/em&gt;에 대해 말합니다. 문제는 간격이 존재하는가가 아니라 그것이 연결 가능한지입니다. 클라인, 블롬버그, 허바드는 네 가지 거리 영역을 식별합니다:">The philosopher Paul Ricoeur speaks of the <em>distanciation gap</em> between the biblical text and contemporary readers. The question is not whether the gap exists — it does — but whether it is bridgeable. Klein, Blomberg, and Hubbard identify four areas:</div>
+  <span class="tm" id="b2-t1">⏱ 1:00 — The Shape of Understanding (12 min)</span>
+  <div class="sh" id="b2-s1">I. The Gold Coin Metaphor</div>
+  <div class="shk">황금 동전의 비유</div>
+  <div class="bt" id="b2-p1">Osborne opens his book with a vivid image: gold coins have been discovered on the church's back lot — and soundings show the number <em>increasing</em> with every foot of depth, down to 200 feet. How quickly would you start digging? This is Bible study. <strong>The deeper you go, the greater the rewards.</strong></div>
+  <div class="ko-fb">오스본은 생생한 이미지로 시작합니다: 교회 뒤뜰에 황금 동전이 발견되었고 — 지하 200피트까지 매 피트마다 동전 수가 늘어납니다. <strong>더 깊이 들어갈수록, 보상은 더 커집니다.</strong></div>
+  <div class="bt" id="b2-p2">Biblical interpretation is not a <strong>closed circle</strong> but a <strong>spiral</strong>. The hermeneutical circle (Schleiermacher, Gadamer) says the whole is understood through its parts and parts through the whole — true, but a closed circle implies interpretation merely loops back to confirm what we already believe. Osborne's spiral <em>moves</em>: it ascends toward the text's intended meaning. And it is cone-shaped — it <em>converges</em>.</div>
+  <div class="ko-fb">성경 해석은 <strong>닫힌 원</strong>이 아니라 <strong>나선형</strong>입니다. 닫힌 원은 해석이 이미 믿는 것을 확인하는 루프를 돈다는 것을 암시합니다. 오스본의 나선형은 <em>움직입니다</em>: 텍스트의 의도된 의미를 향해 상승하며 <em>수렴합니다</em>.</div>
+  <div class="bq"><div class="bqt" id="b2-bq1">It is not a closed circle that can never detect the true meaning but [I am] spiraling nearer and nearer to the text's intended meaning as I refine my hypotheses and allow the text to continue to challenge and correct those alternative interpretations.</div><div class="bqa">— Grant Osborne</div></div>
 
-  <!-- Case Study 2: Four Distances -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · The Four Distances|사례 연구 · 네 가지 거리">Case Study · The Four Distances</div>
-    <div class="cboxq" data-t="Amos 2:6 — 'those who sell the righteous for silver, and the needy for a pair of sandals.' How does each distance shape our understanding?|아모스 2:6 — '은을 받고 의인을 팔며 신 한 켤레를 받고 가난한 자를 파는.' 각각의 거리는 우리의 이해를 어떻게 형성합니까?">Amos 2:6 — "those who sell the righteous for silver, and the needy for a pair of sandals." How does each distance shape our understanding?</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel" data-t="Time|시간">Time</div><div class="ttext" data-t="8th century B.C. Israel under Jeroboam II — 2,800 years separate us from this text's original moment.|기원전 8세기 여로보암 2세 치하의 이스라엘 — 2,800년이 우리와 이 텍스트의 원래 순간을 분리합니다.">8th century B.C. Israel under Jeroboam II — 2,800 years separate us from this text's original moment.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Culture|문화">Culture</div><div class="ttext" data-t="Debt slavery, patron-client economics, and legal corruption in the Israelite gate-court are not abstract — they are the precise social machinery Amos dissects.|채무 노예제, 후원-피후원 경제, 이스라엘 성문 법정의 부패는 추상적이지 않습니다 — 아모스가 해부하는 정확한 사회 기계입니다.">Debt slavery, patron-client economics, and legal corruption in the Israelite gate-court are not abstract — they are the precise social machinery Amos dissects.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Geography|지리">Geography</div><div class="ttext" data-t="Amos is a shepherd from Tekoa (Judah) delivering these oracles to the prosperous north (Israel) — a geographical-political outsider speaking judgment into the center.|아모스는 유다의 드고아 출신 목자로 번영한 북왕국(이스라엘)에 신탁을 전합니다 — 지리적·정치적 외부인이 중심부를 향해 심판을 선포하는 것.">Amos is a shepherd from Tekoa (Judah) delivering oracles to the prosperous north (Israel) — a geographical outsider speaking judgment into the center.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Language|언어">Language</div><div class="ttext" data-t="'A pair of sandals' is a legal idiom for a trifling sum in property transactions. Without Hebrew idiom awareness, the verse sounds trivial. With it, the depth of moral outrage is clear.|'신 한 켤레'는 재산 거래에서 하찮은 금액을 나타내는 법적 관용어입니다. 히브리어 관용어 인식 없이는 이 구절이 사소해 보입니다. 알면 도덕적 분노의 깊이가 분명해집니다.">'A pair of sandals' is a legal idiom for a trifling sum in property transactions. Without Hebrew idiom awareness, the verse sounds trivial. With it, the moral outrage is clear.</div></div>
-    </div>
+  <span class="tm" id="b2-t2">⏱ 1:12 — Science, Art, Spirit (8 min)</span>
+  <div class="sh" id="b2-s2">II. Three Dimensions of Hermeneutics</div>
+  <div class="shk">과학, 예술, 영적 행위</div>
+  <div class="li"><div class="lb2"></div><div class="lt"><strong id="b2-l1">A science</strong> — <span id="b2-l1t">providing logical, orderly classification of interpretive laws. It makes it possible to say some readings are better than others.</span></div></div>
+  <div class="li"><div class="lb2"></div><div class="lt"><strong id="b2-l2">An art</strong> — <span id="b2-l2t">an acquired skill demanding imagination and practice. The art develops through thousands of hours of encounter with the text.</span></div></div>
+  <div class="li"><div class="lb2"></div><div class="lt"><strong id="b2-l3">A spiritual act</strong> — <span id="b2-l3t">uniquely dependent on the illuminating work of the Holy Spirit. Human effort is necessary and never sufficient. Illumination presupposes rigorous study — it does not replace it.</span></div></div>
+
+  <span class="tm" id="b2-t3">⏱ 1:20 — The Four Distances (10 min)</span>
+  <div class="sh" id="b2-s3">III. The Four Distances (Klein, Blomberg, Hubbard)</div>
+  <div class="shk">네 가지 거리</div>
+  <div class="bt" id="b2-p3">Paul Ricoeur speaks of the <em>distanciation gap</em> between the biblical world and contemporary readers. Klein, Blomberg, and Hubbard identify four areas every interpreter must reckon with:</div>
+  <div class="ko-fb">폴 리쾨르는 성경 세계와 현대 독자 사이의 <em>거리화 간격</em>에 대해 말합니다. 클라인, 블롬버그, 허바드는 모든 해석자가 고려해야 할 네 가지 거리 영역을 식별합니다: 시간, 문화, 지리, 언어.</div>
+  <div class="tc">
+    <div class="th" id="b2-d1h">Time</div><div class="th" id="b2-d2h">Culture</div>
+    <div class="td2" id="b2-d1t">The biblical books span ~1,500 years of composition. We are two millennia from the most recent NT writings.</div>
+    <div class="td2" id="b2-d2t">Social structures, economic systems, legal frameworks of the ancient world are profoundly different from ours.</div>
+    <div class="th" id="b2-d3h">Geography</div><div class="th" id="b2-d4h">Language</div>
+    <div class="td2" id="b2-d3t">Places are constitutive elements of meaning, not mere backdrop. Roman occupation means something different to those who have never experienced subjugation.</div>
+    <div class="td2" id="b2-d4t">Hebrew and Greek are living language systems with their own logic and idioms — not codes to decode by consulting a lexicon.</div>
   </div>
 
-  <div class="sh" data-t="IV. Meaning and Significance — Hirsch's Distinction|IV. 의미와 의의 — 허쉬의 구분">IV. Meaning and Significance</div>
-  <div class="shk" data-t="허쉬: 저자의 의도된 의미 vs. 다양한 독자와의 관계|Hirsch: author's intended meaning vs. relationship with diverse readers">허쉬의 구분</div>
-  <span class="tm" data-t="⏱ 1:30 — Hirsch's Distinction (8 min)|⏱ 1:30 — 허쉬의 구분 (8분)">⏱ 1:30 — Hirsch's Distinction (8 min)</span>
+  <span class="tm" id="b2-t4">⏱ 1:30 — Hirsch's Distinction (8 min)</span>
+  <div class="sh" id="b2-s4">IV. Meaning vs. Significance — Hirsch</div>
+  <div class="shk">의미와 의의 — 허쉬의 구분</div>
+  <div class="tc">
+    <div class="th" id="b2-mh">Meaning</div><div class="th" id="b2-sh">Significance</div>
+    <div class="td2" id="b2-mt">The author's intended content — singular, stable, determined at the moment of writing. What Paul meant by Romans 6:23 in 58 A.D. is the same whether read in Rome or Seoul today.</div>
+    <div class="td2" id="b2-st">The relationship between that fixed meaning and a later reader's situation. Different readers, different significance — but the same meaning.</div>
+  </div>
+  <div class="bq"><div class="bqt" id="b2-bq2">A text cannot mean what it could never have meant for its original readers/hearers. The true meaning of the biblical text for us is what God originally intended it to mean when it was first spoken or written.</div><div class="bqa">— Fee &amp; Stuart</div></div>
 
-  <!-- Case Study 3: Hirsch -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · Romans 6:23|사례 연구 · 로마서 6:23">Case Study · Romans 6:23</div>
-    <div class="cboxq" data-t='"The wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." — Romans 6:23|"죄의 삯은 사망이요 하나님의 은사는 그리스도 예수 우리 주 안에 있는 영생이니라" — 로마서 6:23'>"The wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." — Romans 6:23</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel" style="color:var(--gold2)" data-t="Meaning|의미">Meaning</div><div class="ttext" data-t="What Paul intended in 58 A.D. — singular, stable, determined at the moment of writing. Does not change whether read in Rome, Seoul, or 2026.|바울이 기원후 58년에 의도한 것 — 단수, 안정적, 기록 당시에 결정된. 로마에서 읽든, 서울에서 읽든, 2026년에 읽든 변하지 않습니다.">What Paul intended in 58 A.D. — singular, stable, determined at the moment of writing. Does not change whether read in Rome, Seoul, or 2026.</div></div>
-      <div class="trow"><div class="tlabel" style="color:var(--gold2)" data-t="Significance|의의">Significance</div><div class="ttext" data-t="For a martyr in 2nd-century Rome: defiance of imperial power. For a Korean seminary student in 2026: vocational orientation. For a person in addiction crisis: immediate pastoral address. Same meaning — vastly different significance.|2세기 로마의 순교자에게: 황제 권력에 대한 저항. 2026년 한국 신학생에게: 소명 방향. 중독 위기의 사람에게: 즉각적 목회적 말씀. 같은 의미 — 매우 다른 의의.">For a martyr in 2nd-century Rome: defiance of imperial power. For a Korean seminary student in 2026: vocational orientation. For a person in addiction crisis: immediate pastoral address. Same meaning — vastly different significance.</div></div>
-    </div>
-    <div class="cboxd" style="margin-top:14px" data-t="&lt;strong&gt;The danger:&lt;/strong&gt; confusing significance with meaning — treating what a text means for me today as though it were what the author actually said. This collapses the distinction and undermines the text's authority.|&lt;strong&gt;위험:&lt;/strong&gt; 의의를 의미와 혼동하는 것 — 텍스트가 오늘 나에게 의미하는 것을 저자가 실제로 말한 것인 것처럼 다루는 것. 이것은 구분을 무너뜨리고 텍스트의 권위를 훼손합니다."><strong>The danger:</strong> confusing significance with meaning — treating what a text means for me today as though it were what the author actually said. This collapses the distinction and undermines the text's authority.</div>
+  <span class="tm" id="b2-t5">⏱ 1:38 — Context (22 min)</span>
+  <div class="sh" id="b2-s5">V. Context — The Most Important Word</div>
+  <div class="shk">문맥 — 해석학에서 가장 중요한 단어</div>
+  <div class="bt" id="b2-p4">Osborne opens Chapter 1 with a confession: if a student falls half asleep and misses a question, there is a 50% chance of being correct by answering <em>'context.'</em> Words mean things in sentences, paragraphs, books, and historical settings — never in isolation.</div>
+  <div class="ko-fb">오스본은 1장을 고백으로 시작합니다: 학생이 반쯤 졸다가 질문을 놓쳤다면, <em>'문맥'</em>이라고 답하기만 해도 맞을 확률이 50%입니다. 단어들은 문장, 단락, 책, 역사적 배경 안에서 의미를 가집니다 — 결코 고립되어서는 아닙니다.</div>
+  <div class="ssh" id="b2-ssh1">A. Historical Context</div>
+  <div class="bt" id="b2-p5">Knowing that Amos was a shepherd from Tekoa, delivering oracles to the prosperous but structurally unjust northern kingdom during Jeroboam II's reign, transforms <em>'those who trample the poor'</em> from abstract moral platitude into surgical diagnosis.</div>
+  <div class="ko-fb">아모스가 드고아 출신 목자로서 여로보암 2세 통치 기간에 불의한 북왕국에 신탁을 전했다는 것을 알면, <em>'가난한 자를 짓밟는 자들'</em>이 추상적 도덕 교훈에서 정밀한 사회 진단으로 변모합니다.</div>
+  <div class="ssh" id="b2-ssh2">B. Logical Context (Concentric Circles)</div>
+  <div class="bt" id="b2-p6">Logical context moves from immediate sentences outward to section, book, canon. <strong>The immediate context is the final arbiter for word meaning.</strong> The discipline of <em>charting a book</em> — reading it whole before studying any individual passage — prevents the most common exegetical errors.</div>
+  <div class="ko-fb">논리적 문맥은 즉각적 문장에서 섹션, 책, 정경으로 이동합니다. <strong>즉각적 문맥이 단어 의미의 최종 중재자입니다.</strong> <em>책 도표 작성</em>의 훈련 — 개별 구절을 공부하기 전에 전체를 읽는 것 — 이 가장 흔한 주해 오류를 방지합니다.</div>
+
+  <div class="pn">
+    <button class="pnb" onclick="go('b1')" id="b2-p">← Block 1</button>
+    <button class="pnb p" onclick="go('b3')" id="b2-n">Block 3 →</button>
+  </div>
+</div></div>
+
+<!-- BLOCK 3 -->
+<div id="v-b3" class="view"><div class="pg">
+  <div class="pb" id="b3-pb">Block 3 · Minutes 120–170</div>
+  <div class="pt" id="b3-pt">Grammar, Textual Criticism, and the Surface of the Text</div>
+  <div class="ptk">문법, 본문 비평, 그리고 텍스트의 표면</div>
+  <div class="pr"></div>
+
+  <span class="tm" id="b3-t1">⏱ 2:00 — Exegesis vs. Eisegesis (5 min)</span>
+  <div class="sh" id="b3-s1">I. Exegesis and Eisegesis</div>
+  <div class="shk">주해와 삽입 해석</div>
+  <div class="tc">
+    <div class="th" id="b3-eh">Exegesis (ἐξήγησις)</div><div class="th" id="b3-ih">Eisegesis (εἰσ-)</div>
+    <div class="td2" id="b3-et">"To lead out of." Reading meaning <strong>out of</strong> the text — drawing out what the author put there.</div>
+    <div class="td2" id="b3-it">"Into." Reading meaning <strong>into</strong> the text — projecting your assumptions, tradition, or predetermined conclusion onto it.</div>
+  </div>
+  <div class="bt" id="b3-p1">Every interpreter commits eisegesis — constantly, unavoidably. Good hermeneutics does not eliminate these filters (impossible) but names them, holds them loosely, and <strong>allows the text to interrogate and reform them</strong>. This is why the spiral is the right metaphor.</div>
+  <div class="ko-fb">모든 해석자는 끊임없이, 불가피하게 삽입 해석을 범합니다. 좋은 해석학은 이 필터들을 제거하는 것이 아니라 그것들을 명명하고, <strong>텍스트가 그것들을 심문하고 개혁하도록 허용합니다.</strong> 이것이 나선형이 올바른 은유인 이유입니다.</div>
+
+  <span class="tm" id="b3-t2">⏱ 2:05 — Textual Criticism (20 min)</span>
+  <div class="sh" id="b3-s2">II. Textual Criticism: What Exactly Is the Text?</div>
+  <div class="shk">본문 비평: 텍스트는 정확히 무엇인가?</div>
+  <div class="bt" id="b3-p2">We do not possess the original autographs. We have copies of copies — over <strong>5,700 Greek NT manuscripts</strong>. The OT tradition includes the <strong>Masoretic Text</strong> (vocalized 6th–10th c. A.D.), the <strong>Septuagint/LXX</strong> (~3rd–1st c. B.C., translated from pre-Masoretic Hebrew), the <strong>Samaritan Pentateuch</strong>, and the <strong>Dead Sea Scrolls</strong> (discovered 1947 — pushing our oldest Hebrew manuscripts back ~1,000 years and largely confirming the Masoretic tradition).</div>
+  <div class="ko-fb">우리는 원본을 소유하지 않습니다. 사본의 사본들만 있습니다 — 신약 <strong>5,700개 이상의 그리스어 사본</strong>. 구약 전통에는 <strong>마소라 텍스트</strong>, <strong>칠십인역(LXX)</strong>, <strong>사마리아 오경</strong>, <strong>사해 사본</strong>(1947년)이 있습니다.</div>
+
+  <div class="ssh" id="b3-ssh1">Case Study: Mark 16:9–20</div>
+  <div class="bt" id="b3-p3">The longer ending of Mark (vv. 9–20) appears in the KJV but is absent or bracketed in virtually all modern translations. The two oldest and most reliable manuscripts — <strong>Codex Sinaiticus</strong> and <strong>Codex Vaticanus</strong> — end at 16:8: <em>"for they were afraid."</em> The vocabulary and style of vv. 9–20 differ noticeably from Mark's language elsewhere. A later editor appears to have compiled resurrection-appearance traditions and attached them to Mark's abrupt ending. Responsible response: acknowledge it honestly; note that no doctrine depends solely on these verses.</div>
+  <div class="ko-fb">마가복음의 긴 결말(9-20절)은 KJV에 있지만 현대 번역본에는 없거나 괄호로 묶여 있습니다. 가장 오래된 두 사본 — <strong>시나이 사본</strong>과 <strong>바티칸 사본</strong> — 은 16:8에서 끝납니다: <em>"그들이 두려워하였기 때문이라."</em> 책임 있는 응답: 정직하게 인정하고, 어떤 교리도 이 구절에만 의존하지 않음을 언급하십시오.</div>
+  <div class="li"><div class="lb2"></div><div class="lt"><strong id="b3-l1">External criteria</strong>: <span id="b3-l1t">How early is the manuscript? What is the geographical distribution? Is the reading found in multiple independent families?</span></div></div>
+  <div class="li"><div class="lb2"></div><div class="lt"><strong id="b3-l2">Internal criteria</strong>: <span id="b3-l2t">Which reading is more difficult? (Scribes simplified, not complicated.) Which is shorter? Which fits the author's style?</span></div></div>
+
+  <span class="tm" id="b3-t3">⏱ 2:25 — Grammar and Meaning (25 min)</span>
+  <div class="sh" id="b3-s3">III. Grammatical Analysis</div>
+  <div class="shk">문법 분석</div>
+  <div class="bt" id="b3-p4">Grammar is the architectural blueprint of communication. Word meaning is not self-contained: words mean things only in grammatical context.</div>
+
+  <div class="ssh" id="b3-ssh2">Case Study: Greek Present Tense in 1 John 3:9</div>
+  <div class="bt" id="b3-p5">The Greek tense system encodes not just time but <em>verbal aspect</em> — how the speaker presents the action. The present tense indicates ongoing, habitual action. In <strong>1 John 3:9</strong>, the NIV's "continue to sin" and "go on sinning" reflect Greek present forms indicating a <em>characteristic lifestyle</em> — not occasional sins. John is not saying believers never sin; he is saying that sinning as a characteristic pattern is incompatible with being born of God. This grammatical distinction changes the entire interpretation.</div>
+  <div class="ko-fb">그리스어 시제 체계는 시간만이 아니라 <em>언어적 상(verbal aspect)</em>을 인코딩합니다. <strong>요한일서 3:9</strong>의 현재 시제는 <em>특징적인 생활 방식</em>을 나타냅니다 — 가끔 있는 죄가 아닙니다. 이 문법적 구분이 해석 전체를 바꿉니다.</div>
+
+  <div class="ssh" id="b3-ssh3">Case Study: The Philippians 2:6 Participle</div>
+  <div class="bt" id="b3-p6">The participle ὑπάρχων (<em>hyparchon</em>) in <strong>Philippians 2:6</strong> can be translated three ways — each with significant Christological implications:</div>
+  <div class="ttbl">
+    <div class="tr2"><div class="tl" id="b3-r1l">Concessive</div><div class="td" id="b3-r1t">"Although he was in the form of God…" — divine nature as backdrop to self-emptying.</div></div>
+    <div class="tr2"><div class="tl" id="b3-r2l">Causal</div><div class="td" id="b3-r2t">"Because he was in the form of God…" — divinity as motivation rather than contrast.</div></div>
+    <div class="tr2"><div class="tl" id="b3-r3l">Temporal</div><div class="td" id="b3-r3t">"When he was in the form of God…" — locating the action in time relative to the incarnation.</div></div>
   </div>
 
-  <div class="bq">
-    <div class="bqt" data-t="A text cannot mean what it could never have meant for its original readers/hearers. The true meaning of the biblical text for us is what God originally intended it to mean when it was first spoken or written.|텍스트는 원래 독자/청자들에게 의미할 수 없었던 것을 의미할 수 없습니다. 우리를 위한 성경 텍스트의 참된 의미는 그것이 처음 말해지거나 기록되었을 때 하나님이 원래 의도하신 의미입니다.">A text cannot mean what it could never have meant for its original readers/hearers. The true meaning of the biblical text for us is what God originally intended it to mean when it was first spoken or written.</div>
-    <div class="bqa">— Fee &amp; Stuart</div>
+  <span class="tm" id="b3-t4">⏱ 2:50 — Integration (10 min)</span>
+  <div class="sh" id="b3-s4">IV. Integration: Grammar, Translation, Formation</div>
+  <div class="shk">통합: 세 블록의 하나된 과제</div>
+  <div class="bt" id="b3-p7">Translation, context, and grammar are not three separate topics — they are three angles on the same task: understanding what God said in Scripture and how that word speaks into our world. In the <strong>WHERE–WHO–WHAT framework</strong>: hermeneutics locates you (WHERE), reconstitutes you as an interpreter within community (WHO), and shapes your vocation — not merely to understand Scripture but to allow Scripture to understand, reform, and locate you (WHAT).</div>
+  <div class="ko-fb">번역, 문맥, 문법은 동일한 과제의 세 가지 각도입니다. <strong>WHERE–WHO–WHAT 틀</strong>에서: 해석학은 당신을 위치시키고(WHERE), 공동체 안의 해석자로 재구성하며(WHO), 소명을 형성합니다(WHAT) — 성경이 당신을 이해하고, 개혁하고, 위치시키도록 허용하는 것.</div>
+  <div class="bq"><div class="bqt" id="b3-bq">O God of word and wisdom, you have spoken in many ways and by many instruments. Teach us to receive what you have given — not with careless haste, but with the patient attention of those who know that to understand your word is to encounter you.</div><div class="bqa" id="b3-bqa">— Closing Benediction</div></div>
+
+  <div class="pn">
+    <button class="pnb" onclick="go('b2')" id="b3-p">← Block 2</button>
+    <button class="pnb p" onclick="go('sg')" id="b3-n">Study Guide →</button>
   </div>
-
-  <div class="sh" data-t="V. Context — The Most Important Word in Hermeneutics|V. 문맥 — 해석학에서 가장 중요한 단어">V. Context — The Most Important Word</div>
-  <div class="shk" data-t="역사적 문맥과 논리적 문맥 — Osborne, Ch. 1|Historical context and logical context — Osborne, Ch. 1">역사적 문맥과 논리적 문맥</div>
-  <span class="tm" data-t="⏱ 1:38 — Context: Historical and Logical (22 min)|⏱ 1:38 — 문맥: 역사적·논리적 (22분)">⏱ 1:38 — Context: Historical and Logical (22 min)</span>
-  <div class="bt" data-t="Osborne: if a student falls half asleep and answers 'context' to any question, there is a 50% chance of being correct. Words do not mean things in isolation — they mean things in sentences, paragraphs, books, and historical settings. Osborne distinguishes two major dimensions of context:| 오스본: 학생이 반쯤 졸다가 어떤 질문에 '문맥'이라고 답하면, 맞을 확률이 50%입니다. 단어들은 고립되어 의미를 갖지 않습니다 — 문장, 단락, 책, 역사적 배경 안에서 의미를 가집니다. 오스본은 두 가지 주요 문맥 차원을 구분합니다:">Osborne: if a student answers 'context' to any question, there's a 50% chance of being right. Words do not mean things in isolation — they mean things in sentences, paragraphs, books, and historical settings. Osborne distinguishes two dimensions:</div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Historical context|역사적 문맥">Historical context</strong> — <span data-t="the author's identity, date, audience circumstances, and purpose. Knowing Amos was a Tekoa shepherd addressing prosperous but unjust northern Israel transforms his words from platitude into surgical social diagnosis.|저자의 정체성, 연대, 청중의 상황, 목적. 아모스가 번영하지만 불의한 북왕국 이스라엘에 말씀을 전한 드고아 출신 목자임을 알면 그의 말이 상투적 표현에서 정밀한 사회 진단으로 변모합니다.">the author's identity, date, audience circumstances, and purpose. Knowing Amos was a Tekoa shepherd addressing prosperous but unjust northern Israel transforms his words from platitude into surgical social diagnosis.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Logical context|논리적 문맥">Logical context</strong> — <span data-t="the structural and literary relationship around a passage: immediate sentences, section argument, book structure, and canonical context. Visualized as concentric circles. The immediate context is the final arbiter for word meaning decisions.|구절 주변의 구조적·문학적 관계: 즉각적 문장들, 섹션 논증, 책 구조, 정경적 문맥. 동심원으로 시각화됩니다. 즉각적 문맥이 단어 의미 결정의 최종 중재자입니다.">the structural and literary relationship around a passage: immediate sentences, section argument, book structure, and canonical context. Visualized as concentric circles. The immediate context is the final arbiter for word meaning decisions.</span></div></div>
-  <div class="li"><div class="lb"></div><div class="lt"><strong data-t="Charting a book|책 도표 작성">Charting a book</strong> — <span data-t="a macro-level structural analysis before engaging any individual passage. Read the entire book in one sitting; identify major divisions; note the flow of thought. Without this macro-perspective, even brilliant micro-level exegesis can go wrong.|개별 구절을 다루기 전에 거시적 구조 분석. 한 번에 전체 책을 읽고; 주요 구분을 찾아내고; 사상의 흐름을 표시하십시오. 이 거시적 관점 없이는 아무리 탁월한 미시적 주해도 잘못될 수 있습니다.">a macro-level structural analysis before engaging any individual passage. Read the entire book in one sitting; identify major divisions; note the flow of thought. Without this, even brilliant micro-level exegesis can go wrong.</span></div></div>
-
-  <div class="pnav">
-    <button class="nbtn" onclick="go('b1')">← <span data-t="Block 1|1블록">Block 1</span></button>
-    <button class="nbtn prim" onclick="go('b3')"><span data-t="Block 3 →|3블록 →">Block 3 →</span></button>
-  </div>
-</div>
-</div>
-
-<!-- BLOCK 3: GRAMMAR -->
-<div class="vw" id="vw-b3">
-<div class="pg">
-  <div class="pbadge" data-t="Block 3 · Minutes 120–170|3블록 · 120–170분">Block 3 · Minutes 120–170</div>
-  <div class="ptitle" data-t="Grammar, Text Criticism, and the Surface of the Text|문법, 본문 비평, 텍스트의 표면">Grammar, Text Criticism, and the Surface of the Text</div>
-  <div class="pko" data-t="문법, 본문 비평, 그리고 텍스트의 표면 — Osborne, Ch. 2|문법, 본문 비평, 그리고 텍스트의 표면 — Osborne, Ch. 2">문법, 본문 비평, 그리고 텍스트의 표면</div>
-  <div class="prule"></div>
-
-  <div class="sh" data-t="I. Exegesis and Eisegesis|I. 주해와 삽입 해석">I. Exegesis and Eisegesis</div>
-  <div class="shk" data-t="주해와 삽입 해석|Exegesis and eisegesis">주해와 삽입 해석</div>
-  <span class="tm" data-t="⏱ 2:00 — The Fundamental Distinction (5 min)|⏱ 2:00 — 근본적 구분 (5분)">⏱ 2:00 — The Fundamental Distinction (5 min)</span>
-
-  <div class="tbox">
-    <div class="trow"><div class="tlabel" style="color:var(--gold2)" data-t="Exegesis|주해">Exegesis</div><div class="ttext" data-t="From Greek ἐξήγησις — 'to lead out of.' Reading meaning OUT OF the text. Drawing out what the author actually put there.|그리스어 ἐξήγησις에서 — '이끌어내다.' 텍스트에서 의미를 이끌어내기. 저자가 실제로 거기에 넣은 것을 끌어내는 것.">From Greek ἐξήγησις — 'to lead out of.' Reading meaning <em>out of</em> the text — drawing out what the author actually put there.</div></div>
-    <div class="trow"><div class="tlabel" style="color:var(--gold2)" data-t="Eisegesis|삽입 해석">Eisegesis</div><div class="ttext" data-t="From Greek εἰσ — 'into.' Reading meaning INTO the text. Projecting what you wish were there, what tradition says, or what supports your conclusion.|그리스어 εἰσ에서 — '안으로.' 텍스트 안으로 의미를 읽어 넣기. 거기에 있기를 원하는 것, 전통이 말하는 것, 또는 결론을 지지하는 것을 투영하는 것.">From Greek εἰσ — 'into.' Reading meaning <em>into</em> the text — projecting what you wish were there, what tradition says, or what supports your conclusion.</div></div>
-  </div>
-  <div class="bt" data-t="Every interpreter commits eisegesis — constantly, unavoidably. The work of good hermeneutics is not to eliminate these filters (impossible) but to name them, hold them loosely, and &lt;strong&gt;allow the text to interrogate and reform them&lt;/strong&gt;. This is why the spiral is the right metaphor: the text pushes back; we revise; we return.|모든 해석자는 끊임없이, 불가피하게 삽입 해석을 범합니다. 좋은 해석학의 임무는 이 필터들을 제거하는 것(불가능)이 아니라 그것들을 명명하고, 느슨하게 잡고, &lt;strong&gt;텍스트가 그것들을 심문하고 개혁하도록 허용하는 것&lt;/strong&gt;입니다. 이것이 나선형이 올바른 은유인 이유입니다: 텍스트가 반박하고; 우리는 수정하고; 돌아옵니다.">Every interpreter commits eisegesis constantly and unavoidably. Good hermeneutics names the filters, holds them loosely, and <strong>allows the text to interrogate and reform them</strong>. This is why the spiral is the right metaphor: the text pushes back; we revise; we return.</div>
-
-  <div class="sh" data-t="II. Textual Criticism: What Exactly Is the Text?|II. 본문 비평: 텍스트는 정확히 무엇인가?">II. Textual Criticism</div>
-  <div class="shk" data-t="사본 전통과 본문 비평의 원칙들|Manuscript traditions and text-critical principles">사본 전통과 본문 비평의 원칙들</div>
-  <span class="tm" data-t="⏱ 2:05 — Text Criticism (20 min)|⏱ 2:05 — 본문 비평 (20분)">⏱ 2:05 — Text Criticism (20 min)</span>
-  <div class="bt" data-t="We do not possess the original autographs of any biblical book. What we have are copies of copies — in the NT, over &lt;strong&gt;5,700 Greek manuscripts&lt;/strong&gt;. The OT manuscript tradition includes the &lt;strong&gt;Masoretic Text&lt;/strong&gt;, the &lt;strong&gt;Septuagint (LXX)&lt;/strong&gt;, the &lt;strong&gt;Samaritan Pentateuch&lt;/strong&gt;, and the &lt;strong&gt;Dead Sea Scrolls&lt;/strong&gt; (discovered 1947, pushing our oldest Hebrew manuscripts back ~1,000 years).|우리는 어떤 성경 책의 원본도 소유하지 않습니다. 우리가 가진 것은 사본의 사본들입니다 — 신약에서 &lt;strong&gt;5,700개 이상의 그리스어 사본들&lt;/strong&gt;. 구약 사본 전통에는 &lt;strong&gt;마소라 텍스트&lt;/strong&gt;, &lt;strong&gt;칠십인역(LXX)&lt;/strong&gt;, &lt;strong&gt;사마리아 오경&lt;/strong&gt;, &lt;strong&gt;사해 사본&lt;/strong&gt;(1947년 발견, 가장 오래된 히브리어 사본을 약 1,000년 앞으로 당김)이 포함됩니다.">We do not possess original autographs. NT: over <strong>5,700 Greek manuscripts</strong>. OT traditions: <strong>Masoretic Text</strong>, <strong>Septuagint (LXX)</strong>, <strong>Samaritan Pentateuch</strong>, and <strong>Dead Sea Scrolls</strong> (1947, pushing oldest Hebrew manuscripts back ~1,000 years).</div>
-
-  <!-- Case Study 4: Mark 16 -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · Mark 16:9–20|사례 연구 · 마가복음 16:9-20">Case Study · Mark 16:9–20</div>
-    <div class="cboxq" data-t="The longer ending of Mark is present in the KJV, absent or bracketed in virtually all modern translations. Why?|마가복음의 긴 결말은 KJV에 있지만 거의 모든 현대 번역본에는 없거나 괄호로 묶여 있습니다. 왜입니까?">The longer ending of Mark is present in the KJV, absent or bracketed in virtually all modern translations. Why?</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel" data-t="Evidence|증거">Evidence</div><div class="ttext" data-t="Codex Sinaiticus and Codex Vaticanus — the oldest and most reliable Greek manuscripts — end at 16:8: 'for they were afraid.'|시나이 사본과 바티칸 사본 — 가장 오래되고 신뢰할 수 있는 그리스어 사본들 — 은 16:8에서 끝납니다: '그들이 두려워하였기 때문이라.'">Codex Sinaiticus and Codex Vaticanus — the oldest and most reliable Greek manuscripts — end at 16:8: "for they were afraid."</div></div>
-      <div class="trow"><div class="tlabel" data-t="Style|문체">Style</div><div class="ttext" data-t="The vocabulary and style of vv. 9–20 differ markedly from Mark's usage elsewhere in the Gospel. A later editor appears to have compiled resurrection-appearance traditions.|9-20절의 어휘와 문체는 복음서의 다른 곳에서 마가의 용법과 현저히 다릅니다. 후대의 편집자가 부활 현현 전승들을 편집한 것으로 보입니다.">The vocabulary and style of vv. 9–20 differ markedly from Mark's usage elsewhere in the Gospel. A later editor appears to have compiled resurrection-appearance traditions.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Response|대응">Response</div><div class="ttext" data-t="We neither panic nor pretend it isn't there. We acknowledge it honestly. None of the doctrines it affirms are dependent on these verses — they are all well attested elsewhere in the NT.|우리는 당황하지도, 거기에 없는 척하지도 않습니다. 솔직하게 인정합니다. 이 구절이 확인하는 어떤 교리도 이 구절들에 의존하지 않습니다 — 모두 신약의 다른 곳에서 잘 증명됩니다.">We neither panic nor pretend it isn't there. We acknowledge it honestly. None of the doctrines it affirms depend on these verses — they are all well attested elsewhere in the NT.</div></div>
-    </div>
-    <div class="cboxd" style="margin-top:14px" data-t="&lt;strong&gt;Text-critical principle:&lt;/strong&gt; External criteria (manuscript age + distribution) and internal criteria (style, difficulty, length) must be weighed together. The harder reading is often more likely to be original — scribes tended to expand and clarify, not simplify.|&lt;strong&gt;본문 비평 원칙:&lt;/strong&gt; 외적 기준(사본 연대 + 분포)과 내적 기준(문체, 난이도, 길이)을 함께 평가해야 합니다. 더 어려운 독법이 원본일 가능성이 높습니다 — 필사자들은 단순화하지 않고 확장하고 명확히 하는 경향이 있었습니다."><strong>Text-critical principle:</strong> External criteria (manuscript age + distribution) and internal criteria (style, difficulty, length) must be weighed together. The harder reading is often more likely to be original — scribes tended to expand, not simplify.</div>
-  </div>
-
-  <div class="sh" data-t="III. Grammatical Analysis|III. 문법 분석">III. Grammatical Analysis</div>
-  <div class="shk" data-t="그리스어 시제, 법, 태 — 의미 형성에서의 역할|Greek tense, mood, voice — their role in shaping meaning">그리스어 시제, 법, 태</div>
-  <span class="tm" data-t="⏱ 2:25 — Grammar and Meaning (25 min)|⏱ 2:25 — 문법과 의미 (25분)">⏱ 2:25 — Grammar and Meaning (25 min)</span>
-  <div class="bt" data-t="Grammar is the architectural blueprint of communication. Word meaning is not self-contained — words mean things only in grammatical context. The word δικαιόω (dikaioo) can mean 'to declare righteous,' 'to acquit,' or 'to vindicate' depending on who is doing what to whom in what kind of sentence.|문법은 의사소통의 건축 청사진입니다. 단어 의미는 자족적이지 않습니다 — 단어들은 문법적 문맥 안에서만 의미를 가집니다. 단어 δικαιόω(dikaioo)는 어떤 종류의 문장에서 누가 누구에게 무엇을 하는지에 따라 '의롭다고 선언하다,' '무죄를 선언하다,' 또는 '옹호하다'를 의미할 수 있습니다.">Grammar is the architectural blueprint of communication. Word meaning is not self-contained — words mean things only in grammatical context. The word δικαιόω (dikaioo) can mean 'to declare righteous,' 'to acquit,' or 'to vindicate' depending on who is doing what to whom.</div>
-
-  <!-- Case Study 5: 1 John 3:9 -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · 1 John 3:9 · Greek Present Tense|사례 연구 · 요한일서 3:9 · 그리스어 현재 시제">Case Study · 1 John 3:9 · Greek Present Tense</div>
-    <div class="cboxq" data-t='"No one who is born of God will continue to sin… they cannot go on sinning, because they have been born of God." — 1 John 3:9 (NIV)|"하나님께로부터 난 자마다 죄를 짓지 아니하나니… 그가 죄를 짓지 못하는 것은 하나님께로부터 났음이라." — 요한일서 3:9'>"No one who is born of God will continue to sin… they cannot go on sinning, because they have been born of God." — 1 John 3:9 (NIV)</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel" data-t="Grammar|문법">Grammar</div><div class="ttext" data-t="'Continue to sin' and 'go on sinning' reflect Greek present tense forms — indicating ongoing, habitual action, not occasional acts.|'계속해서 죄를 짓다'와 '죄를 짓기를 계속하다'는 그리스어 현재 시제 형태를 반영합니다 — 가끔 있는 행동이 아닌 지속적이고 습관적인 행동을 나타냅니다.">'Continue to sin' and 'go on sinning' reflect Greek present tense forms — indicating ongoing, habitual action, not occasional acts.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Meaning|의미">Meaning</div><div class="ttext" data-t="John is not saying believers never sin. He is saying that sinning as a characteristic lifestyle is incompatible with being born of God.|요한은 신자들이 결코 죄를 짓지 않는다고 말하는 것이 아닙니다. 그는 특징적인 생활 방식으로서의 죄가 하나님에게서 태어난 것과 양립할 수 없다고 말하는 것입니다.">John is not saying believers never sin. He is saying that sinning as a characteristic lifestyle is incompatible with being born of God.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Impact|영향">Impact</div><div class="ttext" data-t="This grammatical distinction changes the entire interpretation — from an impossible demand (never sin) to a description of regenerate character (sin no longer dominates).|이 문법적 구분은 전체 해석을 바꿉니다 — 불가능한 요구(결코 죄짓지 말라)에서 재생된 성품의 묘사(죄가 더 이상 지배하지 않음)로.">This grammatical distinction changes the entire interpretation — from an impossible demand (never sin) to a description of regenerate character (sin no longer dominates).</div></div>
-    </div>
-  </div>
-
-  <!-- Case Study 6: Phil 2:6 -->
-  <div class="cbox">
-    <div class="cboxtag" data-t="Case Study · Phil 2:6 · The Participial Question|사례 연구 · 빌립보서 2:6 · 분사 문제">Case Study · Phil 2:6 · The Participial Question</div>
-    <div class="cboxq" data-t='"Who, being in very nature God, did not consider equality with God something to be used to his own advantage." — Philippians 2:6 (NIV)|"그는 근본 하나님의 본체시나 하나님과 동등됨을 취할 것으로 여기지 아니하시고" — 빌립보서 2:6'>"Who, being in very nature God, did not consider equality with God something to be used to his own advantage." — Philippians 2:6 (NIV)</div>
-    <div class="tbox" style="margin:0">
-      <div class="trow"><div class="tlabel" data-t="Participle|분사">Participle</div><div class="ttext" data-t="ὑπάρχων (hyparchon) — the Greek participle is grammatically ambiguous between concessive, causal, and temporal readings.|ὑπάρχων(hyparchon) — 그리스어 분사는 양보적, 원인적, 시간적 독법 사이에서 문법적으로 모호합니다.">ὑπάρχων (hyparchon) — the Greek participle is grammatically ambiguous between concessive, causal, and temporal readings.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Concessive|양보">Concessive</div><div class="ttext" data-t='"Although he was in the form of God" — emphasis on the paradox of the Incarnation; his divine nature did not prevent humiliation.|"비록 그가 하나님의 형태로 있었지만" — 성육신의 역설을 강조; 그의 신성은 굴욕을 막지 못했습니다.'>"Although he was in the form of God" — emphasis on the paradox of the Incarnation; his divine nature did not prevent the humiliation.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Causal|원인">Causal</div><div class="ttext" data-t='"Because he was in the form of God" — the Incarnation flows from his divine character; who he is determines how he acts.|"그가 하나님의 형태로 있었기 때문에" — 성육신은 그의 신성한 성품에서 흘러나옵니다; 그가 누구인지가 그가 어떻게 행동하는지를 결정합니다.'>"Because he was in the form of God" — the Incarnation flows from his divine character; who he is determines how he acts.</div></div>
-      <div class="trow"><div class="tlabel" data-t="Stakes|중요성">Stakes</div><div class="ttext" data-t="The translation you choose has significant Christological implications. This is not a secondary textual matter — it is the heart of the passage.|당신이 선택한 번역은 상당한 기독론적 함의를 가집니다. 이것은 부차적인 본문 문제가 아닙니다 — 구절의 핵심입니다.">The translation you choose has significant Christological implications. This is not a secondary textual matter — it is the heart of the passage.</div></div>
-    </div>
-  </div>
-
-  <div class="sh" data-t="IV. What If You Don't Know the Languages?|IV. 언어를 모른다면?">IV. What If You Don't Know the Languages?</div>
-  <div class="shk" data-t="원어 없이 문법을 사용하는 실용적 도구들|Practical tools for using grammar without original languages">원어 없이 문법 활용하기</div>
-  <div class="li"><div class="lb"></div><div class="lt" data-t="&lt;strong&gt;Memorize the Hebrew and Greek alphabets.&lt;/strong&gt; This opens interlinear Bibles, analytical concordances, and a massive range of language resources.|&lt;strong&gt;히브리어와 그리스어 알파벳을 암기하십시오.&lt;/strong&gt; 이것은 대역 성경, 분석 어형 사전, 방대한 언어 자원들을 열어줍니다."><strong>Memorize the Hebrew and Greek alphabets.</strong> This opens interlinear Bibles, analytical concordances, and a massive range of language resources.</div></div>
-  <div class="li"><div class="lb"></div><div class="lt" data-t="&lt;strong&gt;Invest in Bible software.&lt;/strong&gt; Logos, Accordance, BibleHub, or Blue Letter Bible allow you to hover over an English word and see the original term, its lexical range, its grammatical form, and its usage elsewhere.|&lt;strong&gt;성경 소프트웨어에 투자하십시오.&lt;/strong&gt; Logos, Accordance, BibleHub, 또는 Blue Letter Bible은 영어 단어 위에 마우스를 올리면 원어, 어휘 범위, 문법 형태, 다른 곳에서의 사용을 볼 수 있게 합니다."><strong>Invest in Bible software.</strong> Logos, Accordance, BibleHub, or Blue Letter Bible allow you to hover over an English word and see the original term, its lexical range, grammatical form, and usage elsewhere.</div></div>
-  <div class="li"><div class="lb"></div><div class="lt" data-t="&lt;strong&gt;Use multiple translations as a grammatical tool.&lt;/strong&gt; Where translations diverge sharply, you are looking at a genuine grammatical or semantic ambiguity in the original. Treat those divergences as flags.|&lt;strong&gt;여러 번역본을 문법적 도구로 사용하십시오.&lt;/strong&gt; 번역본들이 현저히 다른 곳에서는 원문의 진정한 문법적 또는 의미론적 모호성을 보고 있는 것입니다. 그 차이를 신호로 다루십시오."><strong>Use multiple translations as a grammatical tool.</strong> Where translations diverge sharply, you are looking at genuine grammatical ambiguity in the original. Treat those divergences as flags.</div></div>
-
-  <div class="bq">
-    <div class="bqt" data-t="O God of word and wisdom, you have spoken in many ways and by many instruments. Teach us to receive what you have given — not with careless haste, but with the patient attention of those who know that to understand your word is to encounter you.|말씀과 지혜의 하나님, 당신은 여러 방식으로 여러 도구를 통해 말씀하셨습니다. 당신이 주신 것을 받을 수 있도록 가르쳐 주십시오 — 부주의한 성급함이 아니라, 당신의 말씀을 이해하는 것이 당신을 만나는 것임을 아는 사람들의 인내로운 주의로.">O God of word and wisdom, you have spoken in many ways and by many instruments. Teach us to receive what you have given — not with careless haste, but with the patient attention of those who know that to understand your word is to encounter you.</div>
-    <div class="bqa" data-t="— Closing Benediction|— 마무리 축복">— Closing Benediction</div>
-  </div>
-
-  <div class="pnav">
-    <button class="nbtn" onclick="go('b2')">← <span data-t="Block 2|2블록">Block 2</span></button>
-    <button class="nbtn prim" onclick="go('guide')"><span data-t="Study Guide →|학습 가이드 →">Study Guide →</span></button>
-  </div>
-</div>
-</div>
+</div></div>
 
 <!-- STUDY GUIDE -->
-<div class="vw" id="vw-guide">
-<div class="pg">
-  <div class="pbadge" data-t="Week 3 · Study Guide|3주차 · 학습 가이드">Week 3 · Study Guide</div>
-  <div class="ptitle" data-t="Discussion Questions &amp; Assignment|토론 질문 및 과제">Discussion Questions &amp; Assignment</div>
-  <div class="pko" data-t="학습 가이드 및 토론 질문|Study guide and discussion questions">학습 가이드 및 토론 질문</div>
-  <div class="prule"></div>
-  <div class="sh" data-t="Discussion Questions|토론 질문">Discussion Questions</div>
-  <div class="dq"><div class="dqn">Q1</div><div class="dqt" data-t="Fee and Stuart argue that using only one Bible translation commits you to the exegetical decisions of that committee. How does this challenge the way you have read the Bible in the past?|피와 스튜어트는 하나의 번역본만 사용하는 것은 그 위원회의 주해적 결정에 자신을 맡기는 것이라고 주장합니다. 이것이 과거에 당신이 성경을 읽어온 방식에 어떤 도전을 줍니까?">Fee and Stuart argue that using only one Bible translation commits you to the exegetical decisions of that committee. How does this challenge the way you have read the Bible in the past?</div></div>
-  <div class="dq"><div class="dqn">Q2</div><div class="dqt" data-t="Osborne describes hermeneutics as simultaneously a science, an art, and a spiritual act. Which dimension is most developed in your interpretive practice? Which most underdeveloped?|오스본은 해석학을 동시에 과학, 예술, 영적 행위로 묘사합니다. 당신의 해석 실천에서 어느 차원이 가장 발전해 있습니까? 어느 것이 가장 덜 발전해 있습니까?">Osborne describes hermeneutics as simultaneously a science, an art, and a spiritual act. Which dimension is most developed in your practice? Which most underdeveloped?</div></div>
-  <div class="dq"><div class="dqn">Q3</div><div class="dqt" data-t="The four distances (time, culture, geography, language) are real — but Osborne argues they are bridgeable. What resources and practices do you have right now for bridging each of them?|네 가지 거리(시간, 문화, 지리, 언어)는 실재합니다 — 그러나 오스본은 그것들이 연결 가능하다고 주장합니다. 지금 당신이 각각을 연결하기 위해 가진 자원과 실천은 무엇입니까?">The four distances are real — but bridgeable. What resources and practices do you have right now for bridging each of them?</div></div>
-  <div class="dq"><div class="dqn">Q4</div><div class="dqt" data-t="Hirsch's distinction between meaning and significance is central to Osborne's project. How does this distinction change the way you think about 'applying' a biblical text to a contemporary situation?|허쉬의 의미와 의의의 구분은 오스본 프로젝트의 핵심입니다. 이 구분이 성경 텍스트를 현대 상황에 '적용하는' 것에 대해 당신이 생각하는 방식을 어떻게 바꿉니까?">Hirsch's distinction between meaning and significance is central to Osborne's project. How does this distinction change the way you think about 'applying' a biblical text?</div></div>
-  <div class="dq"><div class="dqn">Q5</div><div class="dqt" data-t="Korean question: How does reading in Korean (개역개정 or 새번역) alongside English change or deepen your interpretation? Give a specific example from your own reading.|한국어 질문: 영어와 함께 한국어로(개역개정이나 새번역) 읽는 것이 당신의 해석을 어떻게 바꾸거나 심화시킵니까? 당신 자신의 읽기에서 구체적인 예를 들어 주십시오.">Korean question: How does reading in Korean (개역개정 or 새번역) alongside English change or deepen your interpretation? Give a specific example.</div></div>
-  <div class="dq"><div class="dqn">Q6</div><div class="dqt" data-t="Mark 16:9–20 and the 1 John 3:9 tense issue both illustrate how textual and grammatical decisions change interpretation. Which of these case studies surprised you most — and why?|마가복음 16:9-20과 요한일서 3:9의 시제 문제는 모두 본문적·문법적 결정이 해석을 어떻게 바꾸는지를 보여줍니다. 이 사례 연구 중 어느 것이 가장 놀라웠습니까 — 그리고 왜?">Mark 16:9–20 and the 1 John 3:9 tense issue both illustrate how textual and grammatical decisions change interpretation. Which case study surprised you most — and why?</div></div>
-  <div class="sh" data-t="Assignment for Week 4|4주차 과제">Assignment for Week 4</div>
-  <div class="tbox" style="margin:0">
-    <div class="at"><div class="an">1</div><div class="av" data-t="Read &lt;strong&gt;Fee &amp; Stuart, Chapter 3&lt;/strong&gt; (The Epistles: Learning to Think Contextually) in its entirety.|&lt;strong&gt;피 &amp; 스튜어트 3장&lt;/strong&gt; 전체를 읽으십시오 (서신서: 문맥적으로 생각하는 법 배우기).">Read <strong>Fee &amp; Stuart, Chapter 3</strong> (The Epistles) in its entirety.</div></div>
-    <div class="at"><div class="an">2</div><div class="av" data-t="Choose one key term from &lt;strong&gt;Philippians 2:1–11&lt;/strong&gt;. Trace its semantic range in Paul's letters using an interlinear or Bible software. Write 200–300 words.|&lt;strong&gt;빌립보서 2:1-11&lt;/strong&gt;에서 주요 용어 하나를 선택하십시오. 대역 성경이나 성경 소프트웨어를 사용하여 바울 서신에서 그 의미 범위를 추적하십시오. 200-300 단어를 쓰십시오.">Choose one key term from <strong>Philippians 2:1–11</strong>. Trace its semantic range in Paul's letters using an interlinear or Bible software. Write 200–300 words.</div></div>
-    <div class="at"><div class="an">3</div><div class="av" data-t="Compare &lt;strong&gt;1 Corinthians 7:36&lt;/strong&gt; in at least 4 English translations. Write a paragraph on what the differences reveal about the interpretive challenges in the original Greek.|최소 4가지 영어 번역본에서 &lt;strong&gt;고린도전서 7:36&lt;/strong&gt;을 비교하십시오. 차이점이 원래 그리스어의 해석적 도전에 대해 무엇을 드러내는지 단락을 쓰십시오.">Compare <strong>1 Corinthians 7:36</strong> in at least 4 English translations. Write a paragraph on what the differences reveal.</div></div>
-    <div class="at"><div class="an">🇰🇷</div><div class="av" data-t="&lt;strong&gt;Korean Assignment:&lt;/strong&gt; 개역개정과 새번역에서 시편 22편을 비교하세요. 두 번역의 차이점을 세 군데 이상 찾아서 각각의 번역 철학을 분석하세요."><strong>Korean Assignment:</strong> 개역개정과 새번역에서 시편 22편을 비교하세요. 두 번역의 차이점을 세 군데 이상 찾아서 각각의 번역 철학을 분석하세요.</div></div>
+<div id="v-sg" class="view"><div class="pg">
+  <div class="pb" id="sg-pb">Week 3 · Study Guide</div>
+  <div class="pt" id="sg-pt">Discussion Questions &amp; Assignment</div>
+  <div class="ptk">학습 가이드 및 토론 질문</div>
+  <div class="pr"></div>
+  <div class="sh" id="sg-sh1">Discussion Questions</div>
+  <div class="dq"><div class="dqn">Q1</div><div class="dqt" id="sg-q1">Fee and Stuart argue that using only one Bible translation commits you to the exegetical decisions of that committee. How does this challenge the way you have read the Bible in the past?</div></div>
+  <div class="ko-fb">피와 스튜어트는 하나의 번역본만 사용하는 것은 그 위원회의 주해적 결정에 자신을 맡기는 것이라고 주장합니다. 이것이 과거에 당신이 성경을 읽어온 방식에 어떤 도전을 줍니까?</div>
+  <div class="dq"><div class="dqn">Q2</div><div class="dqt" id="sg-q2">Osborne describes hermeneutics as simultaneously a science, an art, and a spiritual act. Which dimension is most developed in your practice? Which most underdeveloped?</div></div>
+  <div class="ko-fb">오스본은 해석학을 동시에 과학, 예술, 영적 행위로 묘사합니다. 당신의 실천에서 어느 차원이 가장 발전해 있습니까? 어느 것이 가장 덜 발전해 있습니까?</div>
+  <div class="dq"><div class="dqn">Q3</div><div class="dqt" id="sg-q3">The 'problem of distance' (time, culture, geography, language) is real. But Osborne argues it is bridgeable. What resources do you have right now for bridging that gap?</div></div>
+  <div class="ko-fb">'거리의 문제'(시간, 문화, 지리, 언어)는 실재합니다. 그러나 오스본은 그것이 연결 가능하다고 주장합니다. 지금 당신이 그 간격을 연결하기 위해 가진 자원은 무엇입니까?</div>
+  <div class="dq"><div class="dqn">Q4</div><div class="dqt" id="sg-q4">Hirsch's distinction between meaning and significance is central to Osborne's project. How does it change the way you think about 'applying' a biblical text?</div></div>
+  <div class="ko-fb">허쉬의 의미와 의의의 구분은 오스본 프로젝트의 핵심입니다. 이것이 성경 텍스트를 '적용하는' 것에 대해 당신이 생각하는 방식을 어떻게 바꿉니까?</div>
+  <div class="dq"><div class="dqn">Q5</div><div class="dqt" id="sg-q5">For Korean students: How does reading in 개역개정 or 새번역 alongside English change or deepen your interpretation? Give a specific example.</div></div>
+  <div class="ko-fb">한국어 학생들에게: 영어와 함께 개역개정이나 새번역으로 읽는 것이 어떻게 해석을 변화시키거나 심화시킵니까? 구체적인 예를 들어 설명하십시오.</div>
+  <div class="dq"><div class="dqn">Q6</div><div class="dqt" id="sg-q6">Osborne insists charting an entire book before studying individual passages is invaluable. Have you done this? If not, which book would you start with — and why?</div></div>
+  <div class="ko-fb">오스본은 개별 구절을 공부하기 전에 책 전체를 도표화하는 것이 매우 중요하다고 강조합니다. 이것을 해본 적 있습니까? 없다면, 어떤 책으로 시작하겠습니까 — 그리고 왜입니까?</div>
+  <div class="sh" id="sg-sh2">Assignment for Week 4</div>
+  <div class="ai"><div class="an">1</div><div class="at" id="sg-a1">Read <strong>Fee &amp; Stuart, Chapter 3</strong> (The Epistles: Learning to Think Contextually) in its entirety.</div></div>
+  <div class="ai"><div class="an">2</div><div class="at" id="sg-a2">Choose one key term from <strong>Philippians 2:1–11</strong>. Trace its semantic range in Paul's letters using an interlinear or Bible software. Write 200–300 words.</div></div>
+  <div class="ai"><div class="an">3</div><div class="at" id="sg-a3">Compare <strong>1 Corinthians 7:36</strong> in at least 4 English translations. Write a paragraph on what the differences reveal about the interpretive challenges in the Greek.</div></div>
+  <div class="ai"><div class="an">🇰🇷</div><div class="at" id="sg-a4"><strong>Korean Assignment:</strong> 개역개정과 새번역에서 시편 22편을 비교하세요. 두 번역의 차이점을 세 군데 이상 찾아서 각각의 번역 철학을 분석하세요.</div></div>
+  <div class="pn">
+    <button class="pnb" onclick="go('b3')" id="sg-p">← Block 3</button>
+    <button class="pnb p" onclick="go('quiz')" id="sg-n">Take the Quiz →</button>
   </div>
-  <div class="pnav">
-    <button class="nbtn" onclick="go('b3')">← <span data-t="Block 3|3블록">Block 3</span></button>
-    <button class="nbtn prim" onclick="go('quiz')"><span data-t="Take the Quiz →|퀴즈 시작 →">Take the Quiz →</span></button>
-  </div>
-</div>
-</div>
+</div></div>
 
 <!-- QUIZ -->
-<div class="vw" id="vw-quiz">
-<div class="qwrap">
-  <div class="pbadge" data-t="Week 3 Assessment · 7 Questions|3주차 평가 · 7문항">Week 3 Assessment · 7 Questions</div>
-  <div class="qprog-labs">
-    <span id="qpl"></span>
-    <span id="qsl"></span>
+<div id="v-quiz" class="view"><div class="qw">
+  <div class="pb" id="qz-pb">Week 3 Assessment · 7 Questions</div>
+  <div class="qpl"><span id="q-pl">Question 1 of 7</span><span id="q-sc">0 correct</span></div>
+  <div class="qtr"><div class="qfi" id="q-fi" style="width:0%"></div></div>
+  <div class="qds" id="q-ds"></div>
+  <div class="qc" id="q-c">
+    <div class="qtag" id="q-tag">Q 1/7</div>
+    <div class="qtop" id="q-top"></div>
+    <div class="qnum" id="q-num"></div>
+    <div class="qtxt" id="q-txt"></div>
+    <div class="opts" id="q-opts"></div>
+    <div class="fb" id="q-fb"><div class="fbl" id="q-fbl"></div><div class="fbt" id="q-fbt"></div></div>
   </div>
-  <div class="qtrack"><div class="qfill" id="qfill" style="width:0%"></div></div>
-  <div class="qdots" id="qdots"></div>
-  <div class="qcard" id="qcard">
-    <div class="qtag" id="qtag">Q 1/7</div>
-    <div class="qtopic" id="qtopic"></div>
-    <div class="qnum" id="qnum"></div>
-    <div class="qtext" id="qtext"></div>
-    <div class="opts" id="opts"></div>
-    <div class="fb" id="fb">
-      <div class="fblab" id="fblab"></div>
-      <div class="fbtext" id="fbtext"></div>
-    </div>
-  </div>
-  <button class="qnext" id="qnext" onclick="nextQ()"></button>
-</div>
-</div>
+  <button class="nxt" id="q-nxt" onclick="nextQ()"></button>
+</div></div>
 
 <!-- RESULTS -->
-<div class="vw" id="vw-results">
-<div class="rwrap">
-  <div class="remb" id="remb"></div>
-  <div class="rtitle" id="rtitle"></div>
-  <div class="rsub" id="rsub"></div>
-  <div class="scard">
-    <div class="sbig" id="sbig"></div>
-    <div class="slabel" id="slbl"></div>
-    <div class="strk"><div class="sfill" id="sfill" style="width:0%"></div></div>
-    <div class="sdotrow" id="sdots"></div>
+<div id="v-results" class="view"><div class="rw">
+  <div class="re" id="r-e"></div>
+  <div class="rt" id="r-t"></div>
+  <div class="rs" id="r-s"></div>
+  <div class="sc">
+    <div class="sb" id="r-b"></div>
+    <div class="sl" id="r-l"></div>
+    <div class="str"><div class="sfi" id="r-f"></div></div>
+    <div class="sdr" id="r-d"></div>
   </div>
-  <div class="fibox">
-    <div class="filab" id="filab"></div>
-    <div class="fitext" id="fitext"></div>
+  <div class="fi"><div class="fil" id="fi-l"></div><div class="fit" id="fi-t"></div></div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px">
+    <button class="bsc" onclick="restartQ()"><span id="r-retry">↺ Retake</span></button>
+    <button class="bgo" onclick="go('sg')"><span id="r-sg">Study Guide</span> →</button>
   </div>
-  <div class="rbtns">
-    <button class="btns" onclick="retakeQuiz()">↺ <span id="rlbl">Retake Quiz</span></button>
-    <button class="btnp" onclick="go('guide')"><span id="glbl">Study Guide</span> →</button>
-  </div>
-</div>
-</div>
+</div></div>
 
 </div><!-- /main -->
 
 <script>
-// ── DATA ──────────────────────────────────────
-const PAGES = ['cover','obj','b1','b2','b3','guide','quiz','results'];
-let lang='en', curPage='cover', qi=0, sc=0, qDone=false, rmap=[];
 
-const QZ=[
-  {tp:{en:"Translation Philosophy",ko:"번역 철학"},
-   q:{en:"Which translation philosophy attempts to preserve the <em>grammatical structure and word order</em> of the original language most closely?",
-      ko:"원어의 <em>문법 구조와 어순</em>을 가장 충실하게 보존하려는 번역 철학은 무엇입니까?"},
-   o:{en:["Dynamic equivalence","Formal equivalence","Free paraphrase","Idiomatic equivalence"],
-      ko:["동적 등가 번역","형식적 등가 번역","자유 의역","관용적 등가 번역"]},
-   c:1,
-   f:{en:"<strong>Formal equivalence</strong> (word-for-word) preserves grammatical structures, word order, and vocabulary range. Examples: NASB, ESV, NKJV. Invaluable for close study — but strict formal equivalence can misrepresent idioms.",
-      ko:"<strong>형식적 등가 번역</strong>(단어 대 단어)은 문법 구조, 어순, 어휘 범위를 보존합니다. 예: NASB, ESV, NKJV. 정밀한 연구에 귀중하지만 — 엄격한 형식적 등가는 관용어를 잘못 표현할 수 있습니다."}},
-  {tp:{en:"1 Cor 7:36 Case Study",ko:"고전 7:36 사례 연구"},
-   q:{en:"Four major English translations of <em>1 Corinthians 7:36</em> render the verse with four different social scenarios. What does this divergence reveal to the careful interpreter?",
-      ko:"<em>고린도전서 7:36</em>을 네 가지 주요 영어 번역본이 서로 다른 사회적 상황으로 번역합니다. 이러한 차이는 주의 깊은 해석자에게 무엇을 드러냅니까?"},
-   o:{en:["One translation is correct; the others should be discarded","The Greek original is genuinely ambiguous — comparing translations identifies where interpretive decisions lie","Translations can never be trusted for serious study","Dynamic equivalence is always more accurate than formal equivalence"],
-      ko:["하나의 번역본이 올바르고 나머지는 버려야 한다","헬라어 원문이 진정으로 모호하며 — 번역본 비교는 해석적 결정이 어디에 있는지를 식별한다","번역본은 진지한 연구에 결코 신뢰할 수 없다","동적 등가는 항상 형식적 등가보다 더 정확하다"]},
-   c:1,
-   f:{en:"Where translations <strong>agree</strong>, the interpreter is on solid ground. Where they <strong>diverge</strong>, a genuine interpretive difficulty is surfaced. That divergence is your invitation to dig deeper — not a crisis, but a hermeneutical flag.",
-      ko:"번역본들이 <strong>일치하는 곳</strong>에서는 해석자가 확실한 기반 위에 있습니다. 번역본들이 <strong>다른 곳</strong>에서는 본문의 진정한 어려움이 드러납니다. 그 차이는 더 깊이 탐구하라는 초대입니다."}},
-  {tp:{en:"The Hermeneutical Spiral",ko:"해석학적 나선형"},
-   q:{en:"Osborne argues that biblical interpretation is not a <em>closed circle</em> but a <em>spiral</em>. What is the critical difference?",
-      ko:"오스본은 성경 해석이 <em>닫힌 원</em>이 아니라 <em>나선형</em>이라고 주장합니다. 결정적 차이는 무엇입니까?"},
-   o:{en:["A circle allows objective reading; a spiral introduces the interpreter's subjectivity","A circle returns to the same point indefinitely; a spiral moves forward — converging toward the text's intended meaning without claiming final exhaustive knowledge","A spiral implies there is no fixed meaning","A circle describes the movement between Old and New Testaments"],
-      ko:["원형은 객관적 읽기를 허용하고; 나선형은 주관성을 도입한다","원형은 동일한 지점으로 무한히 돌아오고; 나선형은 앞으로 나아가며 — 최종적인 완전한 지식을 주장하지 않으면서 텍스트의 의도된 의미를 향해 수렴한다","나선형은 고정된 의미가 없음을 암시한다","원형은 구약과 신약 사이의 움직임을 묘사한다"]},
-   c:1,
-   f:{en:"The spiral <strong>affirms genuine movement toward meaning</strong> (against radical relativism) and <strong>preserves epistemic humility</strong> (against claims of exhaustive interpretation). It is cone-shaped — converging with each pass through the text.",
-      ko:"나선형은 <strong>의미를 향한 진정한 움직임이 가능하다고 확인하며</strong>(급진적 상대주의에 반대) <strong>인식론적 겸손을 보존합니다</strong>(완전한 해석 주장에 반대). 원뿔 모양으로 매 순환마다 수렴합니다."}},
-  {tp:{en:"The Four Distances",ko:"네 가지 거리"},
-   q:{en:"Klein, Blomberg, and Hubbard identify four areas of distance every interpreter must reckon with. Which of the following is <em>NOT</em> one of their four distances?",
-      ko:"클라인, 블롬버그, 허바드는 모든 해석자가 고려해야 할 네 가지 거리 영역을 식별합니다. 다음 중 그들의 네 가지 거리에 <em>해당하지 않는</em> 것은 무엇입니까?"},
-   o:{en:["Time","Culture","Denomination","Language"],
-      ko:["시간","문화","교단","언어"]},
-   c:2,
-   f:{en:"The four distances are <strong>Time</strong>, <strong>Culture</strong>, <strong>Geography</strong>, and <strong>Language</strong>. Denominational tradition shapes the interpreter's preunderstanding — but it is not one of the four structural distances KBH identify.",
-      ko:"네 가지 거리는 <strong>시간</strong>, <strong>문화</strong>, <strong>지리</strong>, <strong>언어</strong>입니다. 교단적 전통은 해석자의 선이해를 형성하지만 — KBH가 식별하는 네 가지 구조적 거리 중 하나가 아닙니다."}},
-  {tp:{en:"Hirsch's Distinction",ko:"허쉬의 구분"},
-   q:{en:"E.D. Hirsch distinguishes between <em>meaning</em> and <em>significance</em>. Which statement correctly captures his distinction?",
-      ko:"E.D. 허쉬는 <em>의미(meaning)</em>와 <em>의의(significance)</em>를 구분합니다. 그의 구분을 올바르게 포착하는 진술은 무엇입니까?"},
-   o:{en:["Meaning changes with each new reading community; significance remains constant","Meaning is what the author intended — singular and stable; significance is the relationship between that meaning and a later person, situation, or question","Meaning refers to the spiritual sense; significance refers to the literal sense","Both meaning and significance are determined by the reading community"],
-      ko:["의미는 각 새로운 독자 공동체에 따라 변하고; 의의는 일정하다","의미는 저자가 의도한 것 — 단수이고 안정적; 의의는 그 의미와 이후의 사람, 상황, 질문 사이의 관계이다","의미는 영적 의미를 가리키고; 의의는 문자적 의미를 가리킨다","의미와 의의 모두 독자 공동체에 의해 결정된다"]},
-   c:1,
-   f:{en:"<strong>Meaning</strong> = the author's intended, stable content (does not change). <strong>Significance</strong> = the relationship between that stable meaning and diverse readers and situations (variable). Confusing them — treating what a text means for me today as what the author said — undermines the text's authority.",
-      ko:"<strong>의미</strong> = 저자의 의도된, 안정적인 내용(변하지 않습니다). <strong>의의</strong> = 그 안정적 의미와 다양한 독자·상황 사이의 관계(가변적). 그것들을 혼동하면 — 오늘 나에게 의미하는 것을 저자가 말한 것인 것처럼 다루는 것 — 텍스트의 권위를 훼손합니다."}},
-  {tp:{en:"Exegesis vs. Eisegesis",ko:"주해 대 삽입 해석"},
-   q:{en:"Which definition correctly identifies <em>eisegesis</em>?",
-      ko:"<em>삽입 해석(eisegesis)</em>을 올바르게 정의하는 것은 무엇입니까?"},
-   o:{en:["Reading OUT OF the text — drawing meaning from the author's historical intention and grammatical structure","Reading INTO the text — importing the interpreter's own assumptions or agenda rather than listening to the text itself","The comparative study of multiple biblical manuscripts to determine the original wording","The process of translating original-language texts into a receptor language"],
-      ko:["본문에서 읽어내기 — 저자의 역사적 의도와 문법 구조로부터 의미를 이끌어내기","본문 안으로 읽어 넣기 — 본문 자체에 귀 기울이기보다 해석자 자신의 가정이나 의도를 가져오기","원래 문구를 결정하기 위한 여러 성경 사본의 비교 연구","원어 텍스트를 수용 언어로 번역하는 과정"]},
-   c:1,
-   f:{en:"<strong>Exegesis</strong> (ἐξήγησις — 'to lead out') = reading meaning <em>out of</em> the text. <strong>Eisegesis</strong> (εἰσ — 'into') = reading meaning <em>into</em> the text. Every interpreter commits eisegesis unavoidably. Good hermeneutics names the filters and allows the text to push back — spiraling toward truer reading.",
-      ko:"<strong>주해(exegesis)</strong>(ἐξήγησις — '이끌어내다') = 본문에서 의미를 이끌어내기. <strong>삽입 해석(eisegesis)</strong>(εἰσ — '안으로') = 본문 안으로 의미를 읽어 넣기. 모든 해석자는 불가피하게 삽입 해석을 범합니다. 좋은 해석학은 필터들을 명명하고 텍스트가 반박하도록 허용합니다."}},
-  {tp:{en:"Mark 16 · Textual Criticism",ko:"마가복음 16 · 본문 비평"},
-   q:{en:"Osborne uses <em>Mark 16:9–20</em> as a key text-critical case study. What is the textual-critical conclusion about this passage?",
-      ko:"오스본은 <em>마가복음 16:9-20</em>을 주요 본문 비평 사례로 사용합니다. 이 구절에 대한 본문 비평적 결론은 무엇입니까?"},
-   o:{en:["The passage is uniformly attested across all major manuscript families and is certainly original","The passage is absent from the oldest and most reliable manuscripts — most likely added later in the transmission history","The passage appears only in the Western manuscript tradition","Textual critics unanimously affirm the passage's authenticity"],
-      ko:["이 구절은 모든 주요 사본 계열에서 균일하게 증명되어 있으며 확실히 원본이다","이 구절은 가장 오래되고 신뢰할 수 있는 사본에는 없으며 전승 과정에서 나중에 추가된 것으로 보인다","이 구절은 서방 사본 전통에만 나타난다","본문 비평가들이 만장일치로 이 구절의 진정성을 확인한다"]},
-   c:1,
-   f:{en:"Codex Sinaiticus and Codex Vaticanus — the oldest reliable manuscripts — end at 16:8. The vocabulary of vv. 9–20 differs from Mark's usage elsewhere. A later editor compiled resurrection traditions. <strong>Responsible response:</strong> acknowledge it honestly; none of the doctrines it affirms depend solely on these verses.",
-      ko:"시나이 사본과 바티칸 사본 — 가장 오래되고 신뢰할 수 있는 사본들 — 은 16:8에서 끝납니다. 9-20절의 어휘는 마가복음 다른 곳의 용법과 다릅니다. 후대 편집자가 부활 전승을 편집했습니다. <strong>책임 있는 대응:</strong> 솔직하게 인정하십시오; 이 구절이 확인하는 어떤 교리도 오직 이 구절들에만 의존하지 않습니다."}}
-];
+var L = 'en';
+var ORD = ['cover','obj','b1','b2','b3','sg','quiz','results'];
+var qi = 0, qs = 0, qa = false, qm = [];
 
-// ── NAVIGATION ─────────────────────────────
-function go(p) {
-  document.querySelectorAll('.vw').forEach(v => v.classList.remove('on'));
-  const el = document.getElementById('vw-'+p);
+// ── NAVIGATION ──────────────────────────────
+function go(id) {
+  // Hide all views by removing class and resetting display
+  document.querySelectorAll('.view').forEach(function(v) {
+    v.classList.remove('on');
+    v.style.display = '';
+  });
+  var el = document.getElementById('v-' + id);
   if (!el) return;
   el.classList.add('on');
-  curPage = p;
-  window.scrollTo(0,0);
+  // Cover needs flex, others get block via CSS
+  if (id === 'cover') el.style.display = 'flex';
+  window.scrollTo(0, 0);
 
-  // sidebar
-  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on','done'));
-  const idx = PAGES.indexOf(p);
-  PAGES.forEach((pg,i) => {
-    const n = document.getElementById('sn-'+pg);
+  // Sidebar
+  document.querySelectorAll('.ni').forEach(function(n) { n.classList.remove('on','dn'); });
+  var ni = document.getElementById('ni-' + id);
+  if (ni) ni.classList.add('on');
+  var idx = ORD.indexOf(id);
+  ORD.forEach(function(v, i) {
+    var n = document.getElementById('ni-' + v);
     if (!n) return;
-    if (i < idx) n.classList.add('done');
+    if (i < idx) n.classList.add('dn');
     if (i === idx) n.classList.add('on');
   });
 
-  // topbar
-  const pct = idx<0?0:Math.round((idx/(PAGES.length-1))*100);
-  document.getElementById('tb-fill').style.width = pct+'%';
-  document.getElementById('tb-ptext').textContent = (Math.max(idx,0)+1)+'/'+PAGES.length;
+  // Top bar
+  var pct = Math.round((idx / (ORD.length - 1)) * 100);
+  document.getElementById('tb-fill').style.width = pct + '%';
+  document.getElementById('tb-n').textContent = (idx + 1) + '/' + ORD.length;
 
-  if (p==='quiz' && qi===0 && sc===0 && rmap.length===0) renderQ(0);
-  if (p==='results') renderR();
+  if (id === 'quiz' && qi === 0 && qs === 0 && qm.length === 0) renderQ(0);
+  if (id === 'results') renderResults();
   applyLang();
 }
 
-// ── LANGUAGE ───────────────────────────────
+// ── LANGUAGE ────────────────────────────────
 function setLang(l) {
-  lang=l;
-  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
-  document.querySelector('.lbtn:'+(l==='en'?'first':'last')+'-child').classList.add('on');
+  L = l;
+  document.querySelectorAll('.lb').forEach(function(b) { b.classList.remove('on'); });
+  document.querySelector('.lb:' + (l === 'en' ? 'first' : 'last') + '-child').classList.add('on');
   applyLang();
-  if (curPage==='quiz') renderQ(qi);
-  if (curPage==='results') renderR();
+  var qv = document.getElementById('v-quiz');
+  if (qv && qv.classList.contains('on')) renderQ(qi);
+  var rv = document.getElementById('v-results');
+  if (rv && rv.classList.contains('on')) renderResults();
 }
+
+var STRINGS = {
+  en: {
+    'tb-t':'Biblical Hermeneutics · Week 3',
+    'ns1':'Course','ns2':'Lecture','ns3':'Assessment',
+    'nl-cover':'Welcome','nl-obj':'Objectives',
+    'nl-b1':'Block 1 · Translation','nl-b2':'Block 2 · The Spiral',
+    'nl-b3':'Block 3 · Grammar','nl-sg':'Study Guide','nl-quiz':'Quiz · 7 Questions',
+    'c1':'Biblical Hermeneutics · Week 3','c2':"The Interpreter's Instruments",
+    'c3':'Translation, Context, and Grammar','c4a':'Primary Texts','c4b':'Duration',
+    'c4c':'Hours','c4d':'Blocks × 50 min','c5':'Begin Lecture →',
+    'ob1':'Week 3 · Learning Objectives','ob2':'What You Will Learn','ob3':'학습 목표',
+    'ob-p':'← Cover','ob-n':'Block 1 →',
+    'o1a':'Understand why every translation is already an act of interpretation','o1b':'번역과 해석의 관계',
+    'o2a':'Distinguish formal equivalence, dynamic equivalence, and paraphrase translation philosophies','o2b':'세 가지 번역 철학 구별하기',
+    'o3a':'Articulate the hermeneutical spiral and its implications for exegesis','o3b':'해석학적 나선형의 함의',
+    'o4a':'Apply historical and logical context as the foundational interpretive framework','o4b':'문맥의 해석적 기능 적용하기',
+    'o5a':'Grasp the basics of textual criticism and grammatical analysis','o5b':'본문 비평과 문법 분석의 기초',
+    'b1-pb':'Block 1 · Minutes 0–50','b1-pt':'The Basic Tool: A Good Translation',
+    'b1-t1':'⏱ 0:00 — The Linguist\'s Dilemma (10 min)','b1-t2':'⏱ 0:20 — Translation Philosophy (15 min)',
+    'b1-s1':'I. The Three Languages of the Biblical Text',
+    'b1-s2':'II. The 1 Corinthians 7:36 Case Study',
+    'b1-s3':'III. A Taxonomy of English Translations',
+    'b1-s4':'IV. Korean Linguistic Bridge',
+    'b1-th1':'Formal Equivalence (Word-for-Word)','b1-th2':'Dynamic Equivalence (Thought-for-Thought)',
+    'b1-p':'← Objectives','b1-n':'Block 2 →',
+    'b2-pb':'Block 2 · Minutes 60–110','b2-pt':'The Hermeneutical Spiral',
+    'b2-t1':'⏱ 1:00 — The Shape of Understanding (12 min)',
+    'b2-t2':'⏱ 1:12 — Science, Art, Spirit (8 min)',
+    'b2-t3':'⏱ 1:20 — The Four Distances (10 min)',
+    'b2-t4':'⏱ 1:30 — Hirsch\'s Distinction (8 min)',
+    'b2-t5':'⏱ 1:38 — Context (22 min)',
+    'b2-s1':'I. The Gold Coin Metaphor','b2-s2':'II. Three Dimensions of Hermeneutics',
+    'b2-s3':'III. The Four Distances (Klein, Blomberg, Hubbard)',
+    'b2-s4':'IV. Meaning vs. Significance — Hirsch',
+    'b2-s5':'V. Context — The Most Important Word',
+    'b2-d1h':'Time','b2-d2h':'Culture','b2-d3h':'Geography','b2-d4h':'Language',
+    'b2-mh':'Meaning','b2-sh':'Significance',
+    'b2-ssh1':'A. Historical Context','b2-ssh2':'B. Logical Context (Concentric Circles)',
+    'b2-l1':'A science','b2-l2':'An art','b2-l3':'A spiritual act',
+    'b2-p':'← Block 1','b2-n':'Block 3 →',
+    'b3-pb':'Block 3 · Minutes 120–170',
+    'b3-pt':'Grammar, Textual Criticism, and the Surface of the Text',
+    'b3-t1':'⏱ 2:00 — Exegesis vs. Eisegesis (5 min)',
+    'b3-t2':'⏱ 2:05 — Textual Criticism (20 min)',
+    'b3-t3':'⏱ 2:25 — Grammar and Meaning (25 min)',
+    'b3-t4':'⏱ 2:50 — Integration (10 min)',
+    'b3-s1':'I. Exegesis and Eisegesis','b3-s2':'II. Textual Criticism: What Exactly Is the Text?',
+    'b3-s3':'III. Grammatical Analysis','b3-s4':'IV. Integration: Grammar, Translation, Formation',
+    'b3-eh':'Exegesis (ἐξήγησις)','b3-ih':'Eisegesis (εἰσ-)',
+    'b3-ssh1':'Case Study: Mark 16:9–20',
+    'b3-ssh2':'Case Study: Greek Present Tense in 1 John 3:9',
+    'b3-ssh3':'Case Study: The Philippians 2:6 Participle',
+    'b3-l1':'External criteria','b3-l2':'Internal criteria',
+    'b3-r1l':'Concessive','b3-r2l':'Causal','b3-r3l':'Temporal',
+    'b3-bqa':'— Closing Benediction',
+    'b3-p':'← Block 2','b3-n':'Study Guide →',
+    'sg-pb':'Week 3 · Study Guide','sg-pt':'Discussion Questions & Assignment',
+    'sg-sh1':'Discussion Questions','sg-sh2':'Assignment for Week 4',
+    'sg-p':'← Block 3','sg-n':'Take the Quiz →',
+    'qz-pb':'Week 3 Assessment · 7 Questions',
+    'r-retry':'↺ Retake','r-sg':'Study Guide'
+  },
+  ko: {
+    'tb-t':'성경 해석학 · 3주차',
+    'ns1':'강의','ns2':'강의 내용','ns3':'평가',
+    'nl-cover':'시작','nl-obj':'학습목표',
+    'nl-b1':'1블록 · 번역','nl-b2':'2블록 · 나선형',
+    'nl-b3':'3블록 · 문법','nl-sg':'학습 가이드','nl-quiz':'퀴즈 · 7문항',
+    'c1':'성경 해석학 · 3주차','c2':'해석자의 도구들',
+    'c3':'번역, 문맥, 그리고 문법','c4a':'주요 텍스트','c4b':'시간',
+    'c4c':'시간','c4d':'블록 × 50분','c5':'강의 시작 →',
+    'ob1':'3주차 · 학습 목표','ob2':'학습 목표','ob3':'이 강의를 통해 배우게 될 것',
+    'ob-p':'← 표지','ob-n':'1블록 →',
+    'o1a':'모든 번역이 이미 해석의 행위인 이유를 이해한다','o1b':'번역과 해석의 관계',
+    'o2a':'형식적 등가, 동적 등가, 의역의 번역 철학을 구별한다','o2b':'세 가지 번역 철학',
+    'o3a':'해석학적 나선형의 은유와 그 함의를 설명한다','o3b':'나선형의 함의',
+    'o4a':'역사적·논리적 문맥을 기본 해석 틀로 적용한다','o4b':'문맥의 해석적 기능',
+    'o5a':'본문 비평과 문법 분석의 기초를 파악한다','o5b':'본문 비평과 문법',
+    'b1-pb':'1블록 · 0–50분','b1-pt':'기본 도구: 좋은 번역본',
+    'b1-t1':'⏱ 0:00 — 언어학자의 딜레마 (10분)','b1-t2':'⏱ 0:20 — 번역 철학 (15분)',
+    'b1-s1':'I. 성경의 세 언어',
+    'b1-s2':'II. 번역 비교 사례: 고린도전서 7:36',
+    'b1-s3':'III. 번역본의 유형 분류',
+    'b1-s4':'IV. 한국어 언어적 가교',
+    'b1-th1':'형식적 등가 (단어 대 단어)','b1-th2':'동적 등가 (의미 대 의미)',
+    'b1-p':'← 학습목표','b1-n':'2블록 →',
+    'b2-pb':'2블록 · 60–110분','b2-pt':'해석학적 나선형',
+    'b2-t1':'⏱ 1:00 — 이해의 형태 (12분)',
+    'b2-t2':'⏱ 1:12 — 과학, 예술, 영적 행위 (8분)',
+    'b2-t3':'⏱ 1:20 — 네 가지 거리 (10분)',
+    'b2-t4':'⏱ 1:30 — 허쉬의 구분 (8분)',
+    'b2-t5':'⏱ 1:38 — 문맥 (22분)',
+    'b2-s1':'I. 황금 동전의 비유','b2-s2':'II. 해석학의 세 차원',
+    'b2-s3':'III. 네 가지 거리 (클라인, 블롬버그, 허바드)',
+    'b2-s4':'IV. 의미와 의의 — 허쉬의 구분',
+    'b2-s5':'V. 문맥 — 해석학에서 가장 중요한 단어',
+    'b2-d1h':'시간','b2-d2h':'문화','b2-d3h':'지리','b2-d4h':'언어',
+    'b2-mh':'의미 (Meaning)','b2-sh':'의의 (Significance)',
+    'b2-ssh1':'A. 역사적 문맥','b2-ssh2':'B. 논리적 문맥 (동심원)',
+    'b2-l1':'과학','b2-l2':'예술','b2-l3':'영적 행위',
+    'b2-p':'← 1블록','b2-n':'3블록 →',
+    'b3-pb':'3블록 · 120–170분',
+    'b3-pt':'문법, 본문 비평, 그리고 텍스트의 표면',
+    'b3-t1':'⏱ 2:00 — 주해 대 삽입 해석 (5분)',
+    'b3-t2':'⏱ 2:05 — 본문 비평 (20분)',
+    'b3-t3':'⏱ 2:25 — 문법과 의미 (25분)',
+    'b3-t4':'⏱ 2:50 — 통합 (10분)',
+    'b3-s1':'I. 주해와 삽입 해석','b3-s2':'II. 본문 비평: 텍스트는 정확히 무엇인가?',
+    'b3-s3':'III. 문법 분석','b3-s4':'IV. 통합: 문법, 번역, 해석자의 형성',
+    'b3-eh':'주해 (ἐξήγησις)','b3-ih':'삽입 해석 (εἰσ-)',
+    'b3-ssh1':'사례 연구: 마가복음 16:9-20',
+    'b3-ssh2':'사례 연구: 요한일서 3:9의 그리스어 현재 시제',
+    'b3-ssh3':'사례 연구: 빌립보서 2:6의 분사',
+    'b3-l1':'외적 기준','b3-l2':'내적 기준',
+    'b3-r1l':'양보적','b3-r2l':'원인적','b3-r3l':'시간적',
+    'b3-bqa':'— 마무리 축복',
+    'b3-p':'← 2블록','b3-n':'학습 가이드 →',
+    'sg-pb':'3주차 · 학습 가이드','sg-pt':'토론 질문 및 과제',
+    'sg-sh1':'토론 질문','sg-sh2':'4주차 과제',
+    'sg-p':'← 3블록','sg-n':'퀴즈 시작 →',
+    'qz-pb':'3주차 평가 · 7문항',
+    'r-retry':'↺ 다시 풀기','r-sg':'학습 가이드'
+  }
+};
+
+// Rich HTML content (bilingual, keyed by element id + lang)
+var RICH = {
+  'b1-p1': {
+    en: 'Let me begin with a confession that may disturb you — and should. Every time you open your English Bible and read it, you are not reading the Bible. You are reading a translation. And <strong>every translation is already an interpretation</strong>. The sixty-six books were composed in three languages: Hebrew, Aramaic, and Greek. Unless you have studied all three, you have never read a single verse in its original form.',
+    ko: '한 가지 고백으로 시작하겠습니다 — 불편할 수도 있지만, 마땅히 그래야 합니다. 영어 성경을 펼칠 때마다, 당신은 성경을 읽는 것이 아닙니다. 번역본을 읽는 것입니다. 그리고 <strong>모든 번역은 이미 해석입니다.</strong> 66권은 히브리어, 아람어, 그리스어 세 가지 언어로 기록되었습니다. 세 언어를 공부하지 않았다면, 원래 형태로 한 구절도 읽은 적이 없습니다.'
+  },
+  'b1-p2': {
+    en: '<strong>Biblical Hebrew</strong> (OT, with Aramaic in Ezra/Daniel) is a language of striking concreteness — rooted in images of movement, body, and land. Its verbs are the backbone of the sentence. <strong>Koine Greek</strong> (NT) is the common Greek of the marketplace, spread by Alexander\'s conquests: simpler, more flexible, the Greek of ordinary people writing with apostolic urgency. Each language carries semantic ranges that do not map perfectly onto English. Translation requires interpretation. The question is not <em>whether</em> to interpret — it is whether to do so well or poorly.',
+    ko: '<strong>성경 히브리어</strong>(구약, 에스라/다니엘 일부는 아람어)는 움직임, 신체, 땅의 이미지에 뿌리를 둔 구체성의 언어입니다. 동사가 문장의 뼈대입니다. <strong>코이네 그리스어</strong>(신약)는 알렉산더 대왕의 정복으로 퍼진 시장의 일상 그리스어입니다: 더 단순하고 유연하며, 사도적 긴박감을 가진 일반인들의 언어입니다. 각 언어는 영어로 완벽히 매핑되지 않는 의미 범위를 담고 있습니다. 번역은 해석을 필요로 합니다. 문제는 해석할 것인지가 아니라 — 잘 할 것인지입니다.'
+  },
+  'b1-p3': {
+    en: 'Fee and Stuart use <strong>1 Corinthians 7:36</strong> as their primary case study. Four translations render this verse with four different social scenarios — a man and his fiancée? a father and his daughter? a celibate couple? The Greek is genuinely ambiguous — but Paul was not. He wrote to a community that already knew the situation. Where translations <em>agree</em>, you are on solid ground. Where they <em>diverge</em>, a genuine interpretive difficulty is surfaced — your invitation to dig deeper.',
+    ko: '피와 스튜어트는 <strong>고린도전서 7:36</strong>을 주요 사례로 사용합니다. 네 번역본이 이 구절을 네 가지 다른 사회적 상황으로 번역합니다 — 남자와 약혼녀? 아버지와 딸? 독신 부부? 헬라어 원문은 진정으로 모호하지만 — 바울은 아니었습니다. 그는 이미 상황을 아는 공동체에 썼습니다. 번역본들이 <em>일치하는</em> 곳은 확실한 기반입니다. <em>다른</em> 곳은 진정한 해석적 어려움이 드러나는 곳 — 더 깊이 탐구하라는 초대입니다.'
+  },
+  'b1-bq': {
+    en: 'Where translations agree, you are on solid ground. Where they diverge, you are looking at a genuine difficulty in the text — and that divergence is your invitation to dig deeper.',
+    ko: '번역본들이 일치하는 곳에서는 확실한 기반 위에 있습니다. 번역본들이 다른 곳에서는 본문의 진정한 어려움을 보고 있는 것입니다 — 그 차이는 더 깊이 탐구하라는 초대입니다.'
+  },
+  'b1-td1': {
+    en: 'Preserves word order and grammatical structures. <strong>NASB, ESV, NKJV.</strong> Best for close study. Risk: idioms translated word-for-word can mislead.',
+    ko: '어순과 문법 구조를 보존합니다. <strong>NASB, ESV, NKJV.</strong> 정밀한 연구에 최적입니다. 위험: 관용어를 단어 대 단어로 번역하면 잘못된 인상을 줄 수 있습니다.'
+  },
+  'b1-td2': {
+    en: 'Renders the meaning in natural English. <strong>NIV, NLT.</strong> More readable. Risk: the translator\'s interpretation becomes embedded — e.g. NIV renders σάρξ as \'sinful nature\' (one choice among several).',
+    ko: '의미를 자연스러운 영어로 전달합니다. <strong>NIV, NLT.</strong> 더 읽기 쉽습니다. 위험: 번역자의 해석이 내포됩니다 — 예: NIV는 σάρξ를 \'죄성\'으로 번역 (여러 선택지 중 하나).'
+  },
+  'b1-p4': {
+    en: '<strong>Paraphrase</strong> (The Message, Living Bible): expansive, interpretive retellings. Valuable devotionally — <em>never as a primary study text</em>. Practical wisdom: NASB/ESV for formal study; NIV/CSB for readable checking; compare all on difficult passages.',
+    ko: '<strong>의역</strong> (메시지 성경, 리빙 바이블): 광범위한 해석적 재표현입니다. 묵상에는 가치 있지만 — <em>주요 연구 텍스트로 사용하지 마십시오.</em> 실용적 지혜: NASB/ESV를 형식적 연구에; NIV/CSB를 가독성 확인에; 어려운 구절에서는 모두 비교하십시오.'
+  },
+  'b1-p5': {
+    en: 'Korean translations — <strong>개역개정, 새번역, 현대인의 성경</strong> — each carry their own translation philosophies. Korean\'s verb-final structure aligns more naturally with Hebrew and Greek in some respects than English. Korean honorific levels require constant decisions about relational posture that English\'s single \'you\' never faces. A bilingual reader moving between English and Korean has a richer interpretive resource.',
+    ko: '한국어 번역본들 — <strong>개역개정, 새번역, 현대인의 성경</strong> — 각각 고유한 번역 철학을 담고 있습니다. 한국어의 동사 후위 구조는 영어보다 히브리어와 그리스어에 더 자연스럽게 정렬됩니다. 한국어 경어 체계는 관계적 자세에 대한 끊임없는 결정을 요구합니다. 두 언어 독자는 더 풍부한 해석적 자원을 갖습니다.'
+  },
+  'b2-p1': {
+    en: 'Osborne opens his book with a vivid image: gold coins have been discovered on the church\'s back lot — and soundings show the number <em>increasing</em> with every foot of depth, down to 200 feet. How quickly would you start digging? This is Bible study. <strong>The deeper you go, the greater the rewards.</strong>',
+    ko: '오스본은 생생한 이미지로 시작합니다: 교회 뒤뜰에 황금 동전이 발견되었고 — 지하 200피트까지 매 피트마다 동전 수가 늘어난다는 것. 얼마나 빨리 파기 시작하겠습니까? 이것이 성경 연구입니다. <strong>더 깊이 들어갈수록, 보상은 더 커집니다.</strong>'
+  },
+  'b2-p2': {
+    en: 'Biblical interpretation is not a <strong>closed circle</strong> but a <strong>spiral</strong>. The hermeneutical circle (Schleiermacher, Gadamer) says the whole is understood through its parts and parts through the whole — true, but a closed circle implies interpretation merely loops back to confirm what we already believe. Osborne\'s spiral <em>moves</em>: it ascends toward the text\'s intended meaning. And it is cone-shaped — it <em>converges</em>.',
+    ko: '성경 해석은 <strong>닫힌 원</strong>이 아니라 <strong>나선형</strong>입니다. 해석학적 원(슐라이어마허, 가다머)은 전체는 부분을 통해, 부분은 전체를 통해 이해된다고 합니다 — 맞지만, 닫힌 원은 해석이 단지 이미 믿는 것을 확인하는 루프를 돈다는 것을 암시합니다. 오스본의 나선형은 <em>움직입니다</em>: 텍스트의 의도된 의미를 향해 상승합니다. 그리고 원뿔 모양입니다 — <em>수렴합니다</em>.'
+  },
+  'b2-bq1': {
+    en: 'It is not a closed circle that can never detect the true meaning but [I am] spiraling nearer and nearer to the text\'s intended meaning as I refine my hypotheses and allow the text to continue to challenge and correct those alternative interpretations.',
+    ko: '이것은 참된 의미를 결코 발견할 수 없는 닫힌 원이 아니라, 가설을 정제하고 텍스트가 계속해서 대안적 해석들에 도전하고 수정하도록 허용함에 따라 텍스트의 의도된 의미에 점점 더 가까워지는 나선형입니다.'
+  },
+  'b2-l1t': {
+    en: 'providing logical, orderly classification of interpretive laws. It makes it possible to say some readings are better than others.',
+    ko: '해석의 법칙에 대한 논리적이고 질서정연한 분류를 제공합니다. 어떤 읽기가 다른 것보다 낫다고 말할 수 있게 해줍니다.'
+  },
+  'b2-l2t': {
+    en: 'an acquired skill demanding imagination and practice. The art develops through thousands of hours of encounter with the text.',
+    ko: '상상력과 연습을 필요로 하는 습득된 기술입니다. 예술은 텍스트와의 수천 시간의 만남을 통해 발전합니다.'
+  },
+  'b2-l3t': {
+    en: 'uniquely dependent on the illuminating work of the Holy Spirit. Human effort is necessary and never sufficient. Illumination presupposes rigorous study — it does not replace it.',
+    ko: '성령의 조명 사역에 고유하게 의존합니다. 인간의 노력은 필요하지만 결코 충분하지 않습니다. 조명의 교리는 엄격한 연구를 전제합니다 — 대체하지 않습니다.'
+  },
+  'b2-p3': {
+    en: 'Paul Ricoeur speaks of the <em>distanciation gap</em> between the biblical world and contemporary readers. Klein, Blomberg, and Hubbard identify four areas every interpreter must reckon with:',
+    ko: '폴 리쾨르는 성경 세계와 현대 독자 사이의 <em>거리화 간격</em>에 대해 말합니다. 클라인, 블롬버그, 허바드는 모든 해석자가 고려해야 할 네 가지 거리 영역을 식별합니다:'
+  },
+  'b2-d1t': {
+    en: 'The biblical books span ~1,500 years. We are two millennia from the most recent NT writings.',
+    ko: '성경 책들은 약 1,500년에 걸쳐 기록되었습니다. 우리는 가장 최근 신약 기록으로부터 2천 년 떨어져 있습니다.'
+  },
+  'b2-d2t': {
+    en: 'Social structures, economic systems, legal frameworks of the ancient world are profoundly different from ours.',
+    ko: '고대 세계의 사회 구조, 경제 체계, 법적 틀은 우리의 것과 근본적으로 다릅니다.'
+  },
+  'b2-d3t': {
+    en: 'Places are constitutive elements of meaning, not mere backdrop. Roman occupation means something different to those who have never experienced subjugation.',
+    ko: '장소는 단순한 배경이 아니라 의미의 구성 요소입니다. 로마 점령은 억압을 경험한 적 없는 독자에게 다른 의미를 가집니다.'
+  },
+  'b2-d4t': {
+    en: 'Hebrew and Greek are living language systems with their own logic and idioms — not codes to decode by consulting a lexicon.',
+    ko: '히브리어와 그리스어는 고유한 논리와 관용어를 가진 살아있는 언어 체계입니다 — 어휘집으로 해독할 수 있는 코드가 아닙니다.'
+  },
+  'b2-mt': {
+    en: "The author's intended content — singular, stable, determined at the moment of writing. What Paul meant by Romans 6:23 in 58 A.D. is the same whether read in Rome or Seoul today.",
+    ko: '저자의 의도된 내용 — 단수이고 안정적이며, 기록 당시에 결정된. 바울이 58년에 로마서 6:23에서 의미한 것은 로마에서 읽든, 오늘 서울에서 읽든 동일합니다.'
+  },
+  'b2-st': {
+    en: 'The relationship between that fixed meaning and a later reader\'s situation. Different readers, different significance — but the same meaning.',
+    ko: '그 고정된 의미와 후대 독자의 상황 사이의 관계. 다른 독자, 다른 의의 — 그러나 동일한 의미.'
+  },
+  'b2-bq2': {
+    en: "A text cannot mean what it could never have meant for its original readers/hearers. The true meaning of the biblical text for us is what God originally intended it to mean when it was first spoken or written.",
+    ko: '텍스트는 원래 독자들에게 의미할 수 없었던 것을 의미할 수 없습니다. 우리를 위한 성경 텍스트의 참된 의미는 그것이 처음 말해지거나 기록되었을 때 하나님이 원래 의도하신 의미입니다.'
+  },
+  'b2-p4': {
+    en: "Osborne opens Chapter 1 with a confession: if a student falls half asleep and misses a question, there is a 50% chance of being correct by answering <em>'context.'</em> Words mean things in sentences, paragraphs, books, and historical settings — never in isolation.",
+    ko: "오스본은 1장을 고백으로 시작합니다: 학생이 반쯤 졸다가 질문을 놓쳤다면, <em>'문맥'</em>이라고 답하기만 해도 맞을 확률이 50%입니다. 단어들은 문장, 단락, 책, 역사적 배경 안에서 의미를 가집니다 — 결코 고립되어서는 아닙니다."
+  },
+  'b2-p5': {
+    en: "Knowing that Amos was a shepherd from Tekoa, delivering oracles to the prosperous but structurally unjust northern kingdom during Jeroboam II's reign, transforms <em>'those who trample the poor'</em> from abstract moral platitude into surgical diagnosis.",
+    ko: "아모스가 드고아 출신 목자로서 번영하지만 구조적으로 불의한 북왕국에 여로보암 2세 통치 기간에 신탁을 전했다는 것을 알면, <em>'가난한 자를 짓밟는 자들'</em>이 추상적 도덕 교훈에서 정밀한 사회 진단으로 변모합니다."
+  },
+  'b2-p6': {
+    en: 'Logical context moves from immediate sentences outward to section, book, canon. <strong>The immediate context is the final arbiter for word meaning.</strong> The discipline of <em>charting a book</em> — reading it whole before studying any individual passage — prevents the most common exegetical errors.',
+    ko: '논리적 문맥은 즉각적 문장에서 섹션, 책, 정경으로 이동합니다. <strong>즉각적 문맥이 단어 의미의 최종 중재자입니다.</strong> <em>책 도표 작성</em>의 훈련 — 개별 구절을 공부하기 전에 전체를 읽는 것 — 이 가장 흔한 주해 오류를 방지합니다.'
+  },
+  'b3-et': {
+    en: '"To lead out of." Reading meaning <strong>out of</strong> the text — drawing out what the author put there.',
+    ko: '"이끌어내다." 텍스트에서 의미를 이끌어내기 — 저자가 거기에 넣은 것을 끌어내는 것.'
+  },
+  'b3-it': {
+    en: '"Into." Reading meaning <strong>into</strong> the text — projecting your assumptions, tradition, or predetermined conclusion onto it.',
+    ko: '"안으로." 텍스트 안으로 의미를 읽어 넣기 — 자신의 가정, 전통, 또는 미리 정해진 결론을 투영하는 것.'
+  },
+  'b3-p1': {
+    en: 'Every interpreter commits eisegesis — constantly, unavoidably. Good hermeneutics does not eliminate these filters (impossible) but names them, holds them loosely, and <strong>allows the text to interrogate and reform them</strong>. This is why the spiral is the right metaphor.',
+    ko: '모든 해석자는 끊임없이, 불가피하게 삽입 해석을 범합니다. 좋은 해석학은 이 필터들을 제거하는 것이 아니라(불가능) 그것들을 명명하고, 느슨하게 잡고, <strong>텍스트가 그것들을 심문하고 개혁하도록 허용합니다.</strong> 이것이 나선형이 올바른 은유인 이유입니다.'
+  },
+  'b3-p2': {
+    en: 'We do not possess the original autographs. We have copies of copies — over <strong>5,700 Greek NT manuscripts</strong>. The OT tradition includes the <strong>Masoretic Text</strong> (vocalized 6th–10th c. A.D.), the <strong>Septuagint/LXX</strong> (~3rd–1st c. B.C., from pre-Masoretic Hebrew), the <strong>Samaritan Pentateuch</strong>, and the <strong>Dead Sea Scrolls</strong> (1947 — pushing our oldest Hebrew manuscripts back ~1,000 years and largely confirming the Masoretic tradition).',
+    ko: '우리는 원본을 소유하지 않습니다. 사본의 사본들만 있습니다 — 신약 <strong>5,700개 이상의 그리스어 사본</strong>. 구약 전통에는 <strong>마소라 텍스트</strong>(6-10세기), <strong>칠십인역/LXX</strong>(기원전 3-1세기), <strong>사마리아 오경</strong>, 그리고 <strong>사해 사본</strong>(1947년 — 가장 오래된 히브리어 사본을 ~1,000년 앞으로 당기며 마소라 전통을 대부분 확인)이 있습니다.'
+  },
+  'b3-p3': {
+    en: 'The longer ending of Mark (vv. 9–20) appears in the KJV but is absent or bracketed in virtually all modern translations. The two oldest and most reliable manuscripts — <strong>Codex Sinaiticus</strong> and <strong>Codex Vaticanus</strong> — end at 16:8: <em>"for they were afraid."</em> The vocabulary and style of vv. 9–20 differ noticeably from Mark\'s language elsewhere. A later editor appears to have compiled resurrection-appearance traditions and attached them to Mark\'s abrupt ending. Responsible response: acknowledge it honestly; note that no doctrine depends solely on these verses.',
+    ko: '마가복음의 긴 결말(9-20절)은 KJV에 있지만 현대 번역본에는 없거나 괄호로 묶여 있습니다. 가장 오래되고 신뢰할 수 있는 두 사본 — <strong>시나이 사본</strong>과 <strong>바티칸 사본</strong> — 은 16:8에서 끝납니다: <em>"그들이 두려워하였기 때문이라."</em> 9-20절의 어휘와 문체는 다른 곳의 마가복음과 다릅니다. 후대 편집자가 부활 전승들을 붙인 것으로 보입니다. 책임 있는 응답: 정직하게 인정하고, 어떤 교리도 이 구절에만 의존하지 않음을 언급하십시오.'
+  },
+  'b3-l1t': {
+    en: 'How early is the manuscript? What is the geographical distribution? Is the reading found in multiple independent families?',
+    ko: '사본이 얼마나 오래되었는가? 지리적 분포는? 독립적인 여러 사본 계열에서 발견되는가?'
+  },
+  'b3-l2t': {
+    en: 'Which reading is more difficult? (Scribes simplified, not complicated.) Which is shorter? Which fits the author\'s style?',
+    ko: '어느 독법이 더 어려운가? (필사자들은 단순화했습니다.) 어느 것이 더 짧은가? 저자의 문체에 더 잘 맞는가?'
+  },
+  'b3-p4': {
+    en: 'Grammar is the architectural blueprint of communication. Word meaning is not self-contained: words mean things only in grammatical context.',
+    ko: '문법은 의사소통의 건축 청사진입니다. 단어 의미는 자족적이지 않습니다: 단어들은 문법적 문맥 안에서만 의미를 가집니다.'
+  },
+  'b3-p5': {
+    en: 'The Greek tense system encodes not just time but <em>verbal aspect</em> — how the speaker presents the action. The present tense indicates ongoing, habitual action. In <strong>1 John 3:9</strong>, the NIV\'s "continue to sin" and "go on sinning" reflect Greek present forms indicating a <em>characteristic lifestyle</em> — not occasional sins. John is not saying believers never sin; he is saying that sinning as a characteristic pattern is incompatible with being born of God. This grammatical distinction changes the entire interpretation.',
+    ko: '그리스어 시제 체계는 시간만이 아니라 <em>언어적 상</em>을 인코딩합니다 — 화자가 행동을 제시하는 방식. 현재 시제는 지속적이고 습관적인 행동을 나타냅니다. <strong>요한일서 3:9</strong>에서 NIV의 "계속해서 죄를 짓다"는 <em>특징적인 생활 방식</em>을 나타내는 현재 시제를 반영합니다 — 가끔 있는 죄가 아닙니다. 요한은 신자들이 결코 죄를 짓지 않는다는 것이 아니라, 죄의 특징적 패턴이 하나님에게서 태어난 것과 양립할 수 없다는 것입니다. 이 문법적 구분이 해석 전체를 바꿉니다.'
+  },
+  'b3-p6': {
+    en: 'The participle ὑπάρχων (<em>hyparchon</em>) in <strong>Philippians 2:6</strong> can be translated three ways — each with significant Christological implications:',
+    ko: '<strong>빌립보서 2:6</strong>의 분사 ὑπάρχων(<em>hyparchon</em>)은 세 가지로 번역될 수 있습니다 — 각각 중요한 기독론적 함의를 가지며:'
+  },
+  'b3-r1t': {
+    en: '"Although he was in the form of God…" — divine nature as backdrop to self-emptying.',
+    ko: '"비록 그가 하나님의 형태로 있었지만…" — 신성이 자기 비움의 배경.'
+  },
+  'b3-r2t': {
+    en: '"Because he was in the form of God…" — divinity as motivation rather than contrast.',
+    ko: '"그가 하나님의 형태로 있었기 때문에…" — 신성이 대비가 아닌 동기.'
+  },
+  'b3-r3t': {
+    en: '"When he was in the form of God…" — locating the action in time relative to the incarnation.',
+    ko: '"그가 하나님의 형태로 있었을 때…" — 성육신에 대한 상대적 시간적 위치.'
+  },
+  'b3-p7': {
+    en: 'Translation, context, and grammar are not three separate topics — they are three angles on the same task: understanding what God said in Scripture and how that word speaks into our world. In the <strong>WHERE–WHO–WHAT framework</strong>: hermeneutics locates you (WHERE), reconstitutes you as an interpreter within community (WHO), and shapes your vocation — not merely to understand Scripture but to allow Scripture to understand, reform, and locate you (WHAT).',
+    ko: '번역, 문맥, 문법은 세 가지 별개의 주제가 아닙니다 — 동일한 과제의 세 가지 각도입니다: 하나님이 성경에서 말씀하신 것을 이해하고 그 말씀이 우리 세계에 어떻게 말씀하시는지를. <strong>WHERE–WHO–WHAT 틀</strong>에서: 해석학은 당신을 위치시키고(WHERE), 공동체 안의 해석자로 재구성하며(WHO), 소명을 형성합니다 — 단순히 성경을 이해하는 것이 아니라 성경이 당신을 이해하고, 개혁하고, 위치시키도록 허용하는 것(WHAT).'
+  },
+  'b3-bq': {
+    en: 'O God of word and wisdom, you have spoken in many ways and by many instruments. Teach us to receive what you have given — not with careless haste, but with the patient attention of those who know that to understand your word is to encounter you.',
+    ko: '말씀과 지혜의 하나님, 당신은 여러 방식으로 여러 도구를 통해 말씀하셨습니다. 당신이 주신 것을 받을 수 있도록 가르쳐 주십시오 — 부주의한 성급함이 아니라, 당신의 말씀을 이해하는 것이 당신을 만나는 것임을 아는 사람들의 인내로운 주의로.'
+  },
+  'sg-q1': {
+    en: 'Fee and Stuart argue that using only one Bible translation commits you to the exegetical decisions of that committee. How does this challenge the way you have read the Bible in the past?',
+    ko: '피와 스튜어트는 하나의 번역본만 사용하는 것은 그 위원회의 주해적 결정에 자신을 맡기는 것이라고 주장합니다. 이것이 과거에 당신이 성경을 읽어온 방식에 어떤 도전을 줍니까?'
+  },
+  'sg-q2': {
+    en: 'Osborne describes hermeneutics as simultaneously a science, an art, and a spiritual act. Which dimension is most developed in your practice? Which most underdeveloped?',
+    ko: '오스본은 해석학을 동시에 과학, 예술, 영적 행위로 묘사합니다. 당신의 실천에서 어느 차원이 가장 발전해 있습니까? 어느 것이 가장 덜 발전해 있습니까?'
+  },
+  'sg-q3': {
+    en: "The 'problem of distance' (time, culture, geography, language) is real. But Osborne argues it is bridgeable. What resources do you have right now for bridging that gap?",
+    ko: "'거리의 문제'(시간, 문화, 지리, 언어)는 실재합니다. 그러나 오스본은 그것이 연결 가능하다고 주장합니다. 지금 당신이 그 간격을 연결하기 위해 가진 자원은 무엇입니까?"
+  },
+  'sg-q4': {
+    en: "Hirsch's distinction between meaning and significance is central to Osborne's project. How does it change the way you think about 'applying' a biblical text?",
+    ko: "허쉬의 의미와 의의의 구분은 오스본 프로젝트의 핵심입니다. 이것이 성경 텍스트를 '적용하는' 것에 대해 당신이 생각하는 방식을 어떻게 바꿉니까?"
+  },
+  'sg-q5': {
+    en: 'For Korean students: How does reading in 개역개정 or 새번역 alongside English change or deepen your interpretation? Give a specific example.',
+    ko: '한국어 학생들: 영어 번역본과 함께 개역개정이나 새번역으로 읽는 것이 해석을 어떻게 바꾸거나 심화시킵니까? 구체적인 예를 들어 주십시오.'
+  },
+  'sg-q6': {
+    en: "Osborne insists charting an entire book before studying individual passages is invaluable. Have you done this? If not, which book would you start with — and why?",
+    ko: "오스본은 개별 구절을 공부하기 전에 전체 책을 도표로 작성하는 것이 매우 가치 있다고 주장합니다. 이것을 해본 적이 있습니까? 없다면, 어떤 책으로 시작하겠습니까?"
+  },
+  'sg-a1': {
+    en: 'Read <strong>Fee &amp; Stuart, Chapter 3</strong> (The Epistles: Learning to Think Contextually) in its entirety.',
+    ko: '<strong>피 &amp; 스튜어트 3장</strong>(서신서: 문맥적으로 생각하는 법 배우기) 전체를 읽으십시오.'
+  },
+  'sg-a2': {
+    en: 'Choose one key term from <strong>Philippians 2:1–11</strong>. Trace its semantic range in Paul\'s letters using an interlinear or Bible software. Write 200–300 words.',
+    ko: '<strong>빌립보서 2:1-11</strong>에서 주요 용어 하나를 선택하십시오. 대역 성경이나 성경 소프트웨어를 사용하여 의미 범위를 추적하십시오. 200-300자로 요약하십시오.'
+  },
+  'sg-a3': {
+    en: 'Compare <strong>1 Corinthians 7:36</strong> in at least 4 English translations. Write a paragraph on what the differences reveal about the interpretive challenges in the Greek.',
+    ko: '최소 4가지 영어 번역본에서 <strong>고린도전서 7:36</strong>을 비교하십시오. 차이점이 헬라어의 해석적 도전에 대해 무엇을 드러내는지 단락을 쓰십시오.'
+  },
+  'sg-a4': {
+    en: '<strong>Korean Assignment:</strong> 개역개정과 새번역에서 시편 22편을 비교하세요. 두 번역의 차이점을 세 군데 이상 찾아서 각각의 번역 철학을 분석하세요.',
+    ko: '<strong>한국어 과제:</strong> 개역개정과 새번역에서 시편 22편을 비교하세요. 두 번역의 차이점을 세 군데 이상 찾아서 각각의 번역 철학을 분석하세요.'
+  }
+};
 
 function applyLang() {
-  document.querySelectorAll('[data-t]').forEach(el => {
-    const raw = el.getAttribute('data-t');
-    if (!raw) return;
-    const parts = raw.split('|');
-    const val = lang==='en' ? (parts[0]||'') : (parts[1]||parts[0]||'');
-    el.innerHTML = val;
+  var S = STRINGS[L];
+  Object.keys(S).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = S[id];
   });
-  // tbox rows (data-t vs data-ko)
-  document.querySelectorAll('[data-ko]').forEach(el => {
-    if (lang==='ko') {
-      const ko = el.getAttribute('data-ko');
-      if (ko) el.innerHTML = ko;
+  Object.keys(RICH).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && RICH[id][L]) el.innerHTML = RICH[id][L];
+  });
+  // cover meta special
+  var cm = document.getElementById('c4');
+  if (cm) {
+    if (L === 'ko') {
+      cm.innerHTML = '<strong>주요 텍스트</strong><br>피 &amp; 스튜어트, <em>성경을 어떻게 읽을 것인가</em>, 2장<br>오스본, <em>해석학적 나선</em>, 서론; 1–2장<br><br><strong>시간</strong> · 3시간 · 3블록 × 50분';
     } else {
-      const en = el.getAttribute('data-t') || el.getAttribute('data-en');
-      if (en) el.innerHTML = en;
+      cm.innerHTML = '<strong>Primary Texts</strong><br>Fee &amp; Stuart, <em>How to Read the Bible for All Its Worth</em>, Ch. 2<br>Osborne, <em>The Hermeneutical Spiral</em>, Intro; Ch. 1–2<br><br><strong>Duration</strong> · 3 Hours · 3 Blocks &times; 50 min';
     }
-  });
+  }
 }
 
-// ── QUIZ ───────────────────────────────────
-function renderQ(i) {
-  qDone=false;
-  const q=QZ[i];
-  const card=document.getElementById('qcard');
-  card.style.animation='none'; card.offsetHeight; card.style.animation='';
+// ── QUIZ DATA ────────────────────────────────
+var QUIZ = [
+  { top:{en:'Translation Philosophy',ko:'번역 철학'},
+    q:{en:'Fee and Stuart argue that the person who reads only in English is "at the mercy of the translators." Which translation philosophy preserves the <em>grammatical structure and word order</em> of the original language most closely?',
+       ko:'피와 스튜어트는 영어로만 읽는 사람은 "번역자들의 손에 달려 있다"고 합니다. 원어의 <em>문법 구조와 어순</em>을 가장 충실하게 보존하는 번역 철학은 무엇입니까?'},
+    opts:{en:['Dynamic equivalence','Formal equivalence','Free paraphrase','Idiomatic equivalence'],
+          ko:['동적 등가 번역','형식적 등가 번역','자유 의역','관용적 등가 번역']},
+    ans:1,
+    fb:{en:'<strong>Formal equivalence</strong> (word-for-word) preserves grammatical structures, word order, and vocabulary range. NASB and ESV are primary examples. Its strength is enabling close study; its limitation is that word-for-word translation of idioms can produce nonsense or a misleading impression of precision.',
+        ko:'<strong>형식적 등가 번역</strong>(단어 대 단어)은 문법 구조, 어순, 어휘 범위를 보존합니다. NASB와 ESV가 대표적입니다. 장점은 정밀한 연구를 가능하게 한다는 것이며, 한계는 관용어를 단어 대 단어로 번역하면 오해를 줄 수 있습니다.'}
+  },
+  { top:{en:'The 1 Corinthians 7:36 Case',ko:'고린도전서 7:36 사례'},
+    q:{en:'Fee and Stuart\'s case study of <em>1 Corinthians 7:36</em> shows four major English translations rendering the verse with four different social scenarios. What does this divergence fundamentally reveal to the interpreter?',
+       ko:'<em>고린도전서 7:36</em>에 대한 피와 스튜어트의 사례 연구는 네 번역본이 네 가지 다른 사회적 상황을 보여줍니다. 이 차이는 해석자에게 근본적으로 무엇을 드러냅니까?'},
+    opts:{en:['That one translation is always superior to the others','That the Greek is genuinely ambiguous — comparing translations makes interpretive decisions visible rather than invisible','That paraphrase translations are always preferable for study','That dynamic equivalence translations are unreliable'],
+          ko:['하나의 번역본이 항상 다른 것보다 우월하다','헬라어 원문이 진정으로 모호하며 — 번역본 비교는 해석적 결정을 보이게 만든다','의역 번역이 연구에 항상 더 선호된다','동적 등가 번역은 신뢰할 수 없다']},
+    ans:1,
+    fb:{en:'Fee and Stuart\'s key insight: <strong>where translations agree</strong>, the original is likely clear. <strong>Where they diverge</strong>, a genuine interpretive difficulty is surfaced. The divergence is not a crisis — it is <em>your invitation to dig deeper</em>. This is why serious students use multiple translations.',
+        ko:'피와 스튜어트의 핵심 통찰: <strong>번역본들이 일치하는 곳</strong>은 원문이 비교적 분명합니다. <strong>다른 곳</strong>은 진정한 해석적 어려움이 드러납니다. 이 차이는 위기가 아닌 <em>더 깊이 탐구하라는 초대</em>입니다.'}
+  },
+  { top:{en:'The Hermeneutical Spiral',ko:'해석학적 나선형'},
+    q:{en:'Osborne proposes the <em>spiral</em> as a corrective to the hermeneutical <em>closed circle</em>. What is the decisive advantage of the spiral?',
+       ko:'오스본은 해석학적 <em>닫힌 원</em>에 대한 교정으로 <em>나선형</em>을 제안합니다. 나선형의 결정적 장점은 무엇입니까?'},
+    opts:{en:['The spiral eliminates the interpreter\'s subjectivity entirely','The spiral moves forward and converges — affirming genuine progress toward intended meaning without claiming exhaustive knowledge','The spiral implies there is no fixed meaning in the text','The spiral describes the movement from the Old to the New Testament'],
+          ko:['나선형은 해석자의 주관성을 완전히 제거한다','나선형은 앞으로 나아가고 수렴한다 — 완전한 지식을 주장하지 않으면서 의도된 의미를 향한 진정한 진보를 확인한다','나선형은 텍스트에 고정된 의미가 없음을 암시한다','나선형은 구약에서 신약으로의 이동을 묘사한다']},
+    ans:1,
+    fb:{en:"Osborne's spiral is cone-shaped — it converges. Each pass brings the interpreter <strong>nearer to the text's intended meaning</strong>. This affirms that genuine understanding is possible (against relativism) while preserving humility (no interpreter has exhausted the text). The text itself is the authority that corrects and refines.",
+        ko:"오스본의 나선형은 원뿔 모양입니다 — 수렴합니다. 각 순환은 해석자를 <strong>텍스트의 의도된 의미에 점점 더 가깝게</strong> 합니다. 이것은 진정한 이해가 가능하다(상대주의에 반대)는 것과 겸손을 보존(어떤 해석자도 텍스트를 다 소진하지 못했다)한다는 것 모두를 확인합니다."}
+  },
+  { top:{en:'The Four Distances',ko:'네 가지 거리'},
+    q:{en:'Klein, Blomberg, and Hubbard identify four areas of distance that build on Ricoeur\'s <em>distanciation gap</em>. Which of the following is <em>NOT</em> one of their four distances?',
+       ko:'클라인, 블롬버그, 허바드는 리쾨르의 <em>거리화 간격</em>을 기반으로 네 가지 거리 영역을 식별합니다. 다음 중 그들의 네 가지 거리에 <em>해당하지 않는</em> 것은 무엇입니까?'},
+    opts:{en:['Time','Culture','Denomination','Geography'],
+          ko:['시간','문화','교단','지리']},
+    ans:2,
+    fb:{en:'The four distances are <strong>Time</strong>, <strong>Culture</strong>, <strong>Geography</strong>, and <strong>Language</strong>. Denominational tradition is NOT one of the four — though it certainly shapes the interpreter\'s preunderstanding and can become a major source of eisegesis.',
+        ko:'네 가지 거리는 <strong>시간, 문화, 지리, 언어</strong>입니다. 교단적 전통은 네 가지 중 하나가 아닙니다 — 비록 그것이 해석자의 선이해를 형성하고 삽입 해석의 주요 원인이 될 수 있지만.'}
+  },
+  { top:{en:'Exegesis vs. Eisegesis',ko:'주해 대 삽입 해석'},
+    q:{en:'Osborne states that every interpreter commits eisegesis — "constantly, unavoidably." What does good hermeneutics do with this unavoidable tendency?',
+       ko:'오스본은 모든 해석자가 "끊임없이, 불가피하게" 삽입 해석을 범한다고 말합니다. 좋은 해석학은 이 불가피한 경향을 어떻게 처리합니까?'},
+    opts:{en:['It eliminates eisegesis through advanced scholarly training','It names the filters, holds them loosely, and allows the text to interrogate and reform them — the spiral correcting our preunderstanding','It replaces personal reading with committee consensus','It requires the interpreter to suspend all prior beliefs before reading'],
+          ko:['고급 학문적 훈련을 통해 삽입 해석을 제거한다','필터들을 명명하고, 느슨하게 잡고, 텍스트가 그것들을 심문하고 개혁하도록 허용한다 — 나선형이 선이해를 수정한다','개인적 읽기를 위원회 합의로 대체한다','해석자가 읽기 전에 모든 선이해를 유예해야 한다']},
+    ans:1,
+    fb:{en:'Eisegesis is the <em>default human condition</em>. We all bring preunderstanding, tradition, and emotional investments to the text — filters we cannot fully see. Good hermeneutics does not eliminate them but <strong>names them, holds them loosely, and allows the text to push back and reform them</strong>. This is the spiral: we bring ourselves; the text corrects; we return; we ascend.',
+        ko:'삽입 해석은 <em>기본적인 인간 조건</em>입니다. 우리 모두는 선이해, 전통, 감정적 투자를 텍스트에 가져옵니다. 좋은 해석학은 그것들을 제거하는 것이 아니라 <strong>명명하고, 느슨하게 잡고, 텍스트가 반박하고 개혁하도록 허용합니다</strong>. 이것이 나선형입니다: 우리는 자신을 가져오고; 텍스트가 수정하고; 우리는 돌아오고; 상승합니다.'}
+  },
+  { top:{en:'Hirsch: Meaning vs. Significance',ko:'허쉬의 구분'},
+    q:{en:'E.D. Hirsch distinguishes <em>meaning</em> from <em>significance</em>. Fee and Stuart apply this principle when they write: "A text cannot mean what it could never have meant for its original readers." Which answer correctly applies Hirsch\'s distinction?',
+       ko:'E.D. 허쉬는 <em>의미</em>와 <em>의의</em>를 구분합니다. 피와 스튜어트는 이것을 적용하여 말합니다: "텍스트는 원래 독자들에게 의미할 수 없었던 것을 의미할 수 없다." 허쉬의 구분을 올바르게 적용한 것은 무엇입니까?'},
+    opts:{en:["Meaning shifts with every new cultural context; significance remains constant","Meaning is the author's stable, intended content; significance is the relationship between that meaning and a later reader's situation","Meaning refers to grammatical sense; significance to theological application","Both meaning and significance are determined by the reading community"],
+          ko:['의미는 새로운 문화적 문맥마다 변한다; 의의는 일정하다','의미는 저자의 안정적이고 의도된 내용이다; 의의는 그 의미와 후대 독자의 상황 사이의 관계이다','의미는 문법적 의미를 가리키고; 의의는 신학적 적용을 가리킨다','의미와 의의 모두 독자 공동체에 의해 결정된다']},
+    ans:1,
+    fb:{en:"Hirsch: <strong>meaning</strong> = the author's intended, stable content — it does not change across centuries. <strong>Significance</strong> = the relationship between that stable meaning and a particular reader's situation. The danger is confusing them: treating what a text means <em>for me today</em> as though it were what the author actually said.",
+        ko:'허쉬: <strong>의미</strong> = 저자의 의도된, 안정적 내용 — 세기에 걸쳐 변하지 않습니다. <strong>의의</strong> = 그 안정적 의미와 특정 독자의 상황 사이의 관계. 위험은 그것들을 혼동하는 것입니다: 본문이 <em>오늘 나에게 의미하는 것</em>을 저자가 실제로 말한 것인 것처럼 다루는 것.'}
+  },
+  { top:{en:'Mark 16:9–20 Textual Criticism',ko:'마가복음 16:9-20 본문 비평'},
+    q:{en:'Osborne uses <em>Mark 16:9–20</em> as the classic NT textual-criticism case study. What is the text-critical conclusion, and why does it matter for interpretation?',
+       ko:'오스본은 <em>마가복음 16:9-20</em>을 고전적인 신약 본문 비평 사례로 사용합니다. 본문 비평적 결론은 무엇이며, 왜 해석에 중요합니까?'},
+    opts:{en:["The passage is well-attested across all manuscripts and is certainly original","The passage is absent from the oldest manuscripts (Sinaiticus and Vaticanus) and differs stylistically from Mark — most likely a later addition; therefore it should not be used as the sole basis for distinctive doctrinal claims","The passage appears only in the Byzantine tradition","Textual critics unanimously consider the longer ending original"],
+          ko:['이 구절은 모든 사본에 걸쳐 잘 증명되어 있으며 분명히 원본이다','이 구절은 가장 오래된 사본(시나이 사본과 바티칸 사본)에 없으며 마가복음과 문체가 다릅니다 — 나중에 추가된 것으로 보이며; 따라서 독특한 교리적 주장의 유일한 기초로 사용되어서는 안 된다','이 구절은 비잔틴 전통에만 나타난다','본문 비평가들이 만장일치로 긴 결말을 원본으로 간주한다']},
+    ans:1,
+    fb:{en:'The two oldest and most reliable manuscripts — <strong>Codex Sinaiticus</strong> and <strong>Codex Vaticanus</strong> — end at 16:8. The vocabulary and style of vv. 9–20 differ from Mark\'s language elsewhere. External criteria (early, geographically diverse manuscripts) and internal criteria (style, vocabulary) both point to a later addition. The interpretive principle: no doctrine should rest solely on a textually uncertain passage.',
+        ko:'가장 오래되고 신뢰할 수 있는 두 사본 — <strong>시나이 사본</strong>과 <strong>바티칸 사본</strong> — 은 16:8에서 끝납니다. 9-20절의 어휘와 문체는 다른 곳의 마가복음과 다릅니다. 외적 기준(초기, 지리적으로 다양한 사본)과 내적 기준(문체, 어휘) 모두 나중에 추가된 것임을 가리킵니다. 해석 원칙: 어떤 교리도 본문적으로 불확실한 구절에만 의존해서는 안 됩니다.'}
+  }
+];
 
-  document.getElementById('qtag').textContent='Q '+(i+1)+'/'+QZ.length;
-  document.getElementById('qtopic').textContent=q.tp[lang];
-  document.getElementById('qnum').textContent=lang==='en'?'Question '+(i+1):(i+1)+'번 문제';
-  document.getElementById('qtext').innerHTML=q.q[lang];
-
-  const L=['A','B','C','D'];
-  const og=document.getElementById('opts');
-  og.innerHTML='';
-  q.o[lang].forEach((opt,j) => {
-    const b=document.createElement('button');
-    b.className='opt';
-    b.innerHTML='<span class="oltr">'+L[j]+'</span><span class="otxt">'+opt+'</span>';
-    b.onclick=()=>pickAns(j);
-    og.appendChild(b);
+// ── QUIZ FUNCTIONS ───────────────────────────
+function renderQ(idx) {
+  qa = false;
+  var q = QUIZ[idx];
+  var card = document.getElementById('q-c');
+  card.style.animation = 'none'; card.offsetHeight; card.style.animation = '';
+  document.getElementById('q-top').textContent = q.top[L];
+  document.getElementById('q-num').textContent = L === 'en' ? 'Question ' + (idx+1) : (idx+1) + '번 문제';
+  document.getElementById('q-tag').textContent = 'Q ' + (idx+1) + '/7';
+  document.getElementById('q-txt').innerHTML = q.q[L];
+  var grid = document.getElementById('q-opts');
+  grid.innerHTML = '';
+  var ltrs = ['A','B','C','D'];
+  q.opts[L].forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = '<span class="ol">' + ltrs[i] + '</span><span class="ot">' + opt + '</span>';
+    btn.onclick = (function(ii){ return function(){ handleQ(ii); }; })(i);
+    grid.appendChild(btn);
   });
-
-  document.getElementById('fb').className='fb';
-  document.getElementById('qnext').className='qnext';
-
-  // progress
-  const pct=(i/QZ.length)*100;
-  document.getElementById('qfill').style.width=pct+'%';
-  document.getElementById('qpl').textContent=lang==='en'?'Question '+(i+1)+' of '+QZ.length:(i+1)+' / '+QZ.length+'번 문제';
-  document.getElementById('qsl').textContent=lang==='en'?sc+' correct':sc+'개 정답';
-
-  const dd=document.getElementById('qdots');
-  dd.innerHTML='';
-  QZ.forEach((_,j)=>{
-    const d=document.createElement('div');
-    d.className='qd'+(j<i?' done':j===i?' cur':'');
-    dd.appendChild(d);
-  });
+  document.getElementById('q-fb').className = 'fb';
+  document.getElementById('q-nxt').className = 'nxt';
+  var pct = (idx / QUIZ.length) * 100;
+  document.getElementById('q-fi').style.width = pct + '%';
+  document.getElementById('q-pl').textContent = L === 'en' ? 'Question '+(idx+1)+' of 7' : (idx+1)+' / 7번 문제';
+  document.getElementById('q-sc').textContent = L === 'en' ? qs + ' correct' : qs + '개 정답';
+  var ds = document.getElementById('q-ds'); ds.innerHTML = '';
+  for (var i = 0; i < QUIZ.length; i++) {
+    var d = document.createElement('div');
+    d.className = 'qd' + (i < idx ? ' d' : i === idx ? ' a' : '');
+    ds.appendChild(d);
+  }
 }
 
-function pickAns(chosen) {
-  if (qDone) return;
-  qDone=true;
-  const q=QZ[qi];
-  const ok=chosen===q.c;
-  if (ok) sc++;
-  rmap.push(ok);
-
-  document.querySelectorAll('.opt').forEach((b,j)=>{
-    b.disabled=true;
-    if (j===chosen && ok) b.classList.add('corr');
-    else if (j===chosen && !ok) b.classList.add('wrng');
-    else if (j===q.c && !ok) b.classList.add('rev');
+function handleQ(chosen) {
+  if (qa) return;
+  qa = true;
+  var q = QUIZ[qi];
+  var ok = chosen === q.ans;
+  if (ok) qs++;
+  qm.push(ok);
+  var btns = document.querySelectorAll('.opt');
+  btns.forEach(function(b, i) {
+    b.disabled = true;
+    if (i === chosen && ok) b.classList.add('kok');
+    else if (i === chosen && !ok) b.classList.add('kno');
+    else if (i === q.ans && !ok) b.classList.add('krv');
   });
-
-  const fb=document.getElementById('fb');
-  fb.className='fb on '+(ok?'cok':'wrg');
-  document.getElementById('fblab').textContent=ok?(lang==='en'?'Correct':'정답'):(lang==='en'?'Incorrect':'오답');
-  document.getElementById('fbtext').innerHTML=q.f[lang];
-
-  document.getElementById('qsl').textContent=lang==='en'?sc+' correct':sc+'개 정답';
-
-  const isLast=qi===QZ.length-1;
-  const nx=document.getElementById('qnext');
-  nx.textContent=isLast?(lang==='en'?'⟶ View Results':'⟶ 결과 보기'):(lang==='en'?'⟶ Next Question':'⟶ 다음 문제');
-  nx.className='qnext on';
+  var fb = document.getElementById('q-fb');
+  fb.className = 'fb sh ' + (ok ? 'fok' : 'fno');
+  document.getElementById('q-fbl').textContent = ok ? (L==='en'?'Correct':'정답') : (L==='en'?'Incorrect':'오답');
+  document.getElementById('q-fbt').innerHTML = q.fb[L];
+  document.getElementById('q-sc').textContent = L==='en' ? qs+' correct' : qs+'개 정답';
+  var nxt = document.getElementById('q-nxt');
+  var isLast = qi === QUIZ.length - 1;
+  nxt.textContent = isLast ? (L==='en' ? '\u27F6 View Results' : '\u27F6 결과 보기') : (L==='en' ? '\u27F6 Next Question' : '\u27F6 다음 문제');
+  nxt.className = 'nxt sh';
 }
 
 function nextQ() {
   qi++;
-  if (qi>=QZ.length) { go('results'); }
+  if (qi >= QUIZ.length) { go('results'); }
   else { renderQ(qi); }
 }
 
-function retakeQuiz() {
-  qi=0; sc=0; qDone=false; rmap=[];
-  go('quiz');
-  renderQ(0);
+function restartQ() {
+  qi = 0; qs = 0; qa = false; qm = [];
+  go('quiz'); renderQ(0);
 }
 
-// ── RESULTS ────────────────────────────────
-function renderR() {
-  const pct=Math.round((sc/QZ.length)*100);
-  const tiers={
-    en:[{m:7,e:'✦',t:'Master Interpreter',s:'Exceptional command of the instruments of interpretation.'},
-        {m:5,e:'◈',t:'Proficient Interpreter',s:'Strong foundation. A few areas remain to deepen.'},
-        {m:3,e:'◇',t:'Developing Interpreter',s:'The spiral has begun. Keep returning to the text.'},
-        {m:0,e:'○',t:'Apprentice Interpreter',s:'Every master once stood here. The journey is the formation.'}],
-    ko:[{m:7,e:'✦',t:'숙련된 해석자',s:'해석 도구들에 대한 탁월한 이해를 갖추고 있습니다.'},
-        {m:5,e:'◈',t:'역량 있는 해석자',s:'강한 기초를 갖추고 있습니다. 몇 가지 영역을 더 심화할 필요가 있습니다.'},
-        {m:3,e:'◇',t:'성장하는 해석자',s:'나선형이 시작되었습니다. 계속 본문으로 돌아가십시오.'},
-        {m:0,e:'○',t:'견습 해석자',s:'모든 숙련자도 한때 여기에 서 있었습니다. 여정이 곧 형성입니다.'}]
+function renderResults() {
+  var pct = Math.round((qs / QUIZ.length) * 100);
+  var tiers = {
+    en:[{min:7,e:'✦',t:'Master Interpreter',s:'Exceptional command of the instruments of interpretation.'},
+        {min:5,e:'◈',t:'Proficient Interpreter',s:'Strong foundation. A few areas remain to deepen.'},
+        {min:3,e:'◇',t:'Developing Interpreter',s:'The spiral has begun. Keep returning to the text.'},
+        {min:0,e:'○',t:'Apprentice Interpreter',s:'Every master once stood here. The journey is the formation.'}],
+    ko:[{min:7,e:'✦',t:'숙련된 해석자',s:'해석 도구들에 대한 탁월한 이해를 갖추고 있습니다.'},
+        {min:5,e:'◈',t:'역량 있는 해석자',s:'강한 기초를 갖추고 있습니다. 몇 가지 영역을 더 심화할 필요가 있습니다.'},
+        {min:3,e:'◇',t:'성장하는 해석자',s:'나선형이 시작되었습니다. 계속 본문으로 돌아가십시오.'},
+        {min:0,e:'○',t:'견습 해석자',s:'모든 숙련자도 한때 여기에 서 있었습니다. 여정이 곧 형성입니다.'}]
   };
-  const tier=tiers[lang].find(t=>sc>=t.m);
-  document.getElementById('remb').textContent=tier.e;
-  document.getElementById('rtitle').textContent=tier.t;
-  document.getElementById('rsub').textContent=tier.s;
-  document.getElementById('sbig').textContent=sc+'/'+QZ.length;
-  document.getElementById('slbl').textContent=lang==='en'?pct+'% · Week 3 Mastery':pct+'% · 3주차 이해도';
-
-  const fill=document.getElementById('sfill');
-  fill.style.background=pct>=85?'#4a9470':pct>=57?'#c9a84c':'#943a3a';
-  setTimeout(()=>{fill.style.width=pct+'%';},60);
-
-  const dr=document.getElementById('sdots');
-  dr.innerHTML='';
-  rmap.forEach((h,i)=>{
-    const d=document.createElement('div');
-    d.className='sdot '+(h?'hit':'miss');
-    d.textContent=i+1;
-    dr.appendChild(d);
+  var tier = tiers[L].find(function(t){ return qs >= t.min; });
+  document.getElementById('r-e').textContent = tier.e;
+  document.getElementById('r-t').textContent = tier.t;
+  document.getElementById('r-s').textContent = tier.s;
+  document.getElementById('r-b').textContent = qs + '/' + QUIZ.length;
+  document.getElementById('r-l').textContent = L==='en' ? pct+'% · Week 3 Mastery' : pct+'% · 3주차 이해도';
+  var rf = document.getElementById('r-f');
+  rf.style.background = pct>=85?'#3a8a5c':pct>=57?'#b8942a':'#8a3a3a';
+  setTimeout(function(){ rf.style.width = pct + '%'; }, 60);
+  var rd = document.getElementById('r-d'); rd.innerHTML = '';
+  qm.forEach(function(h, i) {
+    var d = document.createElement('div');
+    d.className = 'sd ' + (h ? 'h' : 'm');
+    d.textContent = i + 1;
+    rd.appendChild(d);
   });
-
-  const fi={
-    en:[{m:7,l:'Formation Insight',t:'<strong>Every translation is already an act of interpretation.</strong> You have internalized all five instruments of this week — translation philosophy, the hermeneutical spiral, the four distances, Hirsch\'s meaning-significance distinction, and textual criticism. Next step: take one Epistle, read it in three translations, and trace where they diverge.'},
-        {m:5,l:'Formation Insight',t:'Strong grasp of the foundational instruments. Revisit the questions you missed. <strong>The spiral requires re-entry</strong> — the interpreter who returns to the text knowing where they erred is already ascending.'},
-        {m:3,l:'Formation Insight',t:'The spiral has begun. <strong>Eisegesis is not a failure — it is the default human condition.</strong> Return to Block 2 (The Spiral) and the case studies in Block 3. The gap between where you are and mastery is precisely the space the spiral is designed for.'},
-        {m:0,l:'Formation Insight',t:'You are at the beginning, and beginnings are sacred. <strong>"Where are you?" is not a rebuke — it is an invitation.</strong> Re-read Blocks 1–2 with care, then return to this quiz. The formation is in the returning.'}],
-    ko:[{m:7,l:'형성적 통찰',t:'<strong>모든 번역은 이미 해석의 행위입니다.</strong> 이번 주의 다섯 가지 도구 — 번역 철학, 해석학적 나선형, 네 가지 거리, 허쉬의 의미-의의 구분, 본문 비평 — 를 내면화했습니다. 다음 단계: 서신서 하나를 골라 세 가지 번역본으로 읽고 차이가 나는 곳을 추적하십시오.'},
-        {m:5,l:'형성적 통찰',t:'기초적인 도구들을 잘 파악하고 있습니다. 틀린 문제로 돌아가 피드백과 함께 앉아 있으십시오. <strong>나선형은 재진입을 필요로 합니다</strong> — 자신이 어디서 실수했는지 알면서 돌아오는 해석자는 이미 상승하고 있습니다.'},
-        {m:3,l:'형성적 통찰',t:'나선형이 시작되었습니다. <strong>삽입 해석은 실패가 아니라 기본적인 인간 조건입니다.</strong> 2블록(나선형)과 3블록의 사례 연구로 돌아가십시오.'},
-        {m:0,l:'형성적 통찰',t:'당신은 시작점에 있으며, 시작은 신성합니다. <strong>"당신은 어디에 있습니까?"는 꾸짖음이 아닌 초대입니다.</strong> 1-2블록을 주의 깊게 다시 읽고 이 퀴즈로 돌아오십시오.'}]
+  var fis = {
+    en:[{min:7,l:'Formation Insight',t:'<strong>Every translation is already an act of interpretation.</strong> You have internalized the full set of instruments — translation philosophy, the hermeneutical spiral, the four distances, Hirsch\'s distinction, and textual criticism. The same cases you encountered in the lecture (1 Cor 7:36, Mark 16, 1 John 3:9, Phil 2:6) are now part of your exegetical toolkit. The next step: take one Epistle, read it in three translations, trace every divergence. That is the spiral in practice.'},
+        {min:5,l:'Formation Insight',t:'Strong foundation. Revisit the questions you missed. <strong>The spiral requires re-entry</strong> — the interpreter who returns knowing where they erred is already ascending. The case studies (1 Cor 7:36, Mark 16) reward careful re-reading in Block 1 and Block 3.'},
+        {min:3,l:'Formation Insight',t:'The spiral has begun. <strong>Eisegesis is not failure — it is the default human condition.</strong> Return to Block 2 (The Spiral) and Block 3 (Grammar). Sit with the 1 John 3:9 and Phil 2:6 case studies until the grammatical logic becomes clear.'},
+        {min:0,l:'Formation Insight',t:'You are at the beginning, and beginnings are sacred. <strong>"Where are you?" is not a rebuke — it is an invitation.</strong> Re-read Blocks 1 and 2 with attention. Return to this quiz. The formation is in the returning.'}],
+    ko:[{min:7,l:'형성적 통찰',t:'<strong>모든 번역은 이미 해석의 행위입니다.</strong> 당신은 도구들 전체를 내면화했습니다 — 번역 철학, 해석학적 나선형, 네 가지 거리, 허쉬의 구분, 본문 비평. 강의에서 만난 동일한 사례들(고전 7:36, 마가 16장, 요일 3:9, 빌 2:6)이 이제 당신의 주해 도구가 되었습니다.'},
+        {min:5,l:'형성적 통찰',t:'강한 기초를 갖추고 있습니다. 틀린 문제로 돌아가십시오. <strong>나선형은 재진입을 필요로 합니다</strong> — 어디서 실수했는지 알면서 돌아오는 해석자는 이미 상승하고 있습니다.'},
+        {min:3,l:'형성적 통찰',t:'나선형이 시작되었습니다. <strong>삽입 해석은 실패가 아닙니다 — 기본적인 인간 조건입니다.</strong> 2블록(나선형)과 3블록(문법)으로 돌아가십시오. 요일 3:9와 빌 2:6 사례를 문법적 논리가 분명해질 때까지 함께 앉아 있으십시오.'},
+        {min:0,l:'형성적 통찰',t:'당신은 시작점에 있으며, 시작은 신성합니다. <strong>"당신은 어디에 있습니까?"는 꾸짖음이 아닙니다 — 초대입니다.</strong> 1블록과 2블록을 다시 읽으십시오. 이 퀴즈로 돌아오십시오. 형성은 돌아옴 안에 있습니다.'}]
   };
-  const f=fi[lang].find(t=>sc>=t.m);
-  document.getElementById('filab').textContent=f.l;
-  document.getElementById('fitext').innerHTML=f.t;
-  document.getElementById('rlbl').textContent=lang==='en'?'Retake Quiz':'다시 풀기';
-  document.getElementById('glbl').textContent=lang==='en'?'Study Guide':'학습 가이드';
+  var fi = fis[L].find(function(t){ return qs >= t.min; });
+  document.getElementById('fi-l').textContent = fi.l;
+  document.getElementById('fi-t').innerHTML = fi.t;
+  document.getElementById('r-retry').textContent = L==='en' ? '\u21ba Retake' : '\u21ba 다시 풀기';
+  document.getElementById('r-sg').textContent = L==='en' ? 'Study Guide' : '학습 가이드';
 }
 
-// ── INIT ───────────────────────────────────
+// ── INIT ─────────────────────────────────────
+document.body.classList.add('js-ready');
 go('cover');
+
 </script>
 </body>
 </html>
